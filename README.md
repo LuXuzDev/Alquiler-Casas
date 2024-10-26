@@ -2,6 +2,6 @@
 >[!IMPORTANT]
 >-Desarrolladores
 >
->-Front: **Patty**
+>-Frontend: **Patty**
 >
->-Back: **Angel**
+>-Backend: **Angel**
