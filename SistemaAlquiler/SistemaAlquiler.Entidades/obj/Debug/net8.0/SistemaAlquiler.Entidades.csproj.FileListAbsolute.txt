@@ -1,0 +1,14 @@
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\bin\Debug\net8.0\SistemaAlquiler.Entidades.deps.json
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\bin\Debug\net8.0\SistemaAlquiler.Entidades.runtimeconfig.json
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\bin\Debug\net8.0\SistemaAlquiler.Entidades.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\bin\Debug\net8.0\SistemaAlquiler.Entidades.pdb
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.csproj.AssemblyReference.cache
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.AssemblyInfoInputs.cache
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.AssemblyInfo.cs
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\refint\SistemaAlquiler.Entidades.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.pdb
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\SistemaAlquiler.Entidades.genruntimeconfig.cache
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\SistemaAlquiler\SistemaAlquiler.Entidades\obj\Debug\net8.0\ref\SistemaAlquiler.Entidades.dll
