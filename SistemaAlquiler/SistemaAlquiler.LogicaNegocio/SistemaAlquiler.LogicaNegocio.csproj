@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaAlquiler.AccesoDatos\SistemaAlquiler.AccesoDatos.csproj" />
+    <ProjectReference Include="..\SistemaAlquiler.Entidades\SistemaAlquiler.Entidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Implementaciones\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+</Project>

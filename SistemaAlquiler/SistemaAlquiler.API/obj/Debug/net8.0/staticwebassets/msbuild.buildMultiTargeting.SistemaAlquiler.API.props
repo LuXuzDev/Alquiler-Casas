@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SistemaAlquiler.API.props" />
+</Project>
