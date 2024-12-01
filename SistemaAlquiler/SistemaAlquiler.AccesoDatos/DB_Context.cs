@@ -5,7 +5,9 @@ namespace SistemaAlquiler.AccesoDatos
 {
     public class DB_Context : DbContext
     {
+        public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
         public DbSet<Casa> Casas { get; set; }
         public DbSet<Caracteristicas> Caracteristicas { get; set; }
         public DbSet<Foto> Fotos { get; set; }

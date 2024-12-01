@@ -11,9 +11,4 @@
     <ProjectReference Include="..\SistemaAlquiler.Entidades\SistemaAlquiler.Entidades.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementaciones\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
