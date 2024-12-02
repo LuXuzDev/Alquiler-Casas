@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaAlquiler.Controladora")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1e223400e1b56eb6bb2062df4b2d379cb7f720b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78d445a5810c432e87b9d3b1bcb6a4191a7cbf53")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaAlquiler.Controladora")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaAlquiler.Controladora")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

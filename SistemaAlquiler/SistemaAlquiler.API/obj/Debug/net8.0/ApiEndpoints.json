@@ -1,18 +1,8 @@
 [
   {
-    "ContainingType": "SistemaAlquiler.AccesoDatos.Implementaciones.CasasController",
-    "Method": "obtenerTodas",
-    "RelativePath": "api/casas",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.AccesoDatos.Implementaciones.CasasController",
-    "Method": "obtenerPorID",
-    "RelativePath": "api/casas/{id}",
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "casaPorId",
+    "RelativePath": "casas/{id}casaID",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -26,24 +16,574 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SistemaAlquiler.API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "listaCasa_Ciudad",
+    "RelativePath": "casas/{idCiudad}filtroCiudad",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCiudad",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "crear",
+    "RelativePath": "casas/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCaracteristica",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioNoche",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioMes",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "areaTotal",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "descripcion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "idCiudad",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "listaCasasFiltradas",
+    "RelativePath": "casas/filtrar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cantMaxPersonas",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantHabitaciones",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantBanos",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantCuartos",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "cocina",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "terraza_balcon",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "barbacoa",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "garaje",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "piscina",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "gimnasio",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "lavadora_secadora",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "tv",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteMenores",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteFumar",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteMascotas",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "wifi",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "aguaCaliente",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "climatizada",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioNoche",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioMes",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "areaTotal",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "listaCasas",
+    "RelativePath": "casas/listaCasas",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "ciudadID",
+    "RelativePath": "ciudades/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[SistemaAlquiler.API.WeatherForecast, SistemaAlquiler.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "crear",
+    "RelativePath": "ciudades/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ciudad",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "editar",
+    "RelativePath": "ciudades/editar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ciudad",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "idCiudad",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "eliminar",
+    "RelativePath": "ciudades/eliminar",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCiudad",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "listaCiudades",
+    "RelativePath": "ciudades/listaCiudades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
+    "Method": "crear",
+    "RelativePath": "crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cantMaxPersonas",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantHabitaciones",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantBanos",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantCuartos",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cocina",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "terraza_balcon",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "barbacoa",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "garaje",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "piscina",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "gimnasio",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "lavadora_secadora",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "tv",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteMenores",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteFumar",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "permiteMascotas",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "wifi",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "aguaCaliente",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "climatizada",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
+    "Method": "eliminar",
+    "RelativePath": "eliminar",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCaracteristica",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
+    "Method": "obtener",
+    "RelativePath": "obtener",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCaracteristica",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
+    "Method": "ciudadID",
+    "RelativePath": "reservaciones/precio",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idCasa",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cantPersonas",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaEntrada",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaSalida",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "usuarioId",
+    "RelativePath": "usuarios/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "cambiarRol",
+    "RelativePath": "usuarios/cambiarRol",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idRol",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "crear",
+    "RelativePath": "usuarios/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "correo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "rol",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "numeroContacto",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "clave",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "editar",
+    "RelativePath": "usuarios/editar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "correo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "numeroContacto",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "clave",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "eliminar",
+    "RelativePath": "usuarios/eliminar",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "listaGestores",
+    "RelativePath": "usuarios/listaGestores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
+    "Method": "listaUsuarios",
+    "RelativePath": "usuarios/listaUsuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

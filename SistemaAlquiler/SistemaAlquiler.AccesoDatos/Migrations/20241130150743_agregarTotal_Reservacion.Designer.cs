@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-
+using SistemaAlquiler.AccesoDatos;
 
 #nullable disable
 
 namespace SistemaAlquiler.AccesoDatos.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    partial class DB_ContextModelSnapshot : ModelSnapshot
+    [Migration("20241130150743_agregarTotal_Reservacion")]
+    partial class agregarTotal_Reservacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,9 +63,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Property<bool>("gimnasio")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("idCasa")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("lavadora_secadora")
                         .HasColumnType("boolean");
 
@@ -89,8 +89,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
                     b.HasKey("idCaracteristicas");
 
-                    b.HasIndex("idCasa");
-
                     b.ToTable("Caracteristicas");
                 });
 
@@ -109,21 +107,48 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("direccion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("idUsuario")
+                    b.Property<int>("idCaracteristica")
                         .HasColumnType("integer");
+
+                    b.Property<int?>("idCiudad")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("idUsuario")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("precioMes")
+                        .HasColumnType("double precision");
 
                     b.Property<double>("precioNoche")
                         .HasColumnType("double precision");
 
                     b.HasKey("idCasa");
 
+                    b.HasIndex("idCaracteristica");
+
+                    b.HasIndex("idCiudad");
+
                     b.HasIndex("idUsuario");
 
                     b.ToTable("Casas");
+                });
+
+            modelBuilder.Entity("SistemaAlquiler.Entidades.Ciudad", b =>
+                {
+                    b.Property<int>("idCiudad")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCiudad"));
+
+                    b.Property<string>("ciudad")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.HasKey("idCiudad");
+
+                    b.ToTable("Ciudades");
                 });
 
             modelBuilder.Entity("SistemaAlquiler.Entidades.Foto", b =>
@@ -163,6 +188,9 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Property<int>("cantPersonas")
                         .HasColumnType("integer");
 
+                    b.Property<double>("costoTotal")
+                        .HasColumnType("double precision");
+
                     b.Property<DateTime>("fechaEntrada")
                         .HasColumnType("timestamp with time zone");
 
@@ -184,6 +212,24 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.ToTable("Reservaciones");
                 });
 
+            modelBuilder.Entity("SistemaAlquiler.Entidades.Rol", b =>
+                {
+                    b.Property<int>("idRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idRol"));
+
+                    b.Property<string>("rol")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
+
+                    b.HasKey("idRol");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("SistemaAlquiler.Entidades.Usuario", b =>
                 {
                     b.Property<int>("idUsuario")
@@ -200,15 +246,16 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("idRol")
+                        .HasColumnType("integer");
+
                     b.Property<string>("numeroContacto")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("rol")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("idUsuario");
+
+                    b.HasIndex("idRol");
 
                     b.ToTable("Usuarios");
                 });
@@ -243,24 +290,25 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.ToTable("Valoraciones");
                 });
 
-            modelBuilder.Entity("SistemaAlquiler.Entidades.Caracteristicas", b =>
-                {
-                    b.HasOne("SistemaAlquiler.Entidades.Casa", "casa")
-                        .WithMany()
-                        .HasForeignKey("idCasa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("casa");
-                });
-
             modelBuilder.Entity("SistemaAlquiler.Entidades.Casa", b =>
                 {
-                    b.HasOne("SistemaAlquiler.Entidades.Usuario", "usuario")
+                    b.HasOne("SistemaAlquiler.Entidades.Caracteristicas", "caracteristicas")
                         .WithMany()
-                        .HasForeignKey("idUsuario")
+                        .HasForeignKey("idCaracteristica")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SistemaAlquiler.Entidades.Ciudad", "ciudad")
+                        .WithMany()
+                        .HasForeignKey("idCiudad");
+
+                    b.HasOne("SistemaAlquiler.Entidades.Usuario", "usuario")
+                        .WithMany()
+                        .HasForeignKey("idUsuario");
+
+                    b.Navigation("caracteristicas");
+
+                    b.Navigation("ciudad");
 
                     b.Navigation("usuario");
                 });
@@ -268,7 +316,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
             modelBuilder.Entity("SistemaAlquiler.Entidades.Foto", b =>
                 {
                     b.HasOne("SistemaAlquiler.Entidades.Casa", "casa")
-                        .WithMany()
+                        .WithMany("fotos")
                         .HasForeignKey("idCasa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -295,6 +343,17 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Navigation("usuario");
                 });
 
+            modelBuilder.Entity("SistemaAlquiler.Entidades.Usuario", b =>
+                {
+                    b.HasOne("SistemaAlquiler.Entidades.Rol", "rol")
+                        .WithMany()
+                        .HasForeignKey("idRol")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("rol");
+                });
+
             modelBuilder.Entity("SistemaAlquiler.Entidades.Valoracion", b =>
                 {
                     b.HasOne("SistemaAlquiler.Entidades.Casa", "casa")
@@ -312,6 +371,11 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Navigation("casa");
 
                     b.Navigation("usuario");
+                });
+
+            modelBuilder.Entity("SistemaAlquiler.Entidades.Casa", b =>
+                {
+                    b.Navigation("fotos");
                 });
 #pragma warning restore 612, 618
         }
