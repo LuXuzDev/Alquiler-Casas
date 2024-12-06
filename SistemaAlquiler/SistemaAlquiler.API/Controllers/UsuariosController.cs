@@ -4,7 +4,7 @@ using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using SistemaAlquiler.API.Utilidades.Mappers;
 using AutoMapper;
-using SistemaAlquiler.API.DTOs;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 
 namespace SistemaAlquiler.API.Controllers;
 
@@ -24,7 +24,7 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> usuarioId(int id)
+    public async Task<IActionResult> usuarioId([FromBody] int id)
     {
         var usuario = await usuarioServicio.obtenerPorId(id);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(usuario);
@@ -51,15 +51,15 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpPost("crear")]
-    public async Task<IActionResult> crear(string correo, int rol, string numeroContacto, string clave)
+    public async Task<IActionResult> crear([FromBody] CrearUsuarioDTO user)
     {
-        Usuario u = await usuarioServicio.crear(correo, rol, numeroContacto, clave);
+        Usuario u = await usuarioServicio.crear(user);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(u);
         return StatusCode(StatusCodes.Status200OK, vmUsuario);
     }
 
-    [HttpDelete("eliminar")]
-    public async Task<IActionResult> eliminar(int idUsuario)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> eliminar([FromBody] int idUsuario)
     {
         var eliminado = usuarioServicio.eliminar(idUsuario);
         return StatusCode(StatusCodes.Status200OK);
@@ -67,7 +67,7 @@ public class UsuariosController : ControllerBase
 
 
     [HttpPatch("editar")]
-    public async Task<IActionResult> editar(int idUsuario,string? correo,string? numeroContacto,string? clave)
+    public async Task<IActionResult> editar([FromBody] int idUsuario,string? correo,string? numeroContacto,string? clave)
     {
         Usuario actualizado = await usuarioServicio.editar(correo,numeroContacto,clave, idUsuario);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(actualizado);
@@ -75,8 +75,8 @@ public class UsuariosController : ControllerBase
 
     }
 
-    [HttpPatch("cambiarRol")]
-    public async Task<IActionResult> cambiarRol(int idUsuario,int idRol)
+    [HttpPatch("cambiarRol (\"{id}\")")]
+    public async Task<IActionResult> cambiarRol([FromBody] int idUsuario,int idRol)
     {
         Usuario actualizado = await usuarioServicio.editarRol(idUsuario,idRol);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(actualizado);

@@ -1,6 +1,6 @@
 ﻿using SistemaAlquiler.Entidades;
 using AutoMapper;
-using SistemaAlquiler.API.DTOs;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 
 namespace SistemaAlquiler.API.Utilidades.Mappers;
 
@@ -10,6 +10,7 @@ public class AutoMapperProfile : Profile
     {
         #region Usuario   
         CreateMap<Usuario,UsuarioDTO>().ReverseMap();
+        CreateMap<Usuario, CrearUsuarioDTO>().ReverseMap();
         #endregion
 
         #region Casa
@@ -19,6 +20,13 @@ public class AutoMapperProfile : Profile
         .ForMember(dest => dest.numeroContacto, opt => opt.MapFrom(src => src.usuario.numeroContacto))
         .ForMember(dest => dest.caracteristicas, opt => opt.MapFrom(src => src.caracteristicas))
         .ReverseMap();
+
+        CreateMap<Casa,CrearCasaDTO>().ReverseMap();
+        #endregion
+
+        #region
+        CreateMap<Caracteristicas,CaracteristicaDTO>().ReverseMap();
+        CreateMap<Caracteristicas,CrearCaracteristicasDTO>().ReverseMap();
         #endregion
 
         #region Ciudad
