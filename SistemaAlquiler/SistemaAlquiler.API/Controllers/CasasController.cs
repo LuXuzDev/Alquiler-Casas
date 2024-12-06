@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using SistemaAlquiler.API.DTOs;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System.Web.Http.Results;
@@ -18,12 +18,15 @@ public class CasasController:ControllerBase
     private readonly ICasaServicio casaServicio;
 
     private readonly IMapper autoMapper;
+    
 
     public CasasController(ICasaServicio casaServicio, IMapper autoMapper)
     {
         this.casaServicio = casaServicio;
 
         this.autoMapper = autoMapper;
+
+
     }
 
     [HttpGet("listaCasas")]
@@ -36,7 +39,7 @@ public class CasasController:ControllerBase
     }
 
     [HttpGet("{id}casaID")]
-    public async Task<IActionResult> casaPorId(int id)
+    public async Task<IActionResult> casaPorId([FromBody]int id)
     {
         var casa = await casaServicio.obtenerPorId(id);
 
@@ -51,27 +54,23 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, casas);
     }
 
-    [HttpGet("filtrar")]
-    public async Task<IActionResult> listaCasasFiltradas(int? cantMaxPersonas, int? cantHabitaciones, int? cantBanos,
-        int? cantCuartos, Boolean? cocina, Boolean? terraza_balcon, Boolean? barbacoa, Boolean? garaje,
-        Boolean? piscina, Boolean? gimnasio, Boolean? lavadora_secadora, Boolean? tv, Boolean? permiteMenores,
-        Boolean? permiteFumar, Boolean? permiteMascotas, Boolean? wifi, Boolean? aguaCaliente, Boolean? climatizada,
-        double? precioNoche,double? precioMes,double? areaTotal 
-        )
+    [HttpOptions("filtrar")]
+    public async Task<IActionResult> listaCasasFiltradas([FromBody] BusquedaCasaDTO busquedaCasaDTO)
     {
-        var casas = casaServicio.obtenerCasasFiltradas(cantMaxPersonas, cantHabitaciones, cantBanos, cantCuartos, cocina, terraza_balcon, barbacoa,
-            garaje, piscina, gimnasio, lavadora_secadora, tv, permiteMenores, permiteFumar, permiteMascotas, wifi, aguaCaliente,
-            climatizada, precioNoche, precioMes, areaTotal);
-        return StatusCode(StatusCodes.Status200OK, casas);
+        var casas = await casaServicio.obtenerCasasFiltradas(busquedaCasaDTO);
+        List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
+        return StatusCode(StatusCodes.Status200OK, vmCasas);
     }
 
 
     [HttpPost("crear")]
-    public async Task<IActionResult> crear(int idCaracteristica, double precioNoche, double precioMes,
-        double areaTotal, string descripcion,int idCiudad, int idUsuario)
+    public async Task<IActionResult> crear([FromBody]CrearCasaDTO casaDTO)
     {
-        var casa =await casaServicio.crear(idCaracteristica,precioNoche, precioMes,
-            areaTotal, descripcion, idCiudad,idUsuario);
-        return StatusCode(StatusCodes.Status200OK, casa);
+        
+        Casa c = autoMapper.Map<Casa>(casaDTO);
+        Casa casa = await casaServicio.crear(c, casaDTO.caracteristicasDTO);
+
+        CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 }

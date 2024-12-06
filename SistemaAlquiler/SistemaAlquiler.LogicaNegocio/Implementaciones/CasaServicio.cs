@@ -1,10 +1,12 @@
 ﻿using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.Entidades;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Formats.Tar;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,21 +15,30 @@ namespace SistemaAlquiler.LogicaNegocio.Implementaciones;
 public class CasaServicio : ICasaServicio
 {
     private readonly IRepositorioGenerico<Casa> repositorio;
-    
-    public CasaServicio(IRepositorioGenerico<Casa> repositorio)
+    private readonly ICaracteristicaServicio caracteristicaServicio;
+
+    public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio)
     {
         this.repositorio = repositorio;
+        this.caracteristicaServicio = caracteristicaServicio;
     }
     
-    public async Task<Casa> crear(int idCaracteristicas, double precioNoche, double precioMes, double areaTotal, 
-        string descripcion, int idCiudad,int idGestor)
+    public async Task<Casa> crear(Casa casa,CrearCaracteristicasDTO caracteristicas)
     {
-        Casa casa = new Casa(precioNoche, precioMes,areaTotal,descripcion);
-        casa.idCaracteristica = idCaracteristicas;
-        casa.idCiudad = idCiudad;
-        casa.idUsuario = idGestor;
-        var casaConstruida = await repositorio.crear(casa);
-        return casaConstruida;
+        var caracteristica = await caracteristicaServicio.crear(caracteristicas);
+        try
+        {
+            casa.idCaracteristica = caracteristica.idCaracteristicas;
+            Casa casaCreada = await repositorio.crear(casa);
+        }
+        catch (Exception ex)
+        {
+            caracteristicaServicio.eliminar(caracteristica.idCaracteristicas);
+            throw ex;
+        }
+        
+        return casa;
+
     }
 
     public Task<Casa> editar(Casa casa)
@@ -55,78 +66,105 @@ public class CasaServicio : ICasaServicio
     }
 
 
-    public async Task<List<Casa>> obtenerCasasFiltradas(int? cantMaxPersonas, int? cantHabitaciones, int? cantBanos, int? cantCuartos,
-        bool? cocina, bool? terraza_balcon, bool? barbacoa, bool? garaje, bool? piscina,
-        bool? gimnasio, bool? lavadora_secadora, bool? tv, bool? permiteMenores, bool? permiteFumar,
-        bool? permiteMascotas, bool? wifi, bool? aguaCaliente, bool? climatizada, 
-        double? precioNoche, double? precioMes, double? areaTotal)
+    public async Task<List<Casa>> obtenerCasasFiltradas(BusquedaCasaDTO busquedaCasaDTO)
     {
-        IQueryable<Casa> casas = await repositorio.obtener(u=>u.idUsuario != null && u.idCiudad != null);
-        if (cantMaxPersonas.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.cantMaxPersonas <= cantMaxPersonas);
+        IQueryable<Casa> casas = await repositorio.obtener(u=>u.idUsuario != null && u.idCiudad != null, [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
 
-        if (cantHabitaciones.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.cantHabitaciones <= cantHabitaciones);
+        #region Filtrado
 
-        if (cantBanos.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.cantBanos <= cantBanos);
+        List<Casa> casasFiltradas = casas.ToList();
+        for(int i= 0; i < casasFiltradas.Count(); i++)
+        {
+            Casa c = casasFiltradas[i];
 
-        if (cantCuartos.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.cantCuartos <= cantCuartos);
+            if (busquedaCasaDTO.cantMaxPersonas.HasValue)
+                if(c.caracteristicas.cantMaxPersonas < busquedaCasaDTO.cantMaxPersonas)
+                    casasFiltradas.Remove(c);
 
-        if (cocina.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.cocina == cocina);
+            if (busquedaCasaDTO.cantHabitaciones.HasValue)
+                if (c.caracteristicas.cantHabitaciones < busquedaCasaDTO.cantHabitaciones)
+                    casasFiltradas.Remove(c);
 
-        if (terraza_balcon.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.terraza_balcon == terraza_balcon);
+            if (busquedaCasaDTO.cantBanos.HasValue)
+                if (c.caracteristicas.cantBanos < busquedaCasaDTO.cantBanos)
+                    casasFiltradas.Remove(c);
 
-        if (barbacoa.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.barbacoa == barbacoa);
+            if (busquedaCasaDTO.cantCuartos.HasValue)
+                if (c.caracteristicas.cantCuartos < busquedaCasaDTO.cantCuartos)
+                    casasFiltradas.Remove(c);
 
-        if (garaje.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.garaje == garaje);
+            if (busquedaCasaDTO.cocina.HasValue)
+                if (c.caracteristicas.cocina != busquedaCasaDTO.cocina)
+                    casasFiltradas.Remove(c);
 
-        if (piscina.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.piscina == piscina);
+            if (busquedaCasaDTO.terraza_balcon.HasValue)
+                if (c.caracteristicas.terraza_balcon != busquedaCasaDTO.terraza_balcon)
+                    casasFiltradas.Remove(c);
 
-        if (gimnasio.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.gimnasio == gimnasio);
+            if (busquedaCasaDTO.barbacoa.HasValue)
+                if (c.caracteristicas.barbacoa != busquedaCasaDTO.barbacoa)
+                    casasFiltradas.Remove(c);
 
-        if (lavadora_secadora.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.lavadora_secadora == lavadora_secadora);
+            if (busquedaCasaDTO.garaje.HasValue)
+                if (c.caracteristicas.garaje != busquedaCasaDTO.garaje)
+                    casasFiltradas.Remove(c);
 
-        if (tv.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.tv == tv);
+            if (busquedaCasaDTO.piscina.HasValue)
+                if (c.caracteristicas.piscina != busquedaCasaDTO.piscina)
+                    casasFiltradas.Remove(c);
 
-        if (permiteMenores.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.permiteMenores == permiteMenores);
+            if (busquedaCasaDTO.gimnasio.HasValue)
+                if (c.caracteristicas.gimnasio != busquedaCasaDTO.gimnasio)
+                    casasFiltradas.Remove(c);
 
-        if (permiteFumar.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.permiteFumar == permiteFumar);
+            if (busquedaCasaDTO.lavadora_secadora.HasValue)
+                if (c.caracteristicas.lavadora_secadora != busquedaCasaDTO.lavadora_secadora)
+                    casasFiltradas.Remove(c);
 
-        if (permiteMascotas.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.permiteMascotas == permiteMascotas);
+            if (busquedaCasaDTO.tv.HasValue)
+                if (c.caracteristicas.tv != busquedaCasaDTO.tv)
+                    casasFiltradas.Remove(c);
 
-        if (wifi.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.wifi == wifi);
+            if (busquedaCasaDTO.permiteMenores.HasValue)
+                if (c.caracteristicas.permiteMenores != busquedaCasaDTO.permiteMenores)
+                    casasFiltradas.Remove(c);
 
-        if (aguaCaliente.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.aguaCaliente == aguaCaliente);
+            if (busquedaCasaDTO.permiteFumar.HasValue)
+                if (c.caracteristicas.permiteFumar != busquedaCasaDTO.permiteFumar)
+                    casasFiltradas.Remove(c);
 
-        if (climatizada.HasValue)
-            casas = await repositorio.obtener(u => u.caracteristicas.climatizada == climatizada);
+            if (busquedaCasaDTO.permiteMascotas.HasValue)
+                if (c.caracteristicas.permiteMascotas != busquedaCasaDTO.permiteMascotas)
+                    casasFiltradas.Remove(c);
 
-        if (precioNoche.HasValue)
-            casas = await repositorio.obtener(u => u.precioNoche <= precioNoche);
+            if (busquedaCasaDTO.wifi.HasValue)
+                if (c.caracteristicas.wifi != busquedaCasaDTO.wifi)
+                    casasFiltradas.Remove(c);
 
-        if (precioMes.HasValue)
-            casas = await repositorio.obtener(u => u.precioMes <= precioMes);
+            if (busquedaCasaDTO.aguaCaliente.HasValue)
+                if (c.caracteristicas.aguaCaliente != busquedaCasaDTO.aguaCaliente)
+                    casasFiltradas.Remove(c);
 
-        if (areaTotal.HasValue)
-            casas = await repositorio.obtener(u => u.areaTotal <= areaTotal);
+            if (busquedaCasaDTO.climatizada.HasValue)
+                if (c.caracteristicas.climatizada != busquedaCasaDTO.climatizada)
+                    casasFiltradas.Remove(c);
 
-        List<Casa> lista = casas.ToList();
-        return lista;
+            if (busquedaCasaDTO.precioNoche.HasValue)
+                if (c.precioNoche < busquedaCasaDTO.precioNoche)
+                    casasFiltradas.Remove(c);
+
+            if (busquedaCasaDTO.precioMes.HasValue)
+                if (c.precioMes < busquedaCasaDTO.precioMes)
+                    casasFiltradas.Remove(c);
+
+            if (busquedaCasaDTO.areaTotal.HasValue)
+                if (c.areaTotal < busquedaCasaDTO.areaTotal)
+                    casasFiltradas.Remove(c);
+        }
+
+        #endregion
+        
+        return casasFiltradas;
     }
 
     public Task<Casa> obtenerPorId(int idCasa)

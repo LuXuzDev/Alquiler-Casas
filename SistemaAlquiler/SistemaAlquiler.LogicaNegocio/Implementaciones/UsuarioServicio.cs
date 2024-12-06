@@ -1,6 +1,7 @@
 ﻿using SistemaAlquiler.AccesoDatos;
 using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.Entidades;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -43,16 +44,16 @@ public class UsuarioServicio : IUsuarioServicio
         return (List<Usuario>)consulta.ToList();
     }
 
-    public async Task<Usuario> crear(string correo, int rol, string numeroContacto, string clave)
+    public async Task<Usuario> crear(CrearUsuarioDTO user)
     {
-        var usuarioExiste = await repositorio.obtener(u=> u.correo==correo);
+        var usuarioExiste = await repositorio.obtener(u=> u.correo==user.correo);
         if (usuarioExiste.FirstOrDefault() != null)
             throw new TaskCanceledException("El correo ya existe");
 
         try
         {
-            clave = utilidadesServicio.convertirSha256(clave);
-            Usuario usuarioCreado = new Usuario(rol, correo,numeroContacto,clave);
+            string clave = utilidadesServicio.convertirSha256(user.clave);
+            Usuario usuarioCreado = new Usuario(user.idRol, user.correo,user.numeroContacto,clave);
             Usuario usuario = await repositorio.crear(usuarioCreado);
 
             if(usuarioCreado.idUsuario == 0)

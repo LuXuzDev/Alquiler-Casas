@@ -1,5 +1,6 @@
 ﻿using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.Entidades;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,88 +19,85 @@ public class CaracteristicaServicio : ICaracteristicaServicio
     {
         this.repositorio = repositorio;
     }
-    public async Task<Caracteristicas> crear(int cantMaxPersonas, int cantHabitaciones, int cantBanos,
-        int cantCuartos, bool cocina, bool terraza_balcon,
-        bool barbacoa, bool garaje, bool piscina, bool gimnasio, bool lavadora_secadora, bool tv,
-        bool permiteMenores, bool permiteFumar, bool permiteMascotas, bool wifi,
-        bool aguaCaliente, bool climatizada)
+    public async Task<Caracteristicas> crear(CrearCaracteristicasDTO caracteristicaDTO)
     {
-        if(cantHabitaciones< cantBanos+cantCuartos+1)
+        if(caracteristicaDTO.cantHabitaciones < caracteristicaDTO.cantBanos + caracteristicaDTO.cantCuartos + 1)
             throw new TaskCanceledException("Error en los datos");
 
-        Caracteristicas caracteristicas = new Caracteristicas(cantMaxPersonas, cantHabitaciones,cantBanos, cantCuartos,
-            cocina, terraza_balcon, barbacoa, garaje, piscina, gimnasio,lavadora_secadora, tv, permiteMenores, permiteFumar,
-            permiteMascotas, wifi, aguaCaliente, climatizada);
+        Caracteristicas caracteristicas = new Caracteristicas(caracteristicaDTO.cantMaxPersonas, caracteristicaDTO.cantHabitaciones,
+            caracteristicaDTO.cantBanos, caracteristicaDTO.cantCuartos,
+            caracteristicaDTO.cocina, caracteristicaDTO.terraza_balcon, caracteristicaDTO.barbacoa,
+            caracteristicaDTO.garaje, caracteristicaDTO.piscina, caracteristicaDTO.gimnasio,
+            caracteristicaDTO.lavadora_secadora, caracteristicaDTO.tv, caracteristicaDTO.permiteMenores,
+            caracteristicaDTO.permiteFumar,caracteristicaDTO.permiteMascotas, caracteristicaDTO.wifi,
+            caracteristicaDTO.aguaCaliente, caracteristicaDTO.climatizada);
         await repositorio.crear(caracteristicas);
         return caracteristicas;
     }
 
-    public async Task<Caracteristicas> editar(int idCaracteristica, int? cantMaxPersonas, int? cantHabitaciones, int? cantBanos,
-        int? cantCuartos, bool? cocina, bool? terraza_balcon, bool? barbacoa, bool? garaje, bool? piscina,
-        bool? gimnasio, bool? lavadora_secadora, bool? tv, bool? permiteMenores, bool? permiteFumar,
-        bool? permiteMascotas, bool? wifi, bool? aguaCaliente, bool? climatizada)
+    public async Task<Caracteristicas> editar(int idCaracteristica,CaracteristicaDTO caracteristicaDTO)
     {
         var caracteristica = await repositorio.obtenerTodos(u => u.idCaracteristicas == idCaracteristica);
         if (caracteristica == null)
             throw new TaskCanceledException("No existe esa caracteristica");
-        if (cantHabitaciones < cantBanos + cantCuartos + 1)
+        if (caracteristicaDTO.cantHabitaciones < caracteristicaDTO.cantBanos + caracteristicaDTO.cantCuartos + 1)
             throw new TaskCanceledException("Error en los datos");
         try
         {
             #region Modificando valores
-            if (cantMaxPersonas.HasValue)
-                caracteristica.cantMaxPersonas = (int)cantMaxPersonas;
+            if (caracteristicaDTO.cantMaxPersonas.HasValue)
+                caracteristica.cantMaxPersonas = (int)caracteristicaDTO.cantMaxPersonas;
 
-            if(cantHabitaciones.HasValue)
-                caracteristica.cantHabitaciones = (int)cantHabitaciones;
+            if(caracteristicaDTO.cantHabitaciones.HasValue)
+                caracteristica.cantHabitaciones = (int)caracteristicaDTO.cantHabitaciones;
 
-            if(cantBanos.HasValue)
-                caracteristica.cantBanos = (int)cantBanos;
+            if(caracteristicaDTO.cantBanos.HasValue)
+                caracteristica.cantBanos = (int)caracteristicaDTO.cantBanos;
 
-            if(cantCuartos.HasValue)
-                caracteristica.cantCuartos = (int)cantCuartos;
+            if(caracteristicaDTO.cantCuartos.HasValue)
+                caracteristica.cantCuartos = (int)caracteristicaDTO.cantCuartos;
 
-            if(cocina.HasValue)
-                caracteristica.cocina = cocina.Value;
+            if(caracteristicaDTO.cocina.HasValue)
+                caracteristica.cocina = caracteristicaDTO.cocina.Value;
 
-            if (terraza_balcon.HasValue)
-                caracteristica.terraza_balcon = terraza_balcon.Value;
+            if (caracteristicaDTO.terraza_balcon.HasValue)
+                caracteristica.terraza_balcon = caracteristicaDTO.terraza_balcon.Value;
 
-            if(barbacoa.HasValue)
-                caracteristica.barbacoa = barbacoa.Value;
+            if(caracteristicaDTO.barbacoa.HasValue)
+                caracteristica.barbacoa = caracteristicaDTO.barbacoa.Value;
 
-            if(garaje.HasValue)
-                caracteristica.garaje = garaje.Value;
+            if(caracteristicaDTO.garaje.HasValue)
+                caracteristica.garaje = caracteristicaDTO.garaje.Value;
 
-            if(piscina.HasValue)
-                caracteristica.piscina = piscina.Value;
+            if(caracteristicaDTO.piscina.HasValue)
+                caracteristica.piscina = caracteristicaDTO.piscina.Value;
 
-            if(gimnasio.HasValue)
-                caracteristica.gimnasio = gimnasio.Value;
+            if(caracteristicaDTO.gimnasio.HasValue)
+                caracteristica.gimnasio = caracteristicaDTO.gimnasio.Value;
 
-            if(lavadora_secadora.HasValue)
-                caracteristica.lavadora_secadora = lavadora_secadora.Value;
+            if(caracteristicaDTO.lavadora_secadora.HasValue)
+                caracteristica.lavadora_secadora = caracteristicaDTO.lavadora_secadora.Value;
 
-            if(tv.HasValue)
-                caracteristica.tv = tv.Value;
+            if(caracteristicaDTO.tv.HasValue)
+                caracteristica.tv = caracteristicaDTO.tv.Value;
 
-            if(permiteMenores.HasValue)
-                caracteristica.permiteMenores = permiteMenores.Value;
+            if(caracteristicaDTO.permiteMenores.HasValue)
+                caracteristica.permiteMenores = caracteristicaDTO.permiteMenores.Value;
 
-            if(permiteFumar.HasValue)
-                caracteristica.permiteFumar = permiteFumar.Value;
+            if(caracteristicaDTO.permiteFumar.HasValue)
+                caracteristica.permiteFumar = caracteristicaDTO.permiteFumar.Value;
 
-            if(permiteMascotas.HasValue)
-                caracteristica.permiteMascotas = permiteMascotas.Value;
+            if(caracteristicaDTO.permiteMascotas.HasValue)
+                caracteristica.permiteMascotas = caracteristicaDTO.permiteMascotas.Value;
 
-            if(wifi.HasValue)
-                caracteristica.wifi = wifi.Value;
+            if(caracteristicaDTO.wifi.HasValue)
+                caracteristica.wifi = caracteristicaDTO.wifi.Value;
 
-            if(aguaCaliente.HasValue)
-                caracteristica.aguaCaliente = aguaCaliente.Value;
+            if(caracteristicaDTO.aguaCaliente.HasValue)
+                caracteristica.aguaCaliente = caracteristicaDTO.aguaCaliente.Value;
 
-            if(climatizada.HasValue)
-                caracteristica.climatizada = climatizada.Value;
+            if(caracteristicaDTO.climatizada.HasValue)
+                caracteristica.climatizada = caracteristicaDTO.climatizada.Value;
             #endregion
 
             bool editado =await repositorio.editar(caracteristica);

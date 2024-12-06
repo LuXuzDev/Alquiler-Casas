@@ -1,4 +1,5 @@
 ﻿using SistemaAlquiler.Entidades;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SistemaAlquiler.LogicaNegocio.Interfaces;
 public interface IUsuarioServicio
 {
     Task<List<Usuario>> lista();
-    Task<Usuario> crear(string correo,int rol,string numeroContacto,string clave);
+    Task<Usuario> crear(CrearUsuarioDTO usuarioDTO );
     Task<Usuario> editar(string correo, string numeroContacto, string clave, int idUsuario);
     Task<Usuario> editarRol(int idUsuario,int idRol);
     Task<Usuario> eliminar(int usuarioId);

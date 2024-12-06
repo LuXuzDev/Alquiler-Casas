@@ -1,4 +1,4 @@
-﻿namespace SistemaAlquiler.API.DTOs
+﻿namespace SistemaAlquiler.LogicaNegocio.DTOs
 {
     public class UsuarioDTO
     {

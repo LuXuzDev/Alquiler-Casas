@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SistemaAlquiler.API.DTOs;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.Implementaciones;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
