@@ -1,63 +1,5 @@
 [
   {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
-    "Method": "obtener",
-    "RelativePath": "caracteristicas/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idCaracteristica",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
-    "Method": "eliminar",
-    "RelativePath": "caracteristicas/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idCaracteristica",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CaracteristicasController",
-    "Method": "crear",
-    "RelativePath": "caracteristicas/crear",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "caracteristicaDTO",
-        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearCaracteristicasDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "casaPorId",
     "RelativePath": "casas/{id}casaID",
@@ -68,11 +10,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -114,7 +51,7 @@
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasasFiltradas",
     "RelativePath": "casas/filtrar",
-    "HttpMethod": "OPTIONS",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -138,6 +75,22 @@
   },
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
+    "Method": "crear",
+    "RelativePath": "ciudades/{ciudad}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ciudad",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "ciudadID",
     "RelativePath": "ciudades/{id}",
     "HttpMethod": "GET",
@@ -154,16 +107,16 @@
   },
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
-    "Method": "crear",
-    "RelativePath": "ciudades/crear",
-    "HttpMethod": "POST",
+    "Method": "eliminar",
+    "RelativePath": "ciudades/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ciudad",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -178,29 +131,8 @@
     "Parameters": [
       {
         "Name": "ciudad",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "idCiudad",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
-    "Method": "eliminar",
-    "RelativePath": "ciudades/eliminar",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idCiudad",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CiudadDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -263,11 +195,6 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -283,7 +210,7 @@
       {
         "Name": "idUsuario",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "id",
@@ -296,24 +223,14 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "cambiarRol",
-    "RelativePath": "usuarios/cambiarRol (\u0022{id}\u0022)",
+    "RelativePath": "usuarios/cambiarRol",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idUsuario",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "idRol",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
+        "Name": "rolDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CambiarRolDTO",
         "IsRequired": true
       }
     ],
@@ -344,24 +261,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idUsuario",
-        "Type": "System.Int32",
+        "Name": "user",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.EditarUsuarioDTO",
         "IsRequired": true
-      },
-      {
-        "Name": "correo",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "numeroContacto",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "clave",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

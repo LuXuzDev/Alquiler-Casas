@@ -24,7 +24,7 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> usuarioId([FromBody] int id)
+    public async Task<IActionResult> usuarioId(int id)
     {
         var usuario = await usuarioServicio.obtenerPorId(id);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(usuario);
@@ -59,7 +59,7 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> eliminar([FromBody] int idUsuario)
+    public async Task<IActionResult> eliminar(int idUsuario)
     {
         var eliminado = usuarioServicio.eliminar(idUsuario);
         return StatusCode(StatusCodes.Status200OK);
@@ -67,18 +67,18 @@ public class UsuariosController : ControllerBase
 
 
     [HttpPatch("editar")]
-    public async Task<IActionResult> editar([FromBody] int idUsuario,string? correo,string? numeroContacto,string? clave)
+    public async Task<IActionResult> editar([FromBody] EditarUsuarioDTO user)
     {
-        Usuario actualizado = await usuarioServicio.editar(correo,numeroContacto,clave, idUsuario);
+        Usuario actualizado = await usuarioServicio.editar(user.correo,user.numeroContacto,user.clave, user.idUsuario);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(actualizado);
         return StatusCode(StatusCodes.Status200OK, vmUsuario);
 
     }
 
-    [HttpPatch("cambiarRol (\"{id}\")")]
-    public async Task<IActionResult> cambiarRol([FromBody] int idUsuario,int idRol)
+    [HttpPatch("cambiarRol")]
+    public async Task<IActionResult> cambiarRol([FromBody] CambiarRolDTO rolDTO )
     {
-        Usuario actualizado = await usuarioServicio.editarRol(idUsuario,idRol);
+        Usuario actualizado = await usuarioServicio.editarRol(rolDTO.idUsuario,rolDTO.idRol);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(actualizado);
         return StatusCode(StatusCodes.Status200OK, vmUsuario);
     }

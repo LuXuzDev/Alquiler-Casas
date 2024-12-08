@@ -38,8 +38,8 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
-    [HttpGet("{id}casaID")]
-    public async Task<IActionResult> casaPorId([FromBody]int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> casaPorId(int id)
     {
         var casa = await casaServicio.obtenerPorId(id);
 
@@ -47,14 +47,14 @@ public class CasasController:ControllerBase
     }
 
 
-    [HttpGet("{idCiudad}filtroCiudad")]
+    [HttpGet("{idCiudad}")]
     public async Task<IActionResult> listaCasa_Ciudad(int idCiudad)
     {
         var casas =await casaServicio.obtenerCasaPorCiudad(idCiudad);
         return StatusCode(StatusCodes.Status200OK, casas);
     }
 
-    [HttpOptions("filtrar")]
+    [HttpPost("filtrar")]
     public async Task<IActionResult> listaCasasFiltradas([FromBody] BusquedaCasaDTO busquedaCasaDTO)
     {
         var casas = await casaServicio.obtenerCasasFiltradas(busquedaCasaDTO);
@@ -66,7 +66,6 @@ public class CasasController:ControllerBase
     [HttpPost("crear")]
     public async Task<IActionResult> crear([FromBody]CrearCasaDTO casaDTO)
     {
-        
         Casa c = autoMapper.Map<Casa>(casaDTO);
         Casa casa = await casaServicio.crear(c, casaDTO.caracteristicasDTO);
 

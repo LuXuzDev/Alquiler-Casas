@@ -42,20 +42,20 @@ public class CiudadServicio : ICiudadServicio
 
     public async Task<Ciudad> editar(string nombreCiudadNuevo, int idCiudad)
     {
-        var casaEncontrada = await repositorio.obtener(u => u.idCiudad == idCiudad);
-
-        if (casaEncontrada == null)
+        IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
+        Ciudad ciudad = consulta.FirstOrDefault();
+        if (ciudad == null)
             throw new TaskCanceledException("La ciudad no existe");
 
         try
         {
-            casaEncontrada.FirstOrDefault().ciudad = nombreCiudadNuevo;
-            bool respuesta = await repositorio.editar(casaEncontrada.FirstOrDefault());
+            ciudad.ciudad = nombreCiudadNuevo;
+            bool respuesta = await repositorio.editar(ciudad);
 
             if (!respuesta)
                 throw new TaskCanceledException("Error actualizando los datos");
             else
-                return casaEncontrada.FirstOrDefault();
+                return ciudad;
 
         }
         catch (Exception)
@@ -68,9 +68,9 @@ public class CiudadServicio : ICiudadServicio
     {
         try
         {
-            var ciudadEncontrada = await repositorio.obtener(u => u.idCiudad.Equals(idCiudad));
-
-            if (ciudadEncontrada.FirstOrDefault() == null)
+            IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
+            Ciudad ciudad = consulta.FirstOrDefault();
+            if (ciudad == null)
                 throw new TaskCanceledException("La ciudad no existe");
             var casas = await repositorioCasa.obtener(u => u.idCiudad == idCiudad);
 
@@ -81,10 +81,10 @@ public class CiudadServicio : ICiudadServicio
                 casa.idCiudad = null;
             }
 
-            bool respuesta = await repositorio.eliminar(ciudadEncontrada.FirstOrDefault());
+            bool respuesta = await repositorio.eliminar(ciudad);
             if (!respuesta)
                 throw new TaskCanceledException("Error al eliminar la ciudad");
-            return ciudadEncontrada.FirstOrDefault();
+            return ciudad;
         }
         catch(Exception)
         {
@@ -101,7 +101,10 @@ public class CiudadServicio : ICiudadServicio
 
     public async Task<Ciudad> obtenerPorId(int idCiudad)
     {
-        var ciudadEncontrada = await repositorio.obtener(u => u.idCiudad == idCiudad);
-        return (Ciudad)ciudadEncontrada;
+        IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
+        Ciudad ciudad = consulta.FirstOrDefault();
+        if(ciudad == null)
+            throw new TaskCanceledException("La ciudad no existe");
+        return ciudad;
     }
 }

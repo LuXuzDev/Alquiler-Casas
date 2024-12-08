@@ -29,6 +29,8 @@ public class UsuarioServicio : IUsuarioServicio
     {
         IQueryable<Usuario> consulta = await repositorio.obtener(u=> u.idUsuario == usuarioId);
         Usuario usuario = consulta.FirstOrDefault();
+        if (usuario == null)
+            throw new TaskCanceledException("El usuario no existe");
         return usuario;
     }
 

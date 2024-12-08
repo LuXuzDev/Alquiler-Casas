@@ -11,6 +11,7 @@ public class AutoMapperProfile : Profile
         #region Usuario   
         CreateMap<Usuario,UsuarioDTO>().ReverseMap();
         CreateMap<Usuario, CrearUsuarioDTO>().ReverseMap();
+        CreateMap<Usuario, EditarUsuarioDTO>().ReverseMap();
         #endregion
 
         #region Casa
