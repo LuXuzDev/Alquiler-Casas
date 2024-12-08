@@ -40,7 +40,7 @@ public class CiudadController : ControllerBase
     }
 
 
-    [HttpPost("crear")]
+    [HttpPost("{ciudad}")]
     public async Task<IActionResult> crear(string ciudad)
     {
         Ciudad c= await ciudadServicio.crear(ciudad);
@@ -48,18 +48,19 @@ public class CiudadController : ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCiudad);
     }
 
-    [HttpDelete("eliminar")]
-    public async Task<IActionResult> eliminar(int idCiudad)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> eliminar(int id)
     {
-        var eliminado = ciudadServicio.eliminar(idCiudad);
-        return StatusCode(StatusCodes.Status200OK);
+        Ciudad eliminado =await ciudadServicio.eliminar(id);
+        CiudadDTO vmCiudad = autoMapper.Map<CiudadDTO>(eliminado);
+        return StatusCode(StatusCodes.Status200OK, vmCiudad);
     }
 
 
     [HttpPatch("editar")]
-    public async Task<IActionResult> editar(string ciudad, int idCiudad)
+    public async Task<IActionResult> editar(CiudadDTO ciudad)
     {
-        Ciudad actualizado = await ciudadServicio.editar(ciudad,idCiudad);
+        Ciudad actualizado = await ciudadServicio.editar(ciudad.ciudad, ciudad.idCiudad);
         CiudadDTO vmCiudad = autoMapper.Map<CiudadDTO>(actualizado);
         return StatusCode(StatusCodes.Status200OK, vmCiudad);
 
