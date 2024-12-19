@@ -12,8 +12,8 @@ using SistemaAlquiler.AccesoDatos;
 namespace SistemaAlquiler.AccesoDatos.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    [Migration("20241130150743_agregarTotal_Reservacion")]
-    partial class agregarTotal_Reservacion
+    [Migration("20241211045136_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,25 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("jwt_Roles");
+                });
 
             modelBuilder.Entity("SistemaAlquiler.Entidades.Caracteristicas", b =>
                 {
@@ -191,11 +210,11 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Property<double>("costoTotal")
                         .HasColumnType("double precision");
 
-                    b.Property<DateTime>("fechaEntrada")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("fechaEntrada")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("fechaSalida")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("fechaSalida")
+                        .HasColumnType("date");
 
                     b.Property<int>("idCasa")
                         .HasColumnType("integer");

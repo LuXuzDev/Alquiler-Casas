@@ -22,11 +22,55 @@ public class ReservacionController : ControllerBase
         this.autoMapper = autoMapper;
     }
 
-    [HttpGet("precio")]
-    public async Task<IActionResult> ciudadID(int idUsuario, int idCasa, int cantPersonas, DateTime fechaEntrada, DateTime fechaSalida)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> obtenerReservacionID(int id)
     {
-        var precio = await reservacionServicio.creara( idUsuario,  idCasa,  cantPersonas,  fechaEntrada,  fechaSalida);
+        var reservacion = await reservacionServicio.obtenerPorId(id);
+
+        ReservacionDTO vmReservacion = autoMapper.Map<ReservacionDTO>(reservacion);
+
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
+    [HttpGet("{idGestor}reservacionPorGestores")]
+    public async Task<IActionResult> obtenerPorGestor(int idGestor)
+    {
+        var reservacion = await reservacionServicio.obtenerPorGestor(idGestor);
+
+        List<ReservacionDTO> vmReservacion = autoMapper.Map<List<ReservacionDTO>>(reservacion);
+
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
+    [HttpGet("lista")]
+    public async Task<IActionResult> listaReservaciones()
+    {
+        var reservacion = await reservacionServicio.lista();
+
+        List<ReservacionDTO> vmReservacion = autoMapper.Map<List<ReservacionDTO>>(reservacion);
+
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
+    [HttpDelete("{id}")]
+
+    public async Task<IActionResult> eliminar(int id)
+    {
+        var reservacion = await reservacionServicio.eliminar(id);
+
+        ReservacionDTO vmReservacion = autoMapper.Map<ReservacionDTO>(reservacion);
+
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
+    [HttpPost()]
+    public async Task<IActionResult> crear(CrearReservacionDTO reservacionDTO)
+    {
+        var reservacion = await reservacionServicio.crear(reservacionDTO.idUsuario, reservacionDTO.idCasa,
+            reservacionDTO.cantPersonas,  reservacionDTO.fechaEntrada,  reservacionDTO.fechaSalida);
+
+        ReservacionDTO vmReservacion = autoMapper.Map<ReservacionDTO>(reservacion);
         
-        return StatusCode(StatusCodes.Status200OK,precio);
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
     }
 }

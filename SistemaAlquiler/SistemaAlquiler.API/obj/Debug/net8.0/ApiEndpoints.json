@@ -2,7 +2,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "casaPorId",
-    "RelativePath": "casas/{id}casaID",
+    "RelativePath": "casas/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasa_Ciudad",
-    "RelativePath": "casas/{idCiudad}filtroCiudad",
+    "RelativePath": "casas/{idCiudad}casaPorCiudad",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -42,6 +42,22 @@
       {
         "Name": "casaDTO",
         "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearCasaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "editar",
+    "RelativePath": "casas/editar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "casaDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.EditarCasaDTO",
         "IsRequired": true
       }
     ],
@@ -149,38 +165,76 @@
   },
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
-    "Method": "ciudadID",
-    "RelativePath": "reservaciones/precio",
+    "Method": "crear",
+    "RelativePath": "reservaciones",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservacionDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearReservacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
+    "Method": "obtenerReservacionID",
+    "RelativePath": "reservaciones/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idUsuario",
+        "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "idCasa",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "cantPersonas",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "fechaEntrada",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "fechaSalida",
-        "Type": "System.DateTime",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
+    "Method": "eliminar",
+    "RelativePath": "reservaciones/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
+    "Method": "obtenerPorGestor",
+    "RelativePath": "reservaciones/{idGestor}reservacionPorGestores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idGestor",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
+    "Method": "listaReservaciones",
+    "RelativePath": "reservaciones/lista",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

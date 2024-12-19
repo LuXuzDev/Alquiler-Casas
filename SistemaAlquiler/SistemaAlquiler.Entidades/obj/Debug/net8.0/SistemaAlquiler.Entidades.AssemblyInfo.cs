@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaAlquiler.Entidades")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4ae06261972d6806571970a06419cb665c62361")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97cfd6f1559107daf8f8d230ce30f90f0ea4e5fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaAlquiler.Entidades")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaAlquiler.Entidades")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

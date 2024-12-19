@@ -41,14 +41,30 @@ public class CasaServicio : ICasaServicio
 
     }
 
-    public Task<Casa> editar(Casa casa)
+    public async Task<Casa> editar(EditarCasaDTO casa,CaracteristicaDTO caracteristica)
     {
-        throw new NotImplementedException();
+        var c = await repositorio.obtener(u=> u.idCasa == casa.idCasa);
+        Casa casaEditada = c.FirstOrDefault();
+        if(casaEditada==null)
+           throw new TaskCanceledException("La casa no existe");
+
+        caracteristicaServicio.editar(casa.idCaracteristica, caracteristica);
+        casaEditada.areaTotal = casa.areaTotal;
+        casaEditada.idCiudad = casa.idCiudad;
+        casaEditada.descripcion = casa.descripcion;
+        casaEditada.precioNoche = casa.precioNoche;
+        casaEditada.precioMes = casa.precioMes;
+        repositorio.editar(casaEditada);
+        return casaEditada;
+
     }
 
-    public Task<Casa> eliminar(int idCasa)
+    public async Task<Casa> eliminar(int idCasa)
     {
-        throw new NotImplementedException();
+        Casa casa= await obtenerPorId(idCasa);
+        caracteristicaServicio.eliminar(casa.idCaracteristica);
+        repositorio.eliminar(casa);
+        return casa;
     }
 
     public async Task<List<Casa>> lista()
@@ -167,9 +183,9 @@ public class CasaServicio : ICasaServicio
         return casasFiltradas;
     }
 
-    public Task<Casa> obtenerPorId(int idCasa)
+    public async Task<Casa> obtenerPorId(int idCasa)
     {
-        var casa = repositorio.obtenerTodos(u=> u.idCasa==idCasa);
+        var casa = await repositorio.obtenerTodos(u=> u.idCasa==idCasa);
         return casa;
     }
 }

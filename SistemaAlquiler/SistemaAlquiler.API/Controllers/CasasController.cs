@@ -47,7 +47,7 @@ public class CasasController:ControllerBase
     }
 
 
-    [HttpGet("{idCiudad}")]
+    [HttpGet("{idCiudad}casaPorCiudad")]
     public async Task<IActionResult> listaCasa_Ciudad(int idCiudad)
     {
         var casas =await casaServicio.obtenerCasaPorCiudad(idCiudad);
@@ -68,6 +68,16 @@ public class CasasController:ControllerBase
     {
         Casa c = autoMapper.Map<Casa>(casaDTO);
         Casa casa = await casaServicio.crear(c, casaDTO.caracteristicasDTO);
+
+        CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        return StatusCode(StatusCodes.Status200OK, vmCasa);
+    }
+
+    [HttpPatch("editar")]
+    public async Task<IActionResult> editar([FromBody]EditarCasaDTO casaDTO)
+    {
+        CaracteristicaDTO caracteristica = autoMapper.Map<CaracteristicaDTO>(casaDTO.caracteristicas);
+        Casa casa = await casaServicio.editar(casaDTO, caracteristica);
 
         CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
         return StatusCode(StatusCodes.Status200OK, vmCasa);

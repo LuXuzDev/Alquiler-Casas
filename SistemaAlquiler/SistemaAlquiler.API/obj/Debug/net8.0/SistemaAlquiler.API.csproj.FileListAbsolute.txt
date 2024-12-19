@@ -258,3 +258,12 @@ C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\S
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\obj\Debug\net8.0\SistemaAlquiler.API.genruntimeconfig.cache
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\obj\Debug\net8.0\ref\SistemaAlquiler.API.dll
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
