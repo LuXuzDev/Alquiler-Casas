@@ -3,6 +3,15 @@ using SistemaAlquiler.AccesoDatos;
 using SistemaAlquiler.Controladora;
 using SistemaAlquiler.API.Utilidades.Mappers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using SistemaAlquiler.API.Utilidades.JWT;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using SistemaAlquiler.Entidades;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,11 +19,66 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+//JWT 
+
+builder.Services.AddSwaggerGen(options => {
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Past token here:"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    }); 
+});
+
+builder.Services.AddIdentity<UserModel, IdentityRole>()
+    .AddEntityFrameworkStores<DB_Context>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "medialityc.maping.com",
+        ValidAudience = "medialityc.maping.com",
+        IssuerSigningKey = new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes("estoesmuymuymuysegurohastaquesedemuestrelocontrarioysisedemuestranoeraseguro"))
+    };
+});
+
+builder.Services.AddAuthorization();
 builder.Services.inyectarDependencia(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+
+
+//Cors
 builder.Services.AddCors(opciones =>
 {
     opciones.AddDefaultPolicy(
@@ -26,9 +90,23 @@ builder.Services.AddCors(opciones =>
         });
 });
 
+
+async Task roles(IServiceProvider serviceProvider)
+{
+    using var scope = serviceProvider.CreateScope();
+    var rolControlador = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new[] { "Administrador", "Gestor", "Cliente" };
+    
+    foreach(var rol in roles)
+    {
+        if (!await rolControlador.RoleExistsAsync(rol))
+            await rolControlador.CreateAsync(new IdentityRole(rol));
+    }
+}
+
 var app = builder.Build();
 app.UseCors();
-
 
 /* Hacer la migracion (Mantener comentado)
 using (var scope = app.Services.CreateScope())
@@ -45,7 +123,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+await roles(app.Services);
 
 app.MapControllers();
 

@@ -23,6 +23,7 @@ public class AutoMapperProfile : Profile
         .ReverseMap();
 
         CreateMap<Casa,CrearCasaDTO>().ReverseMap();
+        CreateMap<Casa, EditarCasaDTO>().ReverseMap();
         #endregion
 
         #region
@@ -32,6 +33,11 @@ public class AutoMapperProfile : Profile
 
         #region Ciudad
         CreateMap<Ciudad, CiudadDTO>().ReverseMap();
+        #endregion
+
+        #region Reservacion
+        CreateMap<Reservacion, CrearReservacionDTO>().ReverseMap();
+        CreateMap<Reservacion, ReservacionDTO>().ReverseMap();
         #endregion
     }
 }

@@ -18,13 +18,13 @@ public class Reservacion
     public virtual Casa casa { get; set; }
 
     public int cantPersonas {  get; set; }
-    public DateTime fechaEntrada { get; set; }
-    public DateTime fechaSalida { get;set; }
+    public DateOnly fechaEntrada { get; set; }
+    public DateOnly fechaSalida { get;set; }
     public double costoTotal {  get; set; }
 
     public Reservacion() { }
-    public Reservacion( int idUsuario, int idCasa,int cantPersonas, 
-        DateTime fechaEntrada, DateTime fechaSalida,double costoTotal)
+    public Reservacion( int idUsuario, int idCasa,int cantPersonas,
+        DateOnly fechaEntrada, DateOnly fechaSalida,double costoTotal)
     {
         this.idUsuario = idUsuario;
         this.idCasa = idCasa;

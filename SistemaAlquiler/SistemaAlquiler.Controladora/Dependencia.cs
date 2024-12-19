@@ -35,5 +35,6 @@ public static class Dependencia
         servicios.AddScoped<ICiudadServicio, CiudadServicio>();
         servicios.AddScoped<IReservacionServicio, ReservacionServicio>();
         
+        
     }
 }

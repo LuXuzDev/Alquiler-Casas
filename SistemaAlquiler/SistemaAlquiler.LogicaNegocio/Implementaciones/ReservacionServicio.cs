@@ -13,11 +13,16 @@ public class ReservacionServicio : IReservacionServicio
 {
     private readonly IRepositorioGenerico<Reservacion> repositorio;
     private readonly IRepositorioGenerico<Casa> repositorioCasa;
+    private readonly IRepositorioGenerico<Usuario> repositorioUsuario;
+    private readonly IRepositorioGenerico<Caracteristicas> repositorioCaracteristicas;
 
-    public ReservacionServicio(IRepositorioGenerico<Reservacion> repositorio, IRepositorioGenerico<Casa> repositorioCasa)
+    public ReservacionServicio(IRepositorioGenerico<Reservacion> repositorio, IRepositorioGenerico<Casa> repositorioCasa,
+        IRepositorioGenerico<Usuario> repositorioUsuario, IRepositorioGenerico<Caracteristicas> repositorioCaracteristicas)
     {
         this.repositorio = repositorio;
         this.repositorioCasa = repositorioCasa;
+        this.repositorioUsuario = repositorioUsuario;
+        this.repositorioCaracteristicas = repositorioCaracteristicas;
     }
 
     public async Task<Reservacion> eliminar(int idReservacion)
@@ -25,15 +30,16 @@ public class ReservacionServicio : IReservacionServicio
         try
         {
             var reservacionEncontrada = await repositorio.obtener(u => u.idReservacion == idReservacion);
+            Reservacion reservacion = reservacionEncontrada.FirstOrDefault();
 
-            if (reservacionEncontrada.FirstOrDefault() == null)
+            if (reservacion == null)
                 throw new TaskCanceledException("La reservacion no existe");
 
 
-            bool respuesta = await repositorio.eliminar(reservacionEncontrada.FirstOrDefault());
+            bool respuesta = await repositorio.eliminar(reservacion);
             if (!respuesta)
                 throw new TaskCanceledException("Error al eliminar la reservacion");
-            return (Reservacion)reservacionEncontrada;
+            return reservacion;
         }
         catch (Exception)
         {
@@ -50,22 +56,22 @@ public class ReservacionServicio : IReservacionServicio
     public async Task<List<Reservacion>> obtenerPorGestor(int idGestor)
     {
         IQueryable<Reservacion> consulta = await repositorio.obtener(u => u.idUsuario == idGestor);
+        if(consulta.FirstOrDefault() == null)
+            throw new TaskCanceledException("El usuario no existe");
         return (List<Reservacion>)consulta.ToList();
     }
 
     public async Task<Reservacion> obtenerPorId(int idReservacion)
     {
         IQueryable<Reservacion> consulta = await repositorio.obtener(u=> u.idReservacion==idReservacion);
-        return (Reservacion)consulta;
+        Reservacion reservacion = consulta.FirstOrDefault();
+        if(reservacion== null)
+            throw new TaskCanceledException("La reservacion no existe");
+        return reservacion;
     }
 
-    public async Task<double> creara(int idUsuario, int idCasa, int cantPersonas, DateTime fechaEntrada, DateTime fechaSalida)
-    {
-        
-        return await costoTotal(fechaEntrada, fechaSalida, idCasa);
-    }
 
-    private async Task<double> costoTotal(DateTime fechaEntrada, DateTime fechaSalida, int idCasa)
+    private async Task<double> costoTotal(DateOnly fechaEntrada, DateOnly fechaSalida, int idCasa)
     {
         var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
         if(fechaEntrada.CompareTo(fechaSalida) < 0)
@@ -84,8 +90,71 @@ public class ReservacionServicio : IReservacionServicio
         
     }
 
-    Task<Reservacion> IReservacionServicio.crear(int idUsuario, int idCasa, int cantPersonas, DateTime fechaEntrada, DateTime fechaSalida)
+    private async Task<bool> disponibilidadPorFecha(DateOnly fechaEntrada, DateOnly fechaSalida)
     {
-        throw new NotImplementedException();
+        bool estaDisponible = true;
+        int entrada = fechaEntrada.DayOfYear;
+        int salida = fechaSalida.DayOfYear;
+
+        var reservaciones = await repositorio.obtener(u => u.fechaEntrada.DayOfYear >= entrada && u.fechaSalida.DayOfYear <= salida);
+        if(reservaciones.FirstOrDefault()!=null)
+            estaDisponible = false;
+
+        return estaDisponible;
+    }
+
+    private async Task<bool> revisarCasa(int idCasa)
+    {
+        bool existen = true;
+        var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
+
+        if(casa.FirstOrDefault() == null)
+            throw new TaskCanceledException("La casa no existe");
+        return existen;
+    }
+
+    private async Task<bool> revisarCantidadPersonas(int idCasa, int cantPersonas)
+    {
+        var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
+        bool existen = true;
+        var caracteristicas = await repositorioCaracteristicas.obtener(u => u.idCaracteristicas == casa.FirstOrDefault().idCaracteristica);
+
+        if (caracteristicas.FirstOrDefault().cantMaxPersonas<cantPersonas)
+            throw new TaskCanceledException("La casa no tiene disponibilidad para tantas personas");
+
+        return existen;
+    }
+    private async Task<bool> revisarUsuario(int idUsuario)
+    {
+        bool existen = true;
+        var usuario = await repositorioUsuario.obtener(u => u.idUsuario == idUsuario);
+        
+        if (usuario.FirstOrDefault() == null)
+            throw new TaskCanceledException("El usuario no existe");
+
+        return existen;
+    }
+
+    public async Task<Reservacion> crear(int idUsuario, int idCasa, int cantPersonas, DateOnly fechaEntrada, DateOnly fechaSalida)
+    {
+        await revisarUsuario(idUsuario);
+        await revisarCasa(idCasa);
+        await revisarCantidadPersonas(idCasa,cantPersonas);
+
+        if(!await disponibilidadPorFecha(fechaEntrada, fechaSalida))
+            throw new TaskCanceledException("Ya existe una reservacion en esa fecha");
+
+        try
+        {
+            double costo = await costoTotal(fechaEntrada, fechaSalida, idCasa);
+            Reservacion reservacion = new Reservacion(idUsuario, idCasa, cantPersonas, fechaEntrada, fechaSalida, costo);
+
+            var reservacionCreada = await repositorio.crear(reservacion);
+            return reservacionCreada;
+        }
+        catch(Exception ex)
+        {
+            throw new TaskCanceledException("Error en crear la reservacion.");
+        }
     }
 }

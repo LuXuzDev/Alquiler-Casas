@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SistemaAlquiler.Entidades;
 
 namespace SistemaAlquiler.AccesoDatos
@@ -13,6 +14,7 @@ namespace SistemaAlquiler.AccesoDatos
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Reservacion> Reservaciones { get; set; }
         public DbSet<Valoracion> Valoraciones { get; set; }
+        public DbSet<IdentityRole> jwt_Roles { get; set; }
         public DB_Context(DbContextOptions<DB_Context> options) : base(options)
         {
 

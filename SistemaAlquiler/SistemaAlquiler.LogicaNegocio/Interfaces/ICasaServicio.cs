@@ -12,7 +12,7 @@ public interface ICasaServicio
 {
     Task<List<Casa>> lista();
     Task<Casa> crear(Casa casa,CrearCaracteristicasDTO caracteristicas);
-    Task<Casa> editar(Casa casa);
+    Task<Casa> editar(EditarCasaDTO casa,CaracteristicaDTO caracteristicas);
     Task<Casa> eliminar(int idCasa);
     Task<Casa> obtenerPorId(int idCasa);
     Task<List<Casa>> obtenerCasasFiltradas(BusquedaCasaDTO busquedaCasaDTO);
