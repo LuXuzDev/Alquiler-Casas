@@ -978,8 +978,10 @@
       },
       "SistemaAlquiler.LogicaNegocio/1.0.0": {
         "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "8.3.0",
           "SistemaAlquiler.AccesoDatos": "1.0.0",
-          "SistemaAlquiler.Entidades": "1.0.0"
+          "SistemaAlquiler.Entidades": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "8.3.0"
         },
         "runtime": {
           "SistemaAlquiler.LogicaNegocio.dll": {

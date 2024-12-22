@@ -12,6 +12,7 @@ using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.AccesoDatos.Repositorios;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using SistemaAlquiler.LogicaNegocio.Implementaciones;
+using SistemaAlquiler.LogicaNegocio.JWT;
 
 
 namespace SistemaAlquiler.Controladora;
@@ -34,6 +35,9 @@ public static class Dependencia
         servicios.AddScoped<ICaracteristicaServicio, CaracteristicaServicio>();
         servicios.AddScoped<ICiudadServicio, CiudadServicio>();
         servicios.AddScoped<IReservacionServicio, ReservacionServicio>();
+        servicios.AddScoped<ILoginServicio, LoginServicio>();
+        servicios.AddScoped<ICasaPendienteServicio,CasaPendienteServicio>();
+        servicios.AddSingleton<CreadorToken>();
         
         
     }

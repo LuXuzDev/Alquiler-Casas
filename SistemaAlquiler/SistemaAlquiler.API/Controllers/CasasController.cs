@@ -11,7 +11,7 @@ using System.Web.Http.Results;
 namespace SistemaAlquiler.API.Controllers;
 
 [ApiController]
-[Route("casas/")]
+[Route("api/[controller]")]
 public class CasasController:ControllerBase
 {
 
@@ -79,6 +79,14 @@ public class CasasController:ControllerBase
         CaracteristicaDTO caracteristica = autoMapper.Map<CaracteristicaDTO>(casaDTO.caracteristicas);
         Casa casa = await casaServicio.editar(casaDTO, caracteristica);
 
+        CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        return StatusCode(StatusCodes.Status200OK, vmCasa);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> borrar(int id)
+    {
+        Casa casa = await casaServicio.eliminar(id);
         CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }

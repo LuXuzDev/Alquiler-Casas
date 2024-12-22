@@ -4,12 +4,13 @@ using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.Implementaciones;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemaAlquiler.API.Controllers;
 
 
 [ApiController]
-[Route("ciudades/")]
+[Route("api/[controller]")]
 public class CiudadController : ControllerBase
 {
     private readonly ICiudadServicio ciudadServicio;
@@ -41,6 +42,7 @@ public class CiudadController : ControllerBase
 
 
     [HttpPost("{ciudad}")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> crear(string ciudad)
     {
         Ciudad c= await ciudadServicio.crear(ciudad);

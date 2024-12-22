@@ -9,7 +9,7 @@ namespace SistemaAlquiler.API.Controllers;
 
 
 [ApiController]
-[Route("reservaciones/")]
+[Route("api/[controller]")]
 public class ReservacionController : ControllerBase
 {
     private readonly IReservacionServicio reservacionServicio;

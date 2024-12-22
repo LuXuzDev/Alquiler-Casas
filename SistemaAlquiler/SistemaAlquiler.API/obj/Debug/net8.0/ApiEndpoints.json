@@ -1,8 +1,82 @@
 [
   {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
+    "Method": "cancelar",
+    "RelativePath": "api/CasaPendiente/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
+    "Method": "crear",
+    "RelativePath": "api/CasaPendiente/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "casaDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearCasaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
+    "Method": "editar",
+    "RelativePath": "api/CasaPendiente/editar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "casaDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.EditarCasaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
+    "Method": "listaCasas",
+    "RelativePath": "api/CasaPendiente/listaCasas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
+    "Method": "publicar",
+    "RelativePath": "api/CasaPendiente/publicar{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "casaPorId",
-    "RelativePath": "casas/{id}",
+    "RelativePath": "api/Casas/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -17,8 +91,24 @@
   },
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "borrar",
+    "RelativePath": "api/Casas/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasa_Ciudad",
-    "RelativePath": "casas/{idCiudad}casaPorCiudad",
+    "RelativePath": "api/Casas/{idCiudad}casaPorCiudad",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -34,7 +124,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "crear",
-    "RelativePath": "casas/crear",
+    "RelativePath": "api/Casas/crear",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -50,7 +140,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "editar",
-    "RelativePath": "casas/editar",
+    "RelativePath": "api/Casas/editar",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -66,7 +156,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasasFiltradas",
-    "RelativePath": "casas/filtrar",
+    "RelativePath": "api/Casas/filtrar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -82,7 +172,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasas",
-    "RelativePath": "casas/listaCasas",
+    "RelativePath": "api/Casas/listaCasas",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -92,7 +182,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "crear",
-    "RelativePath": "ciudades/{ciudad}",
+    "RelativePath": "api/Ciudad/{ciudad}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -108,7 +198,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "ciudadID",
-    "RelativePath": "ciudades/{id}",
+    "RelativePath": "api/Ciudad/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -124,7 +214,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "eliminar",
-    "RelativePath": "ciudades/{id}",
+    "RelativePath": "api/Ciudad/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -140,7 +230,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "editar",
-    "RelativePath": "ciudades/editar",
+    "RelativePath": "api/Ciudad/editar",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -156,7 +246,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CiudadController",
     "Method": "listaCiudades",
-    "RelativePath": "ciudades/listaCiudades",
+    "RelativePath": "api/Ciudad/listaCiudades",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -164,9 +254,25 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SistemaAlquiler.API.Controllers.LoginController",
+    "Method": "login",
+    "RelativePath": "api/Login/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
     "Method": "crear",
-    "RelativePath": "reservaciones",
+    "RelativePath": "api/Reservacion",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -182,7 +288,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
     "Method": "obtenerReservacionID",
-    "RelativePath": "reservaciones/{id}",
+    "RelativePath": "api/Reservacion/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -198,7 +304,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
     "Method": "eliminar",
-    "RelativePath": "reservaciones/{id}",
+    "RelativePath": "api/Reservacion/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -214,7 +320,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
     "Method": "obtenerPorGestor",
-    "RelativePath": "reservaciones/{idGestor}reservacionPorGestores",
+    "RelativePath": "api/Reservacion/{idGestor}reservacionPorGestores",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -230,7 +336,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
     "Method": "listaReservaciones",
-    "RelativePath": "reservaciones/lista",
+    "RelativePath": "api/Reservacion/lista",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -240,7 +346,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "usuarioId",
-    "RelativePath": "usuarios/{id}",
+    "RelativePath": "api/Usuarios/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -256,7 +362,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "eliminar",
-    "RelativePath": "usuarios/{id}",
+    "RelativePath": "api/Usuarios/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -277,7 +383,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "cambiarRol",
-    "RelativePath": "usuarios/cambiarRol",
+    "RelativePath": "api/Usuarios/cambiarRol",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -293,7 +399,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "crear",
-    "RelativePath": "usuarios/crear",
+    "RelativePath": "api/Usuarios/crear",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -309,7 +415,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "editar",
-    "RelativePath": "usuarios/editar",
+    "RelativePath": "api/Usuarios/editar",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -325,7 +431,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "listaGestores",
-    "RelativePath": "usuarios/listaGestores",
+    "RelativePath": "api/Usuarios/listaGestores",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -335,7 +441,7 @@
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "listaUsuarios",
-    "RelativePath": "usuarios/listaUsuarios",
+    "RelativePath": "api/Usuarios/listaUsuarios",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
