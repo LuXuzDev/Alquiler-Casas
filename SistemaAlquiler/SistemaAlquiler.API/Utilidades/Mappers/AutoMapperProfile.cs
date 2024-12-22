@@ -24,6 +24,17 @@ public class AutoMapperProfile : Profile
 
         CreateMap<Casa,CrearCasaDTO>().ReverseMap();
         CreateMap<Casa, EditarCasaDTO>().ReverseMap();
+
+
+        CreateMap<CasaPendiente, CasaDTO>()
+        .ForMember(dest => dest.ciudad, opt => opt.MapFrom(src => src.ciudad.ciudad))
+        .ForMember(dest => dest.correo, opt => opt.MapFrom(src => src.usuario.correo))
+        .ForMember(dest => dest.numeroContacto, opt => opt.MapFrom(src => src.usuario.numeroContacto))
+        .ForMember(dest => dest.caracteristicas, opt => opt.MapFrom(src => src.caracteristicas))
+        .ReverseMap();
+
+        CreateMap<CasaPendiente, CrearCasaDTO>().ReverseMap();
+        CreateMap<CasaPendiente, EditarCasaDTO>().ReverseMap();
         #endregion
 
         #region

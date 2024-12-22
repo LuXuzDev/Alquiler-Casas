@@ -9,7 +9,7 @@ using SistemaAlquiler.LogicaNegocio.DTOs;
 namespace SistemaAlquiler.API.Controllers;
 
 [ApiController]
-[Route("usuarios/")]
+[Route("api/[controller]")]
 public class UsuariosController : ControllerBase
 {
     private readonly IUsuarioServicio usuarioServicio;

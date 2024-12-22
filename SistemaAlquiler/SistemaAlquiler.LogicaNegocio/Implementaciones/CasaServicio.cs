@@ -15,21 +15,26 @@ namespace SistemaAlquiler.LogicaNegocio.Implementaciones;
 public class CasaServicio : ICasaServicio
 {
     private readonly IRepositorioGenerico<Casa> repositorio;
+    private readonly IRepositorioGenerico<CasaPendiente> pendientes;
     private readonly ICaracteristicaServicio caracteristicaServicio;
 
-    public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio)
+    public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio, IRepositorioGenerico<CasaPendiente> pendientes)
     {
         this.repositorio = repositorio;
         this.caracteristicaServicio = caracteristicaServicio;
+        this.pendientes = pendientes;
     }
-    
+
+
+
     public async Task<Casa> crear(Casa casa,CrearCaracteristicasDTO caracteristicas)
     {
         var caracteristica = await caracteristicaServicio.crear(caracteristicas);
+        Casa casaCreada = null;
         try
         {
             casa.idCaracteristica = caracteristica.idCaracteristicas;
-            Casa casaCreada = await repositorio.crear(casa);
+            casaCreada = await repositorio.crear(casa);
         }
         catch (Exception ex)
         {
@@ -37,7 +42,7 @@ public class CasaServicio : ICasaServicio
             throw ex;
         }
         
-        return casa;
+        return casaCreada;
 
     }
 
@@ -74,6 +79,7 @@ public class CasaServicio : ICasaServicio
         return casas;
     }
 
+
     public async Task<List<Casa>> obtenerCasaPorCiudad(int idCiudad)
     {
         IQueryable<Casa> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad && u.idUsuario != null);
@@ -81,105 +87,79 @@ public class CasaServicio : ICasaServicio
         return casas;
     }
 
-
     public async Task<List<Casa>> obtenerCasasFiltradas(BusquedaCasaDTO busquedaCasaDTO)
     {
         IQueryable<Casa> casas = await repositorio.obtener(u=>u.idUsuario != null && u.idCiudad != null, [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
 
+
         #region Filtrado
+        if (busquedaCasaDTO.cantMaxPersonas.HasValue)
+            casas = casas.Where(c => c.caracteristicas.cantMaxPersonas >= busquedaCasaDTO.cantMaxPersonas.Value);
 
-        List<Casa> casasFiltradas = casas.ToList();
-        for(int i= 0; i < casasFiltradas.Count(); i++)
-        {
-            Casa c = casasFiltradas[i];
+        if (busquedaCasaDTO.cantHabitaciones.HasValue)
+            casas = casas.Where(c => c.caracteristicas.cantHabitaciones >= busquedaCasaDTO.cantHabitaciones.Value);
 
-            if (busquedaCasaDTO.cantMaxPersonas.HasValue)
-                if(c.caracteristicas.cantMaxPersonas < busquedaCasaDTO.cantMaxPersonas)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.cantBanos.HasValue)
+            casas = casas.Where(c => c.caracteristicas.cantBanos >= busquedaCasaDTO.cantBanos.Value);
 
-            if (busquedaCasaDTO.cantHabitaciones.HasValue)
-                if (c.caracteristicas.cantHabitaciones < busquedaCasaDTO.cantHabitaciones)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.cantCuartos.HasValue)
+            casas = casas.Where(c => c.caracteristicas.cantCuartos >= busquedaCasaDTO.cantCuartos.Value);
 
-            if (busquedaCasaDTO.cantBanos.HasValue)
-                if (c.caracteristicas.cantBanos < busquedaCasaDTO.cantBanos)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.cocina.HasValue)
+            casas = casas.Where(c => c.caracteristicas.cocina == busquedaCasaDTO.cocina.Value);
 
-            if (busquedaCasaDTO.cantCuartos.HasValue)
-                if (c.caracteristicas.cantCuartos < busquedaCasaDTO.cantCuartos)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.terraza_balcon.HasValue)
+            casas = casas.Where(c => c.caracteristicas.terraza_balcon == busquedaCasaDTO.terraza_balcon.Value);
 
-            if (busquedaCasaDTO.cocina.HasValue)
-                if (c.caracteristicas.cocina != busquedaCasaDTO.cocina)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.barbacoa.HasValue)
+            casas = casas.Where(c => c.caracteristicas.barbacoa == busquedaCasaDTO.barbacoa.Value);
 
-            if (busquedaCasaDTO.terraza_balcon.HasValue)
-                if (c.caracteristicas.terraza_balcon != busquedaCasaDTO.terraza_balcon)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.garaje.HasValue)
+            casas = casas.Where(c => c.caracteristicas.garaje == busquedaCasaDTO.garaje.Value);
 
-            if (busquedaCasaDTO.barbacoa.HasValue)
-                if (c.caracteristicas.barbacoa != busquedaCasaDTO.barbacoa)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.piscina.HasValue)
+            casas = casas.Where(c => c.caracteristicas.piscina == busquedaCasaDTO.piscina.Value);
 
-            if (busquedaCasaDTO.garaje.HasValue)
-                if (c.caracteristicas.garaje != busquedaCasaDTO.garaje)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.gimnasio.HasValue)
+            casas = casas.Where(c => c.caracteristicas.gimnasio == busquedaCasaDTO.gimnasio.Value);
 
-            if (busquedaCasaDTO.piscina.HasValue)
-                if (c.caracteristicas.piscina != busquedaCasaDTO.piscina)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.lavadora_secadora.HasValue)
+            casas = casas.Where(c => c.caracteristicas.lavadora_secadora == busquedaCasaDTO.lavadora_secadora.Value);
 
-            if (busquedaCasaDTO.gimnasio.HasValue)
-                if (c.caracteristicas.gimnasio != busquedaCasaDTO.gimnasio)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.tv.HasValue)
+            casas = casas.Where(c => c.caracteristicas.tv == busquedaCasaDTO.tv.Value);
 
-            if (busquedaCasaDTO.lavadora_secadora.HasValue)
-                if (c.caracteristicas.lavadora_secadora != busquedaCasaDTO.lavadora_secadora)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.permiteMenores.HasValue)
+            casas = casas.Where(c => c.caracteristicas.permiteMenores == busquedaCasaDTO.permiteMenores.Value);
 
-            if (busquedaCasaDTO.tv.HasValue)
-                if (c.caracteristicas.tv != busquedaCasaDTO.tv)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.permiteFumar.HasValue)
+            casas = casas.Where(c => c.caracteristicas.permiteFumar == busquedaCasaDTO.permiteFumar.Value);
 
-            if (busquedaCasaDTO.permiteMenores.HasValue)
-                if (c.caracteristicas.permiteMenores != busquedaCasaDTO.permiteMenores)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.permiteMascotas.HasValue)
+            casas = casas.Where(c => c.caracteristicas.permiteMascotas == busquedaCasaDTO.permiteMascotas.Value);
 
-            if (busquedaCasaDTO.permiteFumar.HasValue)
-                if (c.caracteristicas.permiteFumar != busquedaCasaDTO.permiteFumar)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.wifi.HasValue)
+            casas = casas.Where(c => c.caracteristicas.wifi == busquedaCasaDTO.wifi.Value);
 
-            if (busquedaCasaDTO.permiteMascotas.HasValue)
-                if (c.caracteristicas.permiteMascotas != busquedaCasaDTO.permiteMascotas)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.aguaCaliente.HasValue)
+            casas = casas.Where(c => c.caracteristicas.aguaCaliente == busquedaCasaDTO.aguaCaliente.Value);
 
-            if (busquedaCasaDTO.wifi.HasValue)
-                if (c.caracteristicas.wifi != busquedaCasaDTO.wifi)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.climatizada.HasValue)
+            casas = casas.Where(c => c.caracteristicas.climatizada == busquedaCasaDTO.climatizada.Value);
 
-            if (busquedaCasaDTO.aguaCaliente.HasValue)
-                if (c.caracteristicas.aguaCaliente != busquedaCasaDTO.aguaCaliente)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.precioMes.HasValue)
+            casas = casas.Where(c => c.precioMes <= busquedaCasaDTO.precioMes.Value);
 
-            if (busquedaCasaDTO.climatizada.HasValue)
-                if (c.caracteristicas.climatizada != busquedaCasaDTO.climatizada)
-                    casasFiltradas.Remove(c);
+        if (busquedaCasaDTO.precioNoche.HasValue)
+            casas = casas.Where(c => c.precioNoche <= busquedaCasaDTO.precioNoche.Value);
 
-            if (busquedaCasaDTO.precioNoche.HasValue)
-                if (c.precioNoche < busquedaCasaDTO.precioNoche)
-                    casasFiltradas.Remove(c);
-
-            if (busquedaCasaDTO.precioMes.HasValue)
-                if (c.precioMes < busquedaCasaDTO.precioMes)
-                    casasFiltradas.Remove(c);
-
-            if (busquedaCasaDTO.areaTotal.HasValue)
-                if (c.areaTotal < busquedaCasaDTO.areaTotal)
-                    casasFiltradas.Remove(c);
-        }
+        if (busquedaCasaDTO.areaTotal.HasValue)
+            casas = casas.Where(c => c.areaTotal >= busquedaCasaDTO.areaTotal.Value);
 
         #endregion
-        
+
+
+        List<Casa> casasFiltradas = casas.ToList();
         return casasFiltradas;
     }
 
@@ -188,4 +168,6 @@ public class CasaServicio : ICasaServicio
         var casa = await repositorio.obtenerTodos(u=> u.idCasa==idCasa);
         return casa;
     }
+
+    
 }

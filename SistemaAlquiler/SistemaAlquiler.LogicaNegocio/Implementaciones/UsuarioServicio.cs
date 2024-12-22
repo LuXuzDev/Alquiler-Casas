@@ -37,8 +37,8 @@ public class UsuarioServicio : IUsuarioServicio
     public async Task<Usuario> obtenerPorCredenciales(string correo, string clave)
     {
         string claveEncriptada = utilidadesServicio.convertirSha256(clave);
-        Usuario usuarioEncontrado = (Usuario)await repositorio.obtener(u=> u.correo.Equals(correo) && u.clave.Equals(claveEncriptada));
-        return usuarioEncontrado;
+        var usuarioEncontrado = await repositorio.obtener(u=> u.correo.Equals(correo) && u.clave.Equals(claveEncriptada));
+        return usuarioEncontrado.FirstOrDefault();
     }
     public async Task<List<Usuario>> lista()
     {

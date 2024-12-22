@@ -40,4 +40,15 @@ public class Casa
         this.areaTotal = areaTotal;
         this.descripcion = descripcion;
     }
+
+    public Casa(CasaPendiente casaPendiente)
+    {
+        idCaracteristica=casaPendiente.idCaracteristica;
+        idUsuario = casaPendiente.idUsuario;
+        idCiudad = casaPendiente.idCiudad;
+        precioNoche = casaPendiente.precioNoche;
+        precioMes = casaPendiente.precioMes;
+        areaTotal = casaPendiente.areaTotal;
+        descripcion = casaPendiente.descripcion;
+    }
 }

@@ -20,6 +20,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+
+
 //JWT 
 
 builder.Services.AddSwaggerGen(options => {
@@ -65,12 +67,19 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "medialityc.maping.com",
-        ValidAudience = "medialityc.maping.com",
+        ValidIssuer = builder.Configuration["Jwt:Issuer"], 
+        ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes("estoesmuymuymuysegurohastaquesedemuestrelocontrarioysisedemuestranoeraseguro"))
+            System.Text.Encoding.UTF8.GetBytes("TuClaveSecretaMuySeguraTanSeguraQueNoHayPeligroDeUnAtaqueInformatico"))
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", policy => policy.RequireRole("1"));
+});
+
+
 
 builder.Services.AddAuthorization();
 builder.Services.inyectarDependencia(builder.Configuration);
@@ -96,7 +105,7 @@ async Task roles(IServiceProvider serviceProvider)
     using var scope = serviceProvider.CreateScope();
     var rolControlador = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    var roles = new[] { "Administrador", "Gestor", "Cliente" };
+    var roles = new[] { "1", "2", "3" };
     
     foreach(var rol in roles)
     {
@@ -108,12 +117,6 @@ async Task roles(IServiceProvider serviceProvider)
 var app = builder.Build();
 app.UseCors();
 
-/* Hacer la migracion (Mantener comentado)
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<DB_Context>();
-    context.Database.Migrate();
-}*/
 
 if (app.Environment.IsDevelopment())
 {

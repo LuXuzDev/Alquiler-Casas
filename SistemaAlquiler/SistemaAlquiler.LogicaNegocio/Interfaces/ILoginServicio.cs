@@ -8,5 +8,5 @@ namespace SistemaAlquiler.LogicaNegocio.Interfaces;
 
 public interface ILoginServicio
 {
-    Task<bool> login(string correo, string clave);
+    Task<string> login(string correo, string clave);
 }
