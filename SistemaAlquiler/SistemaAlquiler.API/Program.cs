@@ -81,6 +81,12 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("RequireAdmin_Gestor", policy => policy.RequireRole("1","2"));
+   
+});
+
+builder.Services.AddAuthorization(options =>
+{
     options.AddPolicy("RequireGestor", policy => policy.RequireRole("2"));
 });
 

@@ -1,11 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Implementaciones;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 
 namespace SistemaAlquiler.API.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+[Authorize(Policy = "RequireAdmin_Gestor")]
 
 public class GestorController:ControllerBase
 {
@@ -19,7 +24,8 @@ public class GestorController:ControllerBase
         this.autoMapper = autoMapper;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}/listaCasas")]
+    
     public async Task<IActionResult> listaCasasPublicadas(int id)
     {
         var casas = await gestorServicio.listaCasas(id);
@@ -47,5 +53,13 @@ public class GestorController:ControllerBase
     {
         double ganancias = await gestorServicio.ganaciasMensuales(id);
         return StatusCode(StatusCodes.Status200OK, ganancias);
+    }
+
+    [HttpGet("{id}/valoraciones/casa")]
+    public async Task<IActionResult> valoracionesCasa(int id)
+    {
+        List<Valoracion> valoracion = await gestorServicio.valoracionesCasa(id);
+        List<ValoracionDTO> vmValoracion = autoMapper.Map<List<ValoracionDTO>>(valoracion);
+        return StatusCode(StatusCodes.Status200OK, vmValoracion);
     }
 }

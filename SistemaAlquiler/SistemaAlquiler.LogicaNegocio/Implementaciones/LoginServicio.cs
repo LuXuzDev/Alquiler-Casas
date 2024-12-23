@@ -27,7 +27,7 @@ public class LoginServicio : ILoginServicio
         {
             Usuario usuario = await usuarioServicio.obtenerPorCredenciales(nombreUsuario,correo, clave);
             if (usuario == null)
-                throw new TaskCanceledException("El usuario no existe");
+                throw new TaskCanceledException("Usuario incorrecto");
             
             
             return creadorToken.crearToken(usuario);

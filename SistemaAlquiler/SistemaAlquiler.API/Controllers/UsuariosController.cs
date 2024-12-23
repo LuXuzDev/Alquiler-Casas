@@ -5,6 +5,7 @@ using SistemaAlquiler.LogicaNegocio.Interfaces;
 using SistemaAlquiler.API.Utilidades.Mappers;
 using AutoMapper;
 using SistemaAlquiler.LogicaNegocio.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemaAlquiler.API.Controllers;
 
@@ -76,6 +77,7 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpPatch("cambiarRol")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> cambiarRol([FromBody] CambiarRolDTO rolDTO )
     {
         Usuario actualizado = await usuarioServicio.editarRol(rolDTO.idUsuario,rolDTO.idRol);

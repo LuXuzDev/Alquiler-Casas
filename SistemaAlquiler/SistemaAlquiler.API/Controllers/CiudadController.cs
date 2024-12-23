@@ -60,6 +60,7 @@ public class CiudadController : ControllerBase
 
 
     [HttpPatch("editar")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> editar(CiudadDTO ciudad)
     {
         Ciudad actualizado = await ciudadServicio.editar(ciudad.ciudad, ciudad.idCiudad);

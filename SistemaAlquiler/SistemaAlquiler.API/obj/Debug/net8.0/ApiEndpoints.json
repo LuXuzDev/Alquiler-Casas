@@ -1,69 +1,5 @@
 [
   {
-    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
-    "Method": "listaCasasPublicadas",
-    "RelativePath": "{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
-    "Method": "ganacias",
-    "RelativePath": "{id}/ganancias",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
-    "Method": "ganaciasMensuales",
-    "RelativePath": "{id}/ganancias/mensuales",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
-    "Method": "listaCasasPendientes",
-    "RelativePath": "{id}/pendientes",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
     "Method": "cancelar",
     "RelativePath": "api/CasaPendiente/{id}",
@@ -318,6 +254,86 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "ganacias",
+    "RelativePath": "api/Gestor/{id}/ganancias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "ganaciasMensuales",
+    "RelativePath": "api/Gestor/{id}/ganancias/mensuales",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "listaCasasPublicadas",
+    "RelativePath": "api/Gestor/{id}/listaCasas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "listaCasasPendientes",
+    "RelativePath": "api/Gestor/{id}/pendientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "valoracionesCasa",
+    "RelativePath": "api/Gestor/{id}/valoraciones/casa",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SistemaAlquiler.API.Controllers.LoginController",
     "Method": "login",
     "RelativePath": "api/Login/login",
@@ -490,6 +506,80 @@
     "ContainingType": "SistemaAlquiler.API.Controllers.UsuariosController",
     "Method": "listaUsuarios",
     "RelativePath": "api/Usuarios/listaUsuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ValoracionController",
+    "Method": "crear",
+    "RelativePath": "api/Valoracion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "valoracionDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearValoracionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ValoracionController",
+    "Method": "editar",
+    "RelativePath": "api/Valoracion",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "valoracionDTO",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.ValoracionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ValoracionController",
+    "Method": "eliminar",
+    "RelativePath": "api/Valoracion/{idValoracion}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idValoracion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ValoracionController",
+    "Method": "obtenerPorId",
+    "RelativePath": "api/Valoracion/{idValoracion}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idValoracion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.ValoracionController",
+    "Method": "lista",
+    "RelativePath": "lista",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

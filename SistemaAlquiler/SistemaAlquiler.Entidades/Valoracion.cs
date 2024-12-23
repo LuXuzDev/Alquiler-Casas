@@ -17,4 +17,12 @@ public class Valoracion
     public virtual Usuario usuario {  get; set; }
     [ForeignKey("idCasa")]
     public virtual Casa casa { get; set; }
+
+    public Valoracion(int idUsuario, int idCasa, double puntuacion, string comentario)
+    {
+        this.idUsuario = idUsuario;
+        this.idCasa = idCasa;
+        this.puntuacion = puntuacion;
+        this.comentario = comentario;
+    }
 }

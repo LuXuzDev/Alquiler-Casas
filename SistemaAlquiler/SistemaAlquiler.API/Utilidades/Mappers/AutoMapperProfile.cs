@@ -9,12 +9,16 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile() 
     {
         #region Usuario   
+
         CreateMap<Usuario,UsuarioDTO>().ReverseMap();
         CreateMap<Usuario, CrearUsuarioDTO>().ReverseMap();
         CreateMap<Usuario, EditarUsuarioDTO>().ReverseMap();
+
         #endregion
 
+
         #region Casa
+
         CreateMap<Casa, CasaDTO>()
         .ForMember(dest => dest.ciudad , opt => opt.MapFrom(src => src.ciudad.ciudad))
         .ForMember(dest => dest.correo, opt => opt.MapFrom(src => src.usuario.correo))
@@ -25,6 +29,10 @@ public class AutoMapperProfile : Profile
         CreateMap<Casa,CrearCasaDTO>().ReverseMap();
         CreateMap<Casa, EditarCasaDTO>().ReverseMap();
 
+        #endregion
+
+
+        #region CasaPendiente
 
         CreateMap<CasaPendiente, CasaDTO>()
         .ForMember(dest => dest.ciudad, opt => opt.MapFrom(src => src.ciudad.ciudad))
@@ -35,20 +43,38 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CasaPendiente, CrearCasaDTO>().ReverseMap();
         CreateMap<CasaPendiente, EditarCasaDTO>().ReverseMap();
+
+
         #endregion
 
-        #region
+
+        #region Caracteristicas
+
         CreateMap<Caracteristicas,CaracteristicaDTO>().ReverseMap();
         CreateMap<Caracteristicas,CrearCaracteristicasDTO>().ReverseMap();
+
         #endregion
+
 
         #region Ciudad
         CreateMap<Ciudad, CiudadDTO>().ReverseMap();
         #endregion
 
+
         #region Reservacion
+
         CreateMap<Reservacion, CrearReservacionDTO>().ReverseMap();
         CreateMap<Reservacion, ReservacionDTO>().ReverseMap();
+
+        #endregion
+
+
+        #region Valoracion
+
+        CreateMap<Valoracion,ValoracionDTO>()
+            .ForMember(dest=>dest.nombreUsuario , opt => opt.MapFrom(src => src.usuario.nombreUsuario))
+            .ReverseMap();
+
         #endregion
     }
 }

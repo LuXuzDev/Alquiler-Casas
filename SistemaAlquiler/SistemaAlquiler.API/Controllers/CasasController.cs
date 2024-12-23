@@ -42,8 +42,8 @@ public class CasasController:ControllerBase
     public async Task<IActionResult> casaPorId(int id)
     {
         var casa = await casaServicio.obtenerPorId(id);
-
-        return StatusCode(StatusCodes.Status200OK,casa);
+        CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
 
@@ -51,7 +51,8 @@ public class CasasController:ControllerBase
     public async Task<IActionResult> listaCasa_Ciudad(int idCiudad)
     {
         var casas =await casaServicio.obtenerCasaPorCiudad(idCiudad);
-        return StatusCode(StatusCodes.Status200OK, casas);
+        List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
     [HttpPost("filtrar")]

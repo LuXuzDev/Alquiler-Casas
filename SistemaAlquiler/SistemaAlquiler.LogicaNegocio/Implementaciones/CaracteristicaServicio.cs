@@ -13,16 +13,23 @@ namespace SistemaAlquiler.LogicaNegocio.Implementaciones;
 public class CaracteristicaServicio : ICaracteristicaServicio
 {
     private readonly IRepositorioGenerico<Caracteristicas> repositorio;
+    private readonly IValidadorServicio validadorServicio;
 
-    public CaracteristicaServicio(IRepositorioGenerico<Caracteristicas> repositorio)
-
+    public CaracteristicaServicio(IRepositorioGenerico<Caracteristicas> repositorio, IValidadorServicio validadorServicio)
     {
         this.repositorio = repositorio;
+        this.validadorServicio = validadorServicio;
     }
     public async Task<Caracteristicas> crear(CrearCaracteristicasDTO caracteristicaDTO)
     {
-        if(caracteristicaDTO.cantHabitaciones < caracteristicaDTO.cantBanos + caracteristicaDTO.cantCuartos + 1)
-            throw new TaskCanceledException("Error en los datos");
+        await validadorServicio.validarNumerosEnteros(1, 40, caracteristicaDTO.cantMaxPersonas, "La cantidad de personas es incorrecta");
+        await validadorServicio.validarNumerosEnteros(1, 20, caracteristicaDTO.cantBanos, "La cantidad de baños es incorrecta");
+        await validadorServicio.validarNumerosEnteros(1, 20, caracteristicaDTO.cantCuartos, "La cantidad de cuartos es incorrecta");
+        await validadorServicio.validarNumerosEnteros(2, 20, caracteristicaDTO.cantHabitaciones, "La cantidad de habitaciones es incorrecta");
+
+        if (caracteristicaDTO.cantHabitaciones < caracteristicaDTO.cantBanos + caracteristicaDTO.cantCuartos + 1)
+            throw new TaskCanceledException("La cantidad de habitaciones es incorrecta");
+
 
         Caracteristicas caracteristicas = new Caracteristicas(caracteristicaDTO.cantMaxPersonas, caracteristicaDTO.cantHabitaciones,
             caracteristicaDTO.cantBanos, caracteristicaDTO.cantCuartos,
@@ -37,25 +44,38 @@ public class CaracteristicaServicio : ICaracteristicaServicio
 
     public async Task<Caracteristicas> editar(int idCaracteristica,CaracteristicaDTO caracteristicaDTO)
     {
-        var caracteristica = await repositorio.obtenerTodos(u => u.idCaracteristicas == idCaracteristica);
-        if (caracteristica == null)
-            throw new TaskCanceledException("No existe esa caracteristica");
+        Caracteristicas caracteristica = await validadorServicio.existeCaracteristica(idCaracteristica, "No existe esa caracteristica");
+
         if (caracteristicaDTO.cantHabitaciones < caracteristicaDTO.cantBanos + caracteristicaDTO.cantCuartos + 1)
-            throw new TaskCanceledException("Error en los datos");
+            throw new TaskCanceledException("La cantidad de habitaciones es incorrecta");
         try
         {
             #region Modificando valores
             if (caracteristicaDTO.cantMaxPersonas.HasValue)
+            {
+                await validadorServicio.validarNumerosEnteros(1, 40,(int) caracteristicaDTO.cantMaxPersonas, "La cantidad de personas es incorrecta");
                 caracteristica.cantMaxPersonas = (int)caracteristicaDTO.cantMaxPersonas;
+            }
+                
 
             if(caracteristicaDTO.cantHabitaciones.HasValue)
+            {
+                await validadorServicio.validarNumerosEnteros(1, 20, (int)caracteristicaDTO.cantBanos, "La cantidad de habitaciones es incorrecta");
                 caracteristica.cantHabitaciones = (int)caracteristicaDTO.cantHabitaciones;
+            }
+                
 
             if(caracteristicaDTO.cantBanos.HasValue)
+            {
+                await validadorServicio.validarNumerosEnteros(1, 20,(int) caracteristicaDTO.cantBanos, "La cantidad de baños es incorrecta");
                 caracteristica.cantBanos = (int)caracteristicaDTO.cantBanos;
+            }
 
             if(caracteristicaDTO.cantCuartos.HasValue)
+            {
+                await validadorServicio.validarNumerosEnteros(1, 20, (int)caracteristicaDTO.cantBanos, "La cantidad de cuartos es incorrecta");
                 caracteristica.cantCuartos = (int)caracteristicaDTO.cantCuartos;
+            }
 
             if(caracteristicaDTO.cocina.HasValue)
                 caracteristica.cocina = caracteristicaDTO.cocina.Value;
@@ -113,16 +133,14 @@ public class CaracteristicaServicio : ICaracteristicaServicio
 
     public async Task<Caracteristicas> eliminar(int idCaracteristica)
     {
-        var caracteristica = await repositorio.obtenerTodos(u => u.idCaracteristicas == idCaracteristica);
-        if(caracteristica==null)
-            throw new TaskCanceledException("No existe esa caracteristica");
+        Caracteristicas caracteristica =await validadorServicio.existeCaracteristica(idCaracteristica, "No existe esa caracteristica");
         repositorio.eliminar(caracteristica);
         return caracteristica;
     }
 
     public async Task<Caracteristicas> obtenerPorId(int idCaracteristica)
     {
-        var caracteristica = await repositorio.obtenerTodos(u=> u.idCaracteristicas==idCaracteristica);
+        Caracteristicas caracteristica = await validadorServicio.existeCaracteristica(idCaracteristica, "No existe esa caracteristica");
         return caracteristica;
     }
 }

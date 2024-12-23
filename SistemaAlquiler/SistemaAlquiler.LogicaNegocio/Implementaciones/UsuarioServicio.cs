@@ -18,20 +18,21 @@ public class UsuarioServicio : IUsuarioServicio
     private readonly IRepositorioGenerico<Usuario> repositorio;
     private readonly IRepositorioGenerico<Casa> repositorioCasa;
     private readonly IUtilidadesServicio utilidadesServicio;
+    private readonly IValidadorServicio validadorServicio;
 
-    public UsuarioServicio(IRepositorioGenerico<Usuario> repositorio, IUtilidadesServicio utilidadesServicio, IRepositorioGenerico<Casa> repositorioCasa)
+    public UsuarioServicio(IRepositorioGenerico<Usuario> repositorio, IUtilidadesServicio utilidadesServicio,
+        IRepositorioGenerico<Casa> repositorioCasa, IValidadorServicio validadorServicio)
     {
         this.repositorio = repositorio;
         this.repositorioCasa = repositorioCasa;
         this.utilidadesServicio = utilidadesServicio;
+        this.validadorServicio = validadorServicio;
     }
 
     public async Task<Usuario> obtenerPorId(int usuarioId)
     {
-        IQueryable<Usuario> consulta = await repositorio.obtener(u=> u.idUsuario == usuarioId);
-        Usuario usuario = consulta.FirstOrDefault();
-        if (usuario == null)
-            throw new TaskCanceledException("El usuario no existe");
+
+        Usuario usuario =await validadorServicio.existeUsuario(usuarioId, "El usuario no existe");
         return usuario;
     }
 
@@ -49,10 +50,11 @@ public class UsuarioServicio : IUsuarioServicio
 
     public async Task<Usuario> crear(CrearUsuarioDTO user)
     {
-        await revisarNumeroContacto(user.numeroContacto);
-        var usuarioExiste = await repositorio.obtener(u=> u.correo==user.correo);
-        if (usuarioExiste.FirstOrDefault() != null)
-            throw new TaskCanceledException("El correo ya existe");
+
+        await validadorServicio.validarNumeroContacto(user.numeroContacto, "El numero de contacto es incorrecto");
+        await validadorServicio.validarCorreo(user.correo,"El correo es incorrecto");
+        await validadorServicio.validarClave(user.clave, "La clave debe tener mas de 8 caracteres");
+        await validadorServicio.validarTextoVacio(user.nombreUsuario, "El nombre de usuario no puede estar vacio");
 
         try
         {
@@ -71,46 +73,32 @@ public class UsuarioServicio : IUsuarioServicio
 
     }
 
-    private async Task<bool> revisarNumeroContacto(string numeroContacto)
-    {
-        bool esCorrecta = true;
-
-        char[] temp = numeroContacto.ToCharArray();
-        foreach (char c in temp)
-        {
-            if (Char.IsLetter(c))
-                esCorrecta = false;
-        }
-
-        if (!esCorrecta)
-            throw new TaskCanceledException("Error en el numero de contacto");
-        return esCorrecta;
-    }
-
     public async Task<Usuario> editar(string nombreUsuario,string correo, string numeroContacto, string clave,int idUsuario)
     {
-        await revisarNumeroContacto(numeroContacto);
-        var usuarioEncontrado = await repositorio.obtener(u => u.idUsuario == idUsuario);
+        Usuario usuarioEncontrado = await validadorServicio.existeUsuario(idUsuario, "El usuario no existe");
+        await validadorServicio.validarNumeroContacto(numeroContacto, "El numero de contacto es incorrecto");
+        await validadorServicio.validarCorreo(correo, "El correo es incorrecto");
+        await validadorServicio.validarClave(clave, "La clave debe tener mas de 8 caracteres");
+        await validadorServicio.validarTextoVacio(nombreUsuario, "El nombre de usuario no puede estar vacio");
 
-        if (usuarioEncontrado == null)
-            throw new TaskCanceledException("El usuario no existe");
+        
 
         try
         {
             if(nombreUsuario != null)
-                usuarioEncontrado.FirstOrDefault().nombreUsuario = nombreUsuario;
+                usuarioEncontrado.nombreUsuario = nombreUsuario;
             if (correo!=null)
-                usuarioEncontrado.FirstOrDefault().correo= correo;
+                usuarioEncontrado.correo= correo;
             if (numeroContacto != null)
-                usuarioEncontrado.FirstOrDefault().numeroContacto= numeroContacto;
+                usuarioEncontrado.numeroContacto= numeroContacto;
             if (clave != null)
-                usuarioEncontrado.FirstOrDefault().clave = utilidadesServicio.convertirSha256(clave);
-            bool respuesta = await repositorio.editar(usuarioEncontrado.FirstOrDefault());
+                usuarioEncontrado.clave = utilidadesServicio.convertirSha256(clave);
+            bool respuesta = await repositorio.editar(usuarioEncontrado);
 
             if (!respuesta)
                 throw new TaskCanceledException("Error actualizando los datos");
             else
-                return usuarioEncontrado.FirstOrDefault();
+                return usuarioEncontrado;
 
         }
         catch (Exception)
@@ -121,21 +109,19 @@ public class UsuarioServicio : IUsuarioServicio
 
     public async Task<Usuario> editarRol(int idUsuario, int idRol )
     {
-        var usuarioEncontrado = await repositorio.obtener(u => u.idUsuario == idUsuario);
-
-        if (usuarioEncontrado == null)
-            throw new TaskCanceledException("El usuario no existe");
+        Usuario usuarioEncontrado = await validadorServicio.existeUsuario(idUsuario, "El usuario no existe");
+        await validadorServicio.existeRol(idRol, "El rol es incorrecto");
 
         try
         {
-            usuarioEncontrado.FirstOrDefault().idRol = idRol;
+            usuarioEncontrado.idRol = idRol;
             
-            bool respuesta = await repositorio.editar(usuarioEncontrado.FirstOrDefault());
+            bool respuesta = await repositorio.editar(usuarioEncontrado);
 
             if (!respuesta)
                 throw new TaskCanceledException("Error actualizando los datos");
             else
-                return usuarioEncontrado.FirstOrDefault();
+                return usuarioEncontrado;
 
         }
         catch (Exception)
@@ -149,7 +135,7 @@ public class UsuarioServicio : IUsuarioServicio
     {
         try
         {
-            var usuarioEncontrado = await repositorio.obtener(u => u.idUsuario == usuarioId);
+            Usuario usuarioEncontrado = await validadorServicio.existeUsuario(usuarioId, "El usuario no existe");
 
             if (usuarioEncontrado == null)
                 throw new TaskCanceledException("El usuario no existe");
@@ -163,10 +149,10 @@ public class UsuarioServicio : IUsuarioServicio
                 casa.idUsuario = null;
             }
 
-            bool respuesta = await repositorio.eliminar(usuarioEncontrado.FirstOrDefault());
+            bool respuesta = await repositorio.eliminar(usuarioEncontrado);
             if (!respuesta)
                 throw new TaskCanceledException("Error al eliminar el usuario");
-            return usuarioEncontrado.FirstOrDefault();
+            return usuarioEncontrado;
         }
         catch(Exception)
         {
@@ -176,6 +162,7 @@ public class UsuarioServicio : IUsuarioServicio
 
     public async Task<List<Usuario>> obtenerPorRol(int idRol)
     {
+        await validadorServicio.existeRol(idRol, "El rol es incorrecto");
         IQueryable<Usuario> consulta = await repositorio.obtener(u => u.idRol == idRol);
         List<Usuario> gestores = consulta.ToList();
         return gestores;
