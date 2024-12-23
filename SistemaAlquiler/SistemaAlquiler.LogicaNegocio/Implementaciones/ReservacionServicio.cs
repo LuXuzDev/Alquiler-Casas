@@ -53,13 +53,7 @@ public class ReservacionServicio : IReservacionServicio
         return (List<Reservacion>)consulta.ToList();
     }
 
-    public async Task<List<Reservacion>> obtenerPorGestor(int idGestor)
-    {
-        IQueryable<Reservacion> consulta = await repositorio.obtener(u => u.idUsuario == idGestor);
-        if(consulta.FirstOrDefault() == null)
-            throw new TaskCanceledException("El usuario no existe");
-        return (List<Reservacion>)consulta.ToList();
-    }
+    
 
     public async Task<Reservacion> obtenerPorId(int idReservacion)
     {
@@ -148,7 +142,7 @@ public class ReservacionServicio : IReservacionServicio
         {
             double costo = await costoTotal(fechaEntrada, fechaSalida, idCasa);
             Reservacion reservacion = new Reservacion(idUsuario, idCasa, cantPersonas, fechaEntrada, fechaSalida, costo);
-
+            
             var reservacionCreada = await repositorio.crear(reservacion);
             return reservacionCreada;
         }

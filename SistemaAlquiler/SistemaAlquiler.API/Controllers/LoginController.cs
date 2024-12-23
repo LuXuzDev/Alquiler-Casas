@@ -24,7 +24,7 @@ public class LoginController: ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> login([FromBody] LoginDTO loginDTO)
     {
-        var token = await loginServicio.login(loginDTO.correo,loginDTO.clave);
+        var token = await loginServicio.login(loginDTO.nombreUsuario,loginDTO.correo,loginDTO.clave);
         return StatusCode(StatusCodes.Status200OK, token);
     }
 }

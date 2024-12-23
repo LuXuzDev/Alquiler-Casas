@@ -69,7 +69,7 @@ public class UsuariosController : ControllerBase
     [HttpPatch("editar")]
     public async Task<IActionResult> editar([FromBody] EditarUsuarioDTO user)
     {
-        Usuario actualizado = await usuarioServicio.editar(user.correo,user.numeroContacto,user.clave, user.idUsuario);
+        Usuario actualizado = await usuarioServicio.editar(user.nombreUsuario,user.correo,user.numeroContacto,user.clave, user.idUsuario);
         UsuarioDTO vmUsuario = autoMapper.Map<UsuarioDTO>(actualizado);
         return StatusCode(StatusCodes.Status200OK, vmUsuario);
 

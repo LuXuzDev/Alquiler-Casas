@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SistemaAlquiler.AccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class Finalizada : Migration
+    public partial class AgregarNombreUsuario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,6 +89,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     idUsuario = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     idRol = table.Column<int>(type: "integer", nullable: false),
+                    nombreUsuario = table.Column<string>(type: "text", nullable: false),
                     correo = table.Column<string>(type: "text", nullable: false),
                     numeroContacto = table.Column<string>(type: "text", nullable: false),
                     clave = table.Column<string>(type: "text", nullable: false)
@@ -143,12 +144,11 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 name: "CasasPendientes",
                 columns: table => new
                 {
-                    idCasaPendiente = table.Column<int>(type: "integer", nullable: false)
+                    idCasa = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     idCaracteristica = table.Column<int>(type: "integer", nullable: false),
                     idUsuario = table.Column<int>(type: "integer", nullable: true),
                     idCiudad = table.Column<int>(type: "integer", nullable: true),
-                    CasaidCasa = table.Column<int>(type: "integer", nullable: false),
                     precioNoche = table.Column<double>(type: "double precision", nullable: false),
                     precioMes = table.Column<double>(type: "double precision", nullable: false),
                     areaTotal = table.Column<double>(type: "double precision", nullable: false),
@@ -156,18 +156,12 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CasasPendientes", x => x.idCasaPendiente);
+                    table.PrimaryKey("PK_CasasPendientes", x => x.idCasa);
                     table.ForeignKey(
                         name: "FK_CasasPendientes_Caracteristicas_idCaracteristica",
                         column: x => x.idCaracteristica,
                         principalTable: "Caracteristicas",
                         principalColumn: "idCaracteristicas",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CasasPendientes_Casas_CasaidCasa",
-                        column: x => x.CasaidCasa,
-                        principalTable: "Casas",
-                        principalColumn: "idCasa",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CasasPendientes_Ciudades_idCiudad",
@@ -248,16 +242,16 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     idCasa = table.Column<int>(type: "integer", nullable: false),
                     direccionURL = table.Column<string>(type: "text", nullable: false),
                     direccionName = table.Column<string>(type: "text", nullable: false),
-                    CasaPendienteidCasaPendiente = table.Column<int>(type: "integer", nullable: true)
+                    CasaPendienteidCasa = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fotos", x => x.idFoto);
                     table.ForeignKey(
-                        name: "FK_Fotos_CasasPendientes_CasaPendienteidCasaPendiente",
-                        column: x => x.CasaPendienteidCasaPendiente,
+                        name: "FK_Fotos_CasasPendientes_CasaPendienteidCasa",
+                        column: x => x.CasaPendienteidCasa,
                         principalTable: "CasasPendientes",
-                        principalColumn: "idCasaPendiente");
+                        principalColumn: "idCasa");
                     table.ForeignKey(
                         name: "FK_Fotos_Casas_idCasa",
                         column: x => x.idCasa,
@@ -282,11 +276,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 column: "idUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CasasPendientes_CasaidCasa",
-                table: "CasasPendientes",
-                column: "CasaidCasa");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CasasPendientes_idCaracteristica",
                 table: "CasasPendientes",
                 column: "idCaracteristica");
@@ -302,9 +291,9 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 column: "idUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fotos_CasaPendienteidCasaPendiente",
+                name: "IX_Fotos_CasaPendienteidCasa",
                 table: "Fotos",
-                column: "CasaPendienteidCasaPendiente");
+                column: "CasaPendienteidCasa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fotos_idCasa",

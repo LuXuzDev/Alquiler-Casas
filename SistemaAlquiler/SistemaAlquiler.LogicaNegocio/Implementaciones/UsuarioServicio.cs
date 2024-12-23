@@ -4,6 +4,7 @@ using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,10 +35,10 @@ public class UsuarioServicio : IUsuarioServicio
         return usuario;
     }
 
-    public async Task<Usuario> obtenerPorCredenciales(string correo, string clave)
+    public async Task<Usuario> obtenerPorCredenciales(string nombreUsuario,string correo, string clave)
     {
         string claveEncriptada = utilidadesServicio.convertirSha256(clave);
-        var usuarioEncontrado = await repositorio.obtener(u=> u.correo.Equals(correo) && u.clave.Equals(claveEncriptada));
+        var usuarioEncontrado = await repositorio.obtener(u=> u.correo.Equals(correo) && u.clave.Equals(claveEncriptada) && u.nombreUsuario.Equals(nombreUsuario));
         return usuarioEncontrado.FirstOrDefault();
     }
     public async Task<List<Usuario>> lista()
@@ -48,6 +49,7 @@ public class UsuarioServicio : IUsuarioServicio
 
     public async Task<Usuario> crear(CrearUsuarioDTO user)
     {
+        await revisarNumeroContacto(user.numeroContacto);
         var usuarioExiste = await repositorio.obtener(u=> u.correo==user.correo);
         if (usuarioExiste.FirstOrDefault() != null)
             throw new TaskCanceledException("El correo ya existe");
@@ -55,7 +57,7 @@ public class UsuarioServicio : IUsuarioServicio
         try
         {
             string clave = utilidadesServicio.convertirSha256(user.clave);
-            Usuario usuarioCreado = new Usuario(user.idRol, user.correo,user.numeroContacto,clave);
+            Usuario usuarioCreado = new Usuario(3, user.nombreUsuario,user.correo,user.numeroContacto,clave);
             Usuario usuario = await repositorio.crear(usuarioCreado);
 
             if(usuarioCreado.idUsuario == 0)
@@ -69,8 +71,25 @@ public class UsuarioServicio : IUsuarioServicio
 
     }
 
-    public async Task<Usuario> editar(string correo, string numeroContacto, string clave,int idUsuario)
+    private async Task<bool> revisarNumeroContacto(string numeroContacto)
     {
+        bool esCorrecta = true;
+
+        char[] temp = numeroContacto.ToCharArray();
+        foreach (char c in temp)
+        {
+            if (Char.IsLetter(c))
+                esCorrecta = false;
+        }
+
+        if (!esCorrecta)
+            throw new TaskCanceledException("Error en el numero de contacto");
+        return esCorrecta;
+    }
+
+    public async Task<Usuario> editar(string nombreUsuario,string correo, string numeroContacto, string clave,int idUsuario)
+    {
+        await revisarNumeroContacto(numeroContacto);
         var usuarioEncontrado = await repositorio.obtener(u => u.idUsuario == idUsuario);
 
         if (usuarioEncontrado == null)
@@ -78,7 +97,9 @@ public class UsuarioServicio : IUsuarioServicio
 
         try
         {
-            if(correo!=null)
+            if(nombreUsuario != null)
+                usuarioEncontrado.FirstOrDefault().nombreUsuario = nombreUsuario;
+            if (correo!=null)
                 usuarioEncontrado.FirstOrDefault().correo= correo;
             if (numeroContacto != null)
                 usuarioEncontrado.FirstOrDefault().numeroContacto= numeroContacto;
