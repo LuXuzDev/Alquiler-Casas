@@ -13,13 +13,11 @@ namespace SistemaAlquiler.API.Controllers;
 public class LoginController: ControllerBase
 {
     private readonly ILoginServicio loginServicio;
-
-
-
     public LoginController(ILoginServicio loginServicio)
     {
         this.loginServicio = loginServicio;
     }
+
 
     [HttpPost("login")]
     public async Task<IActionResult> login([FromBody] LoginDTO loginDTO)

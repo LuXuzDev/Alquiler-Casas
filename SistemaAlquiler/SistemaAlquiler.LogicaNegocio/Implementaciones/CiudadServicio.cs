@@ -15,19 +15,19 @@ public class CiudadServicio : ICiudadServicio
 {
     private readonly IRepositorioGenerico<Ciudad> repositorio;
     private readonly IRepositorioGenerico<Casa> repositorioCasa;
+    private readonly IValidadorServicio validadorServicio;
 
-    public CiudadServicio(IRepositorioGenerico<Ciudad> repositorio, IRepositorioGenerico<Casa> repositorioCasa)
+    public CiudadServicio(IRepositorioGenerico<Ciudad> repositorio, IRepositorioGenerico<Casa> repositorioCasa,
+        IValidadorServicio validadorServicio)
     {
         this.repositorio = repositorio;
         this.repositorioCasa = repositorioCasa;
+        this.validadorServicio = validadorServicio;
     }
 
     public async Task<Ciudad> crear(string nombreCiudad)
     {
-        var ciudadExiste = await repositorio.obtener(u=> u.ciudad.Equals(nombreCiudad));
-        if (ciudadExiste.FirstOrDefault() != null)
-            throw new TaskCanceledException("La ciudad ya existe");
-
+        await validadorServicio.validarCiudad(nombreCiudad, "El nombre es incorrecto o ya existe");
         try
         {
             Ciudad c = new Ciudad(nombreCiudad);
@@ -42,10 +42,9 @@ public class CiudadServicio : ICiudadServicio
 
     public async Task<Ciudad> editar(string nombreCiudadNuevo, int idCiudad)
     {
-        IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
-        Ciudad ciudad = consulta.FirstOrDefault();
-        if (ciudad == null)
-            throw new TaskCanceledException("La ciudad no existe");
+        await validadorServicio.validarCiudad(nombreCiudadNuevo, "El nombre es incorrecto o ya existe");
+        Ciudad ciudad = await validadorServicio.existeCuidad(idCiudad, "La ciudad no existe");
+
 
         try
         {
@@ -68,10 +67,8 @@ public class CiudadServicio : ICiudadServicio
     {
         try
         {
-            IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
-            Ciudad ciudad = consulta.FirstOrDefault();
-            if (ciudad == null)
-                throw new TaskCanceledException("La ciudad no existe");
+            Ciudad ciudad = await validadorServicio.existeCuidad(idCiudad, "La ciudad no existe");
+
             var casas = await repositorioCasa.obtener(u => u.idCiudad == idCiudad);
 
 
@@ -101,10 +98,7 @@ public class CiudadServicio : ICiudadServicio
 
     public async Task<Ciudad> obtenerPorId(int idCiudad)
     {
-        IQueryable<Ciudad> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad);
-        Ciudad ciudad = consulta.FirstOrDefault();
-        if(ciudad == null)
-            throw new TaskCanceledException("La ciudad no existe");
+        Ciudad ciudad = await validadorServicio.existeCuidad(idCiudad, "La ciudad no existe");
         return ciudad;
     }
 }

@@ -17,18 +17,25 @@ public class CasaServicio : ICasaServicio
     private readonly IRepositorioGenerico<Casa> repositorio;
     private readonly IRepositorioGenerico<CasaPendiente> pendientes;
     private readonly ICaracteristicaServicio caracteristicaServicio;
+    private readonly IValidadorServicio validadorServicio;
 
-    public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio, IRepositorioGenerico<CasaPendiente> pendientes)
+    public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio,
+        IRepositorioGenerico<CasaPendiente> pendientes,IValidadorServicio validadorServicio)
     {
         this.repositorio = repositorio;
         this.caracteristicaServicio = caracteristicaServicio;
         this.pendientes = pendientes;
+        this.validadorServicio= validadorServicio;
     }
 
 
 
     public async Task<Casa> crear(Casa casa,CrearCaracteristicasDTO caracteristicas)
     {
+        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioNoche, "El precio de la noche no es correcto");
+        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioMes, "El precio del mes no es correcto");
+        await validadorServicio.validarNumerosDouble(0, 10000, casa.areaTotal, "El área total no es correcta");
+
         var caracteristica = await caracteristicaServicio.crear(caracteristicas);
         Casa casaCreada = null;
         try
@@ -38,28 +45,29 @@ public class CasaServicio : ICasaServicio
         }
         catch (Exception ex)
         {
-            caracteristicaServicio.eliminar(caracteristica.idCaracteristicas);
+            await caracteristicaServicio.eliminar(caracteristica.idCaracteristicas);
             throw ex;
         }
-        
         return casaCreada;
-
     }
 
     public async Task<Casa> editar(EditarCasaDTO casa,CaracteristicaDTO caracteristica)
     {
+        await validadorServicio.existeCuidad(casa.idCiudad, "La cuidad no es correcta");
+        Casa casaEditada =await validadorServicio.existeCasa(casa.idCasa, "La casa no existe");
+        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioNoche, "El precio de la noche no es correcto");
+        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioMes, "El precio del mes no es correcto");
+        await validadorServicio.validarNumerosDouble(0, 10000, casa.areaTotal, "El área total no es correcta");
         var c = await repositorio.obtener(u=> u.idCasa == casa.idCasa);
-        Casa casaEditada = c.FirstOrDefault();
-        if(casaEditada==null)
-           throw new TaskCanceledException("La casa no existe");
+        
 
-        caracteristicaServicio.editar(casa.idCaracteristica, caracteristica);
+        await caracteristicaServicio.editar(casa.idCaracteristica, caracteristica);
         casaEditada.areaTotal = casa.areaTotal;
         casaEditada.idCiudad = casa.idCiudad;
         casaEditada.descripcion = casa.descripcion;
         casaEditada.precioNoche = casa.precioNoche;
         casaEditada.precioMes = casa.precioMes;
-        repositorio.editar(casaEditada);
+        await repositorio.editar(casaEditada);
         return casaEditada;
 
     }
@@ -67,8 +75,8 @@ public class CasaServicio : ICasaServicio
     public async Task<Casa> eliminar(int idCasa)
     {
         Casa casa= await obtenerPorId(idCasa);
-        caracteristicaServicio.eliminar(casa.idCaracteristica);
-        repositorio.eliminar(casa);
+        await caracteristicaServicio.eliminar(casa.idCaracteristica);
+        await repositorio.eliminar(casa);
         return casa;
     }
 
@@ -82,7 +90,8 @@ public class CasaServicio : ICasaServicio
 
     public async Task<List<Casa>> obtenerCasaPorCiudad(int idCiudad)
     {
-        IQueryable<Casa> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad && u.idUsuario != null);
+        await validadorServicio.existeCuidad(idCiudad,"La cuidad no existe");
+        IQueryable<Casa> consulta = await repositorio.obtener(u => u.idCiudad == idCiudad && u.idUsuario != null,[u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
         List<Casa> casas = consulta.ToList();
         return casas;
     }
@@ -165,7 +174,9 @@ public class CasaServicio : ICasaServicio
 
     public async Task<Casa> obtenerPorId(int idCasa)
     {
-        var casa = await repositorio.obtenerTodos(u=> u.idCasa==idCasa);
+        await validadorServicio.existeCasa(idCasa, "No existe la casa");
+        var consulta = await repositorio.obtener(u=> u.idCasa==idCasa, [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
+        Casa casa = consulta.FirstOrDefault();
         return casa;
     }
 

@@ -15,19 +15,24 @@ public class GestorServicio : IGestorServicio
     private readonly IRepositorioGenerico<Usuario> repositorioUsuarios;
     private readonly IRepositorioGenerico<CasaPendiente> repositorioPendientes;
     private readonly IRepositorioGenerico<Reservacion> repositorioReservaciones;
+    private readonly IValoracionServicio valoracionServicio;
+    private readonly IValidadorServicio validadorServicio;
 
     public GestorServicio(IRepositorioGenerico<Casa> repositorioCasa, IRepositorioGenerico<CasaPendiente> repositorioPendientes,
-        IRepositorioGenerico<Reservacion> repositorioReservaciones, IRepositorioGenerico<Usuario> repositorioUsuarios)
+        IRepositorioGenerico<Reservacion> repositorioReservaciones, IRepositorioGenerico<Usuario> repositorioUsuarios,
+        IValoracionServicio valoracionServicio, IValidadorServicio validadorServicio)
     {
         this.repositorioCasa = repositorioCasa;
         this.repositorioPendientes = repositorioPendientes;
         this.repositorioReservaciones = repositorioReservaciones;
         this.repositorioUsuarios = repositorioUsuarios;
+        this.valoracionServicio = valoracionServicio;
+        this.validadorServicio = validadorServicio;
     }
 
     public async Task<List<CasaPendiente>> casasPendientes(int idGestor)
     {
-        await existeGestor(idGestor);
+        await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
         var consulta = await repositorioPendientes.obtener(u=> u.idUsuario==idGestor);
         List<CasaPendiente> casas = consulta.ToList();
         return casas;
@@ -35,7 +40,7 @@ public class GestorServicio : IGestorServicio
 
     public async Task<List<Casa>> listaCasas(int idGestor)
     {
-        await existeGestor(idGestor);
+        await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
         var consulta = await repositorioCasa.obtener(u => u.idUsuario == idGestor);
         List<Casa> casas = consulta.ToList();
         return casas;
@@ -43,7 +48,7 @@ public class GestorServicio : IGestorServicio
 
     private async Task<List<Reservacion>> obtenerPorGestor(int idGestor)
     {
-        await existeGestor(idGestor);
+        await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
         List<Casa> casas = await listaCasas(idGestor);
         List<Reservacion> reservaciones=new List<Reservacion>();
         foreach (Casa c in casas)
@@ -58,7 +63,7 @@ public class GestorServicio : IGestorServicio
 
     public async Task<double> ganaciasMensuales(int idGestor)
     {
-        await existeGestor(idGestor);
+        await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
         List<Reservacion> reservaciones = await obtenerPorGestor(idGestor);
         double total = 0;
         int mes = DateTime.Now.Month;
@@ -72,7 +77,7 @@ public class GestorServicio : IGestorServicio
 
     public async Task<double> gananciasTotales(int idGestor)
     {
-        await existeGestor(idGestor);
+        await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
         List<Reservacion> reservaciones = await obtenerPorGestor(idGestor);
         double total = 0;
         foreach (Reservacion r in reservaciones)
@@ -82,14 +87,10 @@ public class GestorServicio : IGestorServicio
         return total;
     }
 
-    private async Task<bool> existeGestor(int idGestor)
-    {
-        bool existe = true;
-        var consulta = await repositorioUsuarios.obtener(u=> u.idUsuario==idGestor && u.idRol==2);
-        Usuario gestor = consulta.FirstOrDefault();
-        if (gestor==null)
-            throw new TaskCanceledException("El gestor no existe");
-        return existe;
-    }
 
+    public async Task<List<Valoracion>> valoracionesCasa(int idCasa)
+    {
+        List<Valoracion> valoraciones = await valoracionServicio.obtenerPorIdCasa(idCasa);
+        return valoraciones;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.DTOs;
@@ -44,6 +45,7 @@ public class CasaPendienteController:ControllerBase
     }
 
     [HttpPost("publicar{id}")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> publicar(int id)
     {
         Casa casa = await casaServicio.publicar(id);

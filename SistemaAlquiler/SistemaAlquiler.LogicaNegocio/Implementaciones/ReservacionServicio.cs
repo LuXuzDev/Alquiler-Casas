@@ -15,27 +15,24 @@ public class ReservacionServicio : IReservacionServicio
     private readonly IRepositorioGenerico<Casa> repositorioCasa;
     private readonly IRepositorioGenerico<Usuario> repositorioUsuario;
     private readonly IRepositorioGenerico<Caracteristicas> repositorioCaracteristicas;
+    private readonly IValidadorServicio validadorServicio;
 
     public ReservacionServicio(IRepositorioGenerico<Reservacion> repositorio, IRepositorioGenerico<Casa> repositorioCasa,
-        IRepositorioGenerico<Usuario> repositorioUsuario, IRepositorioGenerico<Caracteristicas> repositorioCaracteristicas)
+        IRepositorioGenerico<Usuario> repositorioUsuario, IRepositorioGenerico<Caracteristicas> repositorioCaracteristicas,
+        IValidadorServicio validadorServicio)
     {
         this.repositorio = repositorio;
         this.repositorioCasa = repositorioCasa;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCaracteristicas = repositorioCaracteristicas;
+        this.validadorServicio = validadorServicio;
     }
 
     public async Task<Reservacion> eliminar(int idReservacion)
     {
         try
         {
-            var reservacionEncontrada = await repositorio.obtener(u => u.idReservacion == idReservacion);
-            Reservacion reservacion = reservacionEncontrada.FirstOrDefault();
-
-            if (reservacion == null)
-                throw new TaskCanceledException("La reservacion no existe");
-
-
+            Reservacion reservacion = await validadorServicio.existeReservacion(idReservacion, "La reservacion no existe");
             bool respuesta = await repositorio.eliminar(reservacion);
             if (!respuesta)
                 throw new TaskCanceledException("Error al eliminar la reservacion");
@@ -57,16 +54,14 @@ public class ReservacionServicio : IReservacionServicio
 
     public async Task<Reservacion> obtenerPorId(int idReservacion)
     {
-        IQueryable<Reservacion> consulta = await repositorio.obtener(u=> u.idReservacion==idReservacion);
-        Reservacion reservacion = consulta.FirstOrDefault();
-        if(reservacion== null)
-            throw new TaskCanceledException("La reservacion no existe");
+        Reservacion reservacion = await validadorServicio.existeReservacion(idReservacion, "La reservacion no existe");
         return reservacion;
     }
 
 
     private async Task<double> costoTotal(DateOnly fechaEntrada, DateOnly fechaSalida, int idCasa)
     {
+        await validadorServicio.existeCasa(idCasa, "No existe la casa");
         var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
         if(fechaEntrada.CompareTo(fechaSalida) < 0)
         {
@@ -97,43 +92,12 @@ public class ReservacionServicio : IReservacionServicio
         return estaDisponible;
     }
 
-    private async Task<bool> revisarCasa(int idCasa)
-    {
-        bool existen = true;
-        var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
-
-        if(casa.FirstOrDefault() == null)
-            throw new TaskCanceledException("La casa no existe");
-        return existen;
-    }
-
-    private async Task<bool> revisarCantidadPersonas(int idCasa, int cantPersonas)
-    {
-        var casa = await repositorioCasa.obtener(u => u.idCasa == idCasa);
-        bool existen = true;
-        var caracteristicas = await repositorioCaracteristicas.obtener(u => u.idCaracteristicas == casa.FirstOrDefault().idCaracteristica);
-
-        if (caracteristicas.FirstOrDefault().cantMaxPersonas<cantPersonas)
-            throw new TaskCanceledException("La casa no tiene disponibilidad para tantas personas");
-
-        return existen;
-    }
-    private async Task<bool> revisarUsuario(int idUsuario)
-    {
-        bool existen = true;
-        var usuario = await repositorioUsuario.obtener(u => u.idUsuario == idUsuario);
-        
-        if (usuario.FirstOrDefault() == null)
-            throw new TaskCanceledException("El usuario no existe");
-
-        return existen;
-    }
 
     public async Task<Reservacion> crear(int idUsuario, int idCasa, int cantPersonas, DateOnly fechaEntrada, DateOnly fechaSalida)
     {
-        await revisarUsuario(idUsuario);
-        await revisarCasa(idCasa);
-        await revisarCantidadPersonas(idCasa,cantPersonas);
+        await validadorServicio.existeUsuario(idUsuario, "No existe el usuario");
+        Casa casa = await validadorServicio.existeCasa(idCasa, "No existe la casa");
+        await validadorServicio.validarNumerosEnteros(1, casa.caracteristicas.cantMaxPersonas, cantPersonas, "La cantidad de personas es incorrecta");
 
         if(!await disponibilidadPorFecha(fechaEntrada, fechaSalida))
             throw new TaskCanceledException("Ya existe una reservacion en esa fecha");
