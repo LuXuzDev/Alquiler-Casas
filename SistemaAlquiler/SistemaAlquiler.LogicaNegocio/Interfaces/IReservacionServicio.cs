@@ -14,5 +14,5 @@ public interface IReservacionServicio
         DateOnly fechaEntrada, DateOnly fechaSalida);
     Task<Reservacion> eliminar(int idReservacion);
     Task<Reservacion> obtenerPorId(int idReservacion);
-    Task<List<Reservacion>> obtenerPorGestor(int idGestor);
+    
 }

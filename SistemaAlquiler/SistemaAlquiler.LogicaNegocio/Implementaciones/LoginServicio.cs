@@ -21,11 +21,11 @@ public class LoginServicio : ILoginServicio
         this.creadorToken = creadorToken;
     }
 
-    public async Task<string> login(string correo, string clave)
+    public async Task<string> login(string nombreUsuario,string correo, string clave)
     {
         try
         {
-            Usuario usuario = await usuarioServicio.obtenerPorCredenciales(correo, clave);
+            Usuario usuario = await usuarioServicio.obtenerPorCredenciales(nombreUsuario,correo, clave);
             if (usuario == null)
                 throw new TaskCanceledException("El usuario no existe");
             

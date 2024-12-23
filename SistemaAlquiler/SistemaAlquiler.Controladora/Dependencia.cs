@@ -37,6 +37,7 @@ public static class Dependencia
         servicios.AddScoped<IReservacionServicio, ReservacionServicio>();
         servicios.AddScoped<ILoginServicio, LoginServicio>();
         servicios.AddScoped<ICasaPendienteServicio,CasaPendienteServicio>();
+        servicios.AddScoped<IGestorServicio, GestorServicio > ();
         servicios.AddSingleton<CreadorToken>();
         
         

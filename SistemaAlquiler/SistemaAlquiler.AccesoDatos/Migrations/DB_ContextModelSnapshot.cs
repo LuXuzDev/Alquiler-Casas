@@ -151,14 +151,11 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
             modelBuilder.Entity("SistemaAlquiler.Entidades.CasaPendiente", b =>
                 {
-                    b.Property<int>("idCasaPendiente")
+                    b.Property<int>("idCasa")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCasaPendiente"));
-
-                    b.Property<int>("CasaidCasa")
-                        .HasColumnType("integer");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCasa"));
 
                     b.Property<double>("areaTotal")
                         .HasColumnType("double precision");
@@ -182,9 +179,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Property<double>("precioNoche")
                         .HasColumnType("double precision");
 
-                    b.HasKey("idCasaPendiente");
-
-                    b.HasIndex("CasaidCasa");
+                    b.HasKey("idCasa");
 
                     b.HasIndex("idCaracteristica");
 
@@ -221,7 +216,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idFoto"));
 
-                    b.Property<int?>("CasaPendienteidCasaPendiente")
+                    b.Property<int?>("CasaPendienteidCasa")
                         .HasColumnType("integer");
 
                     b.Property<string>("direccionName")
@@ -237,7 +232,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
                     b.HasKey("idFoto");
 
-                    b.HasIndex("CasaPendienteidCasaPendiente");
+                    b.HasIndex("CasaPendienteidCasa");
 
                     b.HasIndex("idCasa");
 
@@ -316,6 +311,10 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Property<int>("idRol")
                         .HasColumnType("integer");
 
+                    b.Property<string>("nombreUsuario")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("numeroContacto")
                         .IsRequired()
                         .HasColumnType("text");
@@ -382,12 +381,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
             modelBuilder.Entity("SistemaAlquiler.Entidades.CasaPendiente", b =>
                 {
-                    b.HasOne("SistemaAlquiler.Entidades.Casa", "Casa")
-                        .WithMany()
-                        .HasForeignKey("CasaidCasa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SistemaAlquiler.Entidades.Caracteristicas", "caracteristicas")
                         .WithMany()
                         .HasForeignKey("idCaracteristica")
@@ -402,8 +395,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         .WithMany()
                         .HasForeignKey("idUsuario");
 
-                    b.Navigation("Casa");
-
                     b.Navigation("caracteristicas");
 
                     b.Navigation("ciudad");
@@ -415,7 +406,7 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 {
                     b.HasOne("SistemaAlquiler.Entidades.CasaPendiente", null)
                         .WithMany("fotos")
-                        .HasForeignKey("CasaPendienteidCasaPendiente");
+                        .HasForeignKey("CasaPendienteidCasa");
 
                     b.HasOne("SistemaAlquiler.Entidades.Casa", "casa")
                         .WithMany("fotos")

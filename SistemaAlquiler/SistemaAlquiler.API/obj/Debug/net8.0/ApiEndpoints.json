@@ -1,5 +1,69 @@
 [
   {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "listaCasasPublicadas",
+    "RelativePath": "{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "ganacias",
+    "RelativePath": "{id}/ganancias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "ganaciasMensuales",
+    "RelativePath": "{id}/ganancias/mensuales",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.GestorController",
+    "Method": "listaCasasPendientes",
+    "RelativePath": "{id}/pendientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
     "Method": "cancelar",
     "RelativePath": "api/CasaPendiente/{id}",
@@ -311,22 +375,6 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.ReservacionController",
-    "Method": "obtenerPorGestor",
-    "RelativePath": "api/Reservacion/{idGestor}reservacionPorGestores",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idGestor",
         "Type": "System.Int32",
         "IsRequired": true
       }

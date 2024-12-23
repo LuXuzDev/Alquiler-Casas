@@ -32,15 +32,6 @@ public class ReservacionController : ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmReservacion);
     }
 
-    [HttpGet("{idGestor}reservacionPorGestores")]
-    public async Task<IActionResult> obtenerPorGestor(int idGestor)
-    {
-        var reservacion = await reservacionServicio.obtenerPorGestor(idGestor);
-
-        List<ReservacionDTO> vmReservacion = autoMapper.Map<List<ReservacionDTO>>(reservacion);
-
-        return StatusCode(StatusCodes.Status200OK, vmReservacion);
-    }
 
     [HttpGet("lista")]
     public async Task<IActionResult> listaReservaciones()

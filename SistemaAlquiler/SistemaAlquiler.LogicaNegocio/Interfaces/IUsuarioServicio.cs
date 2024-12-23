@@ -12,10 +12,10 @@ public interface IUsuarioServicio
 {
     Task<List<Usuario>> lista();
     Task<Usuario> crear(CrearUsuarioDTO usuarioDTO );
-    Task<Usuario> editar(string correo, string numeroContacto, string clave, int idUsuario);
+    Task<Usuario> editar(string nombreUsuario, string correo, string numeroContacto, string clave, int idUsuario);
     Task<Usuario> editarRol(int idUsuario,int idRol);
     Task<Usuario> eliminar(int usuarioId);
-    Task<Usuario> obtenerPorCredenciales(string correo, string clave);
+    Task<Usuario> obtenerPorCredenciales(string nombreUsuario, string correo, string clave);
     Task<Usuario> obtenerPorId(int usuarioId);
     Task<List<Usuario>> obtenerPorRol(int idRol);
 }

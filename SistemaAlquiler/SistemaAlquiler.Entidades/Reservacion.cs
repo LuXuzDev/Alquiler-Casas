@@ -10,6 +10,7 @@ public class Reservacion
     public int idReservacion { get; set; }
     public int idUsuario { get; set; }
 
+
     [ForeignKey("idUsuario")]
     public virtual Usuario usuario { get; set; }
     public int idCasa {  get; set; }
