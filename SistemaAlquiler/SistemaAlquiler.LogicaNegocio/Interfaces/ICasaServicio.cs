@@ -17,4 +17,5 @@ public interface ICasaServicio
     Task<Casa> obtenerPorId(int idCasa);
     Task<List<Casa>> obtenerCasasFiltradas(BusquedaCasaDTO busquedaCasaDTO);
     Task<List<Casa>> obtenerCasaPorCiudad(int idCiudad);
+    Task<List<Casa>> filtradoInicial(FiltradoInicialDTO filtrado);
 }

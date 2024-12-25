@@ -134,7 +134,7 @@ public class CaracteristicaServicio : ICaracteristicaServicio
     public async Task<Caracteristicas> eliminar(int idCaracteristica)
     {
         Caracteristicas caracteristica =await validadorServicio.existeCaracteristica(idCaracteristica, "No existe esa caracteristica");
-        repositorio.eliminar(caracteristica);
+        await repositorio.eliminar(caracteristica);
         return caracteristica;
     }
 

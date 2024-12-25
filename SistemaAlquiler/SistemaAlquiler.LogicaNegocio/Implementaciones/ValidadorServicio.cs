@@ -39,16 +39,16 @@ public class ValidadorServicio : IValidadorServicio
 
     public async Task<Casa> existeCasa(int idCasa, string mensaje)
     {
-        var consulta = await casas.obtener(u => u.idCasa == idCasa);
+        var consulta = await casas.obtener(u => u.idCasa == idCasa, [u => u.caracteristicas, u => u.ciudad, u=>u.usuario]);
         Casa casa = consulta.FirstOrDefault();
-        if(casa== null)
+        if(casa == null)
             throw new TaskCanceledException(mensaje);
         return casa;
     }
 
     public async Task<CasaPendiente> existeCasaPendiente(int idCasaPendiente, string mensaje)
     {
-        var consulta = await casasPendientes.obtener(u => u.idCasa == idCasaPendiente);
+        var consulta = await casasPendientes.obtener(u => u.idCasa == idCasaPendiente, [u => u.caracteristicas, u => u.ciudad, u => u.usuario]);
         CasaPendiente casa = consulta.FirstOrDefault();
         if (casa == null)
             throw new TaskCanceledException(mensaje);

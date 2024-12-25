@@ -16,16 +16,19 @@ public class CasaServicio : ICasaServicio
 {
     private readonly IRepositorioGenerico<Casa> repositorio;
     private readonly IRepositorioGenerico<CasaPendiente> pendientes;
+    private readonly IRepositorioGenerico<Reservacion> reservacion;
     private readonly ICaracteristicaServicio caracteristicaServicio;
     private readonly IValidadorServicio validadorServicio;
 
     public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio,
-        IRepositorioGenerico<CasaPendiente> pendientes,IValidadorServicio validadorServicio)
+        IRepositorioGenerico<CasaPendiente> pendientes,IValidadorServicio validadorServicio,
+        IRepositorioGenerico<Reservacion> reservacion)
     {
         this.repositorio = repositorio;
         this.caracteristicaServicio = caracteristicaServicio;
         this.pendientes = pendientes;
         this.validadorServicio= validadorServicio;
+        this.reservacion = reservacion;
     }
 
 
@@ -167,8 +170,41 @@ public class CasaServicio : ICasaServicio
 
         #endregion
 
-
         List<Casa> casasFiltradas = casas.ToList();
+        return casasFiltradas;
+    }
+
+
+    public async Task<List<Casa>> filtradoInicial(FiltradoInicialDTO filtrado)
+    {
+        IQueryable<Casa> casas = await repositorio.obtener(u => u.idUsuario != null && u.idCiudad != null, 
+            [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
+
+        if (filtrado.cantMaxPersonas.HasValue)
+        {
+            casas = casas.Where(c => c.caracteristicas.cantMaxPersonas >= filtrado.cantMaxPersonas.Value);
+        }
+
+        if (!string.IsNullOrEmpty(filtrado.nombreCiudad))
+        {
+            casas = casas.Where(c => c.ciudad.ciudad.Equals(filtrado.nombreCiudad));
+        }
+
+        List<Casa> casasFiltradas = casas.ToList(); 
+
+        if(filtrado.fechaEntrada.HasValue && filtrado.fechaSalida.HasValue)
+        {
+            var consulta = await reservacion.obtener(u => u.fechaEntrada.DayOfYear >= filtrado.fechaEntrada.Value.DayOfYear
+                                                      && u.fechaSalida.DayOfYear <= filtrado.fechaSalida.Value.DayOfYear);
+
+            List<Reservacion> reservaciones = consulta.ToList();
+
+            // Filtrar las casas que están reservadas
+            casasFiltradas = casasFiltradas
+                .Where(casa => !reservaciones.Any(r => r.idCasa == casa.idCasa))
+                .ToList();
+
+        }
         return casasFiltradas;
     }
 
