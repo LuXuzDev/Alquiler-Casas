@@ -97,7 +97,8 @@ public class ReservacionServicio : IReservacionServicio
     {
         await validadorServicio.existeUsuario(idUsuario, "No existe el usuario");
         Casa casa = await validadorServicio.existeCasa(idCasa, "No existe la casa");
-        await validadorServicio.validarNumerosEnteros(1, casa.caracteristicas.cantMaxPersonas, cantPersonas, "La cantidad de personas es incorrecta");
+        int cantMaxima = casa.caracteristicas.cantMaxPersonas;
+        await validadorServicio.validarNumerosEnteros(1, cantMaxima, cantPersonas, "La cantidad de personas es incorrecta");
 
         if(!await disponibilidadPorFecha(fechaEntrada, fechaSalida))
             throw new TaskCanceledException("Ya existe una reservacion en esa fecha");

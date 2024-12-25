@@ -63,6 +63,14 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCasas);
     }
 
+    [HttpPost("filtrarInicial")]
+    public async Task<IActionResult> listaCasasFiltradasInicial([FromBody] FiltradoInicialDTO filtrado)
+    {
+        var casas = await casaServicio.filtradoInicial(filtrado);
+        List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
+        return StatusCode(StatusCodes.Status200OK, vmCasas);
+    }
+
 
     [HttpPost("crear")]
     public async Task<IActionResult> crear([FromBody]CrearCasaDTO casaDTO)

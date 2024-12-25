@@ -171,6 +171,22 @@
   },
   {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "listaCasasFiltradasInicial",
+    "RelativePath": "api/Casas/filtrarInicial",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filtrado",
+        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.FiltradoInicialDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "listaCasas",
     "RelativePath": "api/Casas/listaCasas",
     "HttpMethod": "GET",

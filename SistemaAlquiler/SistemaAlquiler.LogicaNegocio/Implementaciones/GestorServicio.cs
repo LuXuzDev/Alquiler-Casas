@@ -41,7 +41,7 @@ public class GestorServicio : IGestorServicio
     public async Task<List<Casa>> listaCasas(int idGestor)
     {
         await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
-        var consulta = await repositorioCasa.obtener(u => u.idUsuario == idGestor);
+        var consulta = await repositorioCasa.obtener(u => u.idUsuario == idGestor, [u => u.caracteristicas, u => u.ciudad]);
         List<Casa> casas = consulta.ToList();
         return casas;
     }
