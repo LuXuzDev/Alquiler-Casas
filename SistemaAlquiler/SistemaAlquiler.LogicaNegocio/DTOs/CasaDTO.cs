@@ -15,6 +15,8 @@ public class CasaDTO
     public double precioNoche { get; set; }
     public double precioMes { get; set; }
     public double areaTotal { get; set; }
+    public string nombre { get; set; }
+    public string direccion { get; set; }
 
     public Caracteristicas caracteristicas { get; set; }
 

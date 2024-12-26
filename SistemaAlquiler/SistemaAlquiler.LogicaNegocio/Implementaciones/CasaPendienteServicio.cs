@@ -56,19 +56,45 @@ public class CasaPendienteServicio: ICasaPendienteServicio
 
     public async Task<CasaPendiente> editar(EditarCasaDTO casa, CaracteristicaDTO caracteristica)
     {
-        await validadorServicio.existeCuidad(casa.idCiudad, "La cuidad no es correcta");
+        if (casa.idCiudad.HasValue)
+            await validadorServicio.existeCuidad(casa.idCiudad.Value, "La cuidad no es correcta");
         CasaPendiente casaEditada = await validadorServicio.existeCasaPendiente(casa.idCasa, "La casa no existe");
-        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioNoche, "El precio de la noche no es correcto");
-        await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioMes, "El precio del mes no es correcto");
-        await validadorServicio.validarNumerosDouble(0, 10000, casa.areaTotal, "El área total no es correcta");
+
+        if (casa.precioNoche.HasValue)
+            await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioNoche.Value, "El precio de la noche no es correcto");
+
+        if (casa.precioMes.HasValue)
+            await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioMes.Value, "El precio del mes no es correcto");
+
+        if (casa.areaTotal.HasValue)
+            await validadorServicio.validarNumerosDouble(0, 10000, casa.areaTotal.Value, "El área total no es correcta");
+        var c = await repositorio.obtener(u => u.idCasa == casa.idCasa);
 
 
-        await caracteristicaServicio.editar(casa.idCaracteristica, caracteristica);
-        casaEditada.areaTotal = casa.areaTotal;
-        casaEditada.idCiudad = casa.idCiudad;
-        casaEditada.descripcion = casa.descripcion;
-        casaEditada.precioNoche = casa.precioNoche;
-        casaEditada.precioMes = casa.precioMes;
+
+        if (casa.caracteristicas != null)
+            await caracteristicaServicio.editar(casaEditada.idCaracteristica, caracteristica);
+        if (casa.areaTotal.HasValue)
+            casaEditada.areaTotal = casa.areaTotal.Value;
+
+        if (casa.idCiudad.HasValue)
+            casaEditada.idCiudad = casa.idCiudad;
+
+        if (casa.descripcion != null && !casa.descripcion.Equals(""))
+            casaEditada.descripcion = casa.descripcion;
+
+        if (casa.precioNoche.HasValue)
+            casaEditada.precioNoche = casa.precioNoche.Value;
+
+        if (casa.precioMes.HasValue)
+            casaEditada.precioMes = casa.precioMes.Value;
+
+        if (casa.nombre!=null && !casa.nombre.Equals(""))
+            casaEditada.nombre = casa.nombre;
+
+        if (casa.direccion!=null && !casa.direccion.Equals(""))
+            casaEditada.direccion = casa.direccion;
+
         await pendientes.editar(casaEditada);
         return casaEditada;
     }
