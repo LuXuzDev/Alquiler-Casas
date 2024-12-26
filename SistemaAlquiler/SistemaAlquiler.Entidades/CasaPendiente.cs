@@ -33,6 +33,8 @@ public class CasaPendiente
     [Range(0, double.MaxValue)]
     public double areaTotal { get; set; }
     public string descripcion { get; set; }
+    public string nombre { get; set; }
+    public string direccion { get; set; }
 
     public CasaPendiente() { }
     public CasaPendiente(Casa casa)
@@ -44,5 +46,7 @@ public class CasaPendiente
         precioMes = casa.precioMes;
         areaTotal = casa.areaTotal;
         descripcion = casa.descripcion;
+        nombre = casa.nombre;
+        direccion = casa.direccion;
     }
 }
