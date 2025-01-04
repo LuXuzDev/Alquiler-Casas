@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaAlquiler.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef986e6ad351cd46cbe3b252fffc679fa4dabeac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25d174a674c6367ce85444fe2fb6d49ef93ae86e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaAlquiler.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaAlquiler.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
