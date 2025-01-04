@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaAlquiler.LogicaNegocio.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,5 @@ namespace SistemaAlquiler.LogicaNegocio.Interfaces;
 
 public interface ILoginServicio
 {
-    Task<string> login(string nombreUsuario,string correo, string clave);
+    Task<LoginRetornoDTO> login(string nombreUsuario,string correo, string clave);
 }

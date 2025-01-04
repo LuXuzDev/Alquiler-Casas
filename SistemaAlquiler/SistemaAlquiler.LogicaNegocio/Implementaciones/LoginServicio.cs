@@ -1,5 +1,6 @@
 ﻿using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.Entidades;
+using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using SistemaAlquiler.LogicaNegocio.JWT;
 using System;
@@ -21,7 +22,7 @@ public class LoginServicio : ILoginServicio
         this.creadorToken = creadorToken;
     }
 
-    public async Task<string> login(string nombreUsuario,string correo, string clave)
+    public async Task<LoginRetornoDTO> login(string nombreUsuario,string correo, string clave)
     {
         try
         {
@@ -29,8 +30,10 @@ public class LoginServicio : ILoginServicio
             if (usuario == null)
                 throw new TaskCanceledException("Usuario incorrecto");
             
-            
-            return creadorToken.crearToken(usuario);
+            LoginRetornoDTO ret = new LoginRetornoDTO();
+            ret.token= creadorToken.crearToken(usuario);
+            ret.idUsuario = usuario.idUsuario;
+            return ret;
         }
         catch (Exception)
         {
