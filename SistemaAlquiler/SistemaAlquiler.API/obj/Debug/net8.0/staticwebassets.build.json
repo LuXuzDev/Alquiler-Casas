@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r3xYLqXcUxYlZIeI2lPwR38pFD3B3Brv7J1WwICt/1E=",
+  "Hash": "JqnYy1NqIl4UFMaJXzKUS4he3FsDWmRgeTSb8Bym+eQ=",
   "Source": "SistemaAlquiler.API",
   "BasePath": "_content/SistemaAlquiler.API",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\04d2992b-8eb7-4978-b5ad-3bfc62a2d145.png",
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\1bd32043-3800-48e2-b8aa-f8df76494bc7.png",
       "SourceId": "SistemaAlquiler.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
       "BasePath": "_content/SistemaAlquiler.API",
-      "RelativePath": "fotos/04d2992b-8eb7-4978-b5ad-3bfc62a2d145.png",
+      "RelativePath": "fotos/1bd32043-3800-48e2-b8aa-f8df76494bc7.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,15 +33,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\fotos\\04d2992b-8eb7-4978-b5ad-3bfc62a2d145.png"
+      "OriginalItemSpec": "wwwroot\\fotos\\1bd32043-3800-48e2-b8aa-f8df76494bc7.png"
     },
     {
-      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\5bf0d8eb-77ab-4b55-91d4-91f92cb84359.png",
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\53bf95bd-ad4c-4a66-a5af-2310dd920cb3.png",
       "SourceId": "SistemaAlquiler.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
       "BasePath": "_content/SistemaAlquiler.API",
-      "RelativePath": "fotos/5bf0d8eb-77ab-4b55-91d4-91f92cb84359.png",
+      "RelativePath": "fotos/53bf95bd-ad4c-4a66-a5af-2310dd920cb3.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -52,15 +52,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\fotos\\5bf0d8eb-77ab-4b55-91d4-91f92cb84359.png"
+      "OriginalItemSpec": "wwwroot\\fotos\\53bf95bd-ad4c-4a66-a5af-2310dd920cb3.png"
     },
     {
-      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\926f93dc-cc70-4619-a493-0509bb93fb14.png",
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\8006d690-c7ff-47e4-a802-e703d1b0868c.png",
       "SourceId": "SistemaAlquiler.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
       "BasePath": "_content/SistemaAlquiler.API",
-      "RelativePath": "fotos/926f93dc-cc70-4619-a493-0509bb93fb14.png",
+      "RelativePath": "fotos/8006d690-c7ff-47e4-a802-e703d1b0868c.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,15 +71,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\fotos\\926f93dc-cc70-4619-a493-0509bb93fb14.png"
+      "OriginalItemSpec": "wwwroot\\fotos\\8006d690-c7ff-47e4-a802-e703d1b0868c.png"
     },
     {
-      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\98b98e77-1c6a-4d2a-8de8-fdb77c28157d.png",
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\89dde04a-7609-4858-9828-100823414b88.png",
       "SourceId": "SistemaAlquiler.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
       "BasePath": "_content/SistemaAlquiler.API",
-      "RelativePath": "fotos/98b98e77-1c6a-4d2a-8de8-fdb77c28157d.png",
+      "RelativePath": "fotos/89dde04a-7609-4858-9828-100823414b88.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +90,64 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\fotos\\98b98e77-1c6a-4d2a-8de8-fdb77c28157d.png"
+      "OriginalItemSpec": "wwwroot\\fotos\\89dde04a-7609-4858-9828-100823414b88.png"
+    },
+    {
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\8ce83684-12dd-440c-9b8f-049bdbec4015.png",
+      "SourceId": "SistemaAlquiler.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
+      "BasePath": "_content/SistemaAlquiler.API",
+      "RelativePath": "fotos/8ce83684-12dd-440c-9b8f-049bdbec4015.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fotos\\8ce83684-12dd-440c-9b8f-049bdbec4015.png"
+    },
+    {
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\bfb7eb5f-da7a-4f21-914b-e60e20771439.png",
+      "SourceId": "SistemaAlquiler.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
+      "BasePath": "_content/SistemaAlquiler.API",
+      "RelativePath": "fotos/bfb7eb5f-da7a-4f21-914b-e60e20771439.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fotos\\bfb7eb5f-da7a-4f21-914b-e60e20771439.png"
+    },
+    {
+      "Identity": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\e0f3bc1a-c1ad-4d22-bef6-56e0ecfa131a.png",
+      "SourceId": "SistemaAlquiler.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\",
+      "BasePath": "_content/SistemaAlquiler.API",
+      "RelativePath": "fotos/e0f3bc1a-c1ad-4d22-bef6-56e0ecfa131a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fotos\\e0f3bc1a-c1ad-4d22-bef6-56e0ecfa131a.png"
     }
   ]
 }

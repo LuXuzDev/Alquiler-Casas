@@ -110,11 +110,15 @@ public class CasaServicio : ICasaServicio
 
     public async Task<Casa> eliminar(int idCasa)
     {
-        Casa casa = await validadorServicio.existeCasa(idCasa, "La casa no existe");
+        await validadorServicio.existeCasa(idCasa, "La casa no existe");
+        Casa c = await obtenerPorId(idCasa);
         await fotoServicio.eliminarFotos(idCasa);
-        await caracteristicaServicio.eliminar(casa.idCaracteristica);
-        await repositorio.eliminar(casa);
-        return casa;
+        await repositorio.eliminar(c);
+        await caracteristicaServicio.eliminar(c.idCaracteristica);
+        
+
+
+        return c;
     }
     
     public async Task<List<Casa>> lista()
@@ -247,7 +251,7 @@ public class CasaServicio : ICasaServicio
     public async Task<Casa> obtenerPorId(int idCasa)
     {
         await validadorServicio.existeCasa(idCasa, "No existe la casa");
-        var consulta = await repositorio.obtener(u=> u.idCasa==idCasa && u.estado.Equals("Publicada"), [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
+        var consulta = await repositorio.obtener(u=> u.idCasa==idCasa, [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
         Casa casa = consulta.FirstOrDefault();
         return casa;
     }
