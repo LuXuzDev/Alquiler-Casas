@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaAlquiler.LogicaNegocio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02f4f302648702814424d6040796d4b581770ca2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81f24992a9d8c7341b17814edf0b6540e4871502")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaAlquiler.LogicaNegocio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaAlquiler.LogicaNegocio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
