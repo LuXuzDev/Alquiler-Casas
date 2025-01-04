@@ -1,4 +1,5 @@
-﻿using SistemaAlquiler.Entidades;
+﻿using Microsoft.AspNetCore.Http;
+using SistemaAlquiler.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,5 @@ public class CrearCasaDTO
     public string nombre { get; set; }
     public string direccion { get; set; }
     public CrearCaracteristicasDTO caracteristicasDTO { get; set; }
-
 
 }

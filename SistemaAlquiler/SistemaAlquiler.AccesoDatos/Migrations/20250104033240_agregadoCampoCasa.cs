@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SistemaAlquiler.AccesoDatos.Migrations
 {
     /// <inheritdoc />
-    public partial class AgregarNombreUsuario : Migration
+    public partial class agregadoCampoCasa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -117,7 +117,10 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     precioNoche = table.Column<double>(type: "double precision", nullable: false),
                     precioMes = table.Column<double>(type: "double precision", nullable: false),
                     areaTotal = table.Column<double>(type: "double precision", nullable: false),
-                    descripcion = table.Column<string>(type: "text", nullable: false)
+                    descripcion = table.Column<string>(type: "text", nullable: false),
+                    nombre = table.Column<string>(type: "text", nullable: false),
+                    direccion = table.Column<string>(type: "text", nullable: false),
+                    estado = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,38 +144,24 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CasasPendientes",
+                name: "Fotos",
                 columns: table => new
                 {
-                    idCasa = table.Column<int>(type: "integer", nullable: false)
+                    idFoto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    idCaracteristica = table.Column<int>(type: "integer", nullable: false),
-                    idUsuario = table.Column<int>(type: "integer", nullable: true),
-                    idCiudad = table.Column<int>(type: "integer", nullable: true),
-                    precioNoche = table.Column<double>(type: "double precision", nullable: false),
-                    precioMes = table.Column<double>(type: "double precision", nullable: false),
-                    areaTotal = table.Column<double>(type: "double precision", nullable: false),
-                    descripcion = table.Column<string>(type: "text", nullable: false)
+                    idCasa = table.Column<int>(type: "integer", nullable: false),
+                    direccionURL = table.Column<string>(type: "text", nullable: false),
+                    direccionName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CasasPendientes", x => x.idCasa);
+                    table.PrimaryKey("PK_Fotos", x => x.idFoto);
                     table.ForeignKey(
-                        name: "FK_CasasPendientes_Caracteristicas_idCaracteristica",
-                        column: x => x.idCaracteristica,
-                        principalTable: "Caracteristicas",
-                        principalColumn: "idCaracteristicas",
+                        name: "FK_Fotos_Casas_idCasa",
+                        column: x => x.idCasa,
+                        principalTable: "Casas",
+                        principalColumn: "idCasa",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CasasPendientes_Ciudades_idCiudad",
-                        column: x => x.idCiudad,
-                        principalTable: "Ciudades",
-                        principalColumn: "idCiudad");
-                    table.ForeignKey(
-                        name: "FK_CasasPendientes_Usuarios_idUsuario",
-                        column: x => x.idUsuario,
-                        principalTable: "Usuarios",
-                        principalColumn: "idUsuario");
                 });
 
             migrationBuilder.CreateTable(
@@ -233,33 +222,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Fotos",
-                columns: table => new
-                {
-                    idFoto = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    idCasa = table.Column<int>(type: "integer", nullable: false),
-                    direccionURL = table.Column<string>(type: "text", nullable: false),
-                    direccionName = table.Column<string>(type: "text", nullable: false),
-                    CasaPendienteidCasa = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fotos", x => x.idFoto);
-                    table.ForeignKey(
-                        name: "FK_Fotos_CasasPendientes_CasaPendienteidCasa",
-                        column: x => x.CasaPendienteidCasa,
-                        principalTable: "CasasPendientes",
-                        principalColumn: "idCasa");
-                    table.ForeignKey(
-                        name: "FK_Fotos_Casas_idCasa",
-                        column: x => x.idCasa,
-                        principalTable: "Casas",
-                        principalColumn: "idCasa",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Casas_idCaracteristica",
                 table: "Casas",
@@ -274,26 +236,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 name: "IX_Casas_idUsuario",
                 table: "Casas",
                 column: "idUsuario");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CasasPendientes_idCaracteristica",
-                table: "CasasPendientes",
-                column: "idCaracteristica");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CasasPendientes_idCiudad",
-                table: "CasasPendientes",
-                column: "idCiudad");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CasasPendientes_idUsuario",
-                table: "CasasPendientes",
-                column: "idUsuario");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fotos_CasaPendienteidCasa",
-                table: "Fotos",
-                column: "CasaPendienteidCasa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fotos_idCasa",
@@ -340,9 +282,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Valoraciones");
-
-            migrationBuilder.DropTable(
-                name: "CasasPendientes");
 
             migrationBuilder.DropTable(
                 name: "Casas");

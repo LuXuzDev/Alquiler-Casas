@@ -53,6 +53,10 @@ public class Caracteristicas
         this.gimnasio   = gimnasio;
         this.lavadora_secadora  = lavadora_secadora;
         this.tv = tv;
+        this.permiteMenores = permiteMenores;
+        this.permiteFumar = permiteFumar;
+        this.permiteMascotas = permiteMascotas;
+        this.wifi = wifi;
         this.aguaCaliente = aguaCaliente;
         this.climatizada = climatizada;
     }

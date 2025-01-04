@@ -8,6 +8,6 @@ namespace SistemaAlquiler.LogicaNegocio.DTOs;
 
 public class LoginRetornoDTO
 {
-    public int idUsuario {  get; set; }
     public string token { get; set; }
+    public int idUsuario {  get; set; }
 }

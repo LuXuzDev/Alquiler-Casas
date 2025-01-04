@@ -10,7 +10,6 @@ namespace SistemaAlquiler.AccesoDatos
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
         public DbSet<Casa> Casas { get; set; }
-        public DbSet<CasaPendiente> CasasPendientes { get; set; }
         public DbSet<Caracteristicas> Caracteristicas { get; set; }
         public DbSet<Foto> Fotos { get; set; }
         public DbSet<Reservacion> Reservaciones { get; set; }

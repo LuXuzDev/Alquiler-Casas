@@ -12,8 +12,8 @@ using SistemaAlquiler.AccesoDatos;
 namespace SistemaAlquiler.AccesoDatos.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    [Migration("20241226192613_NombreDeTuMigracion")]
-    partial class NombreDeTuMigracion
+    [Migration("20250104033240_agregadoCampoCasa")]
+    partial class agregadoCampoCasa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,10 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("estado")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("idCaracteristica")
                         .HasColumnType("integer");
 
@@ -160,55 +164,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.ToTable("Casas");
                 });
 
-            modelBuilder.Entity("SistemaAlquiler.Entidades.CasaPendiente", b =>
-                {
-                    b.Property<int>("idCasa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idCasa"));
-
-                    b.Property<double>("areaTotal")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("direccion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("idCaracteristica")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("idCiudad")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("idUsuario")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("nombre")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("precioMes")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("precioNoche")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("idCasa");
-
-                    b.HasIndex("idCaracteristica");
-
-                    b.HasIndex("idCiudad");
-
-                    b.HasIndex("idUsuario");
-
-                    b.ToTable("CasasPendientes");
-                });
-
             modelBuilder.Entity("SistemaAlquiler.Entidades.Ciudad", b =>
                 {
                     b.Property<int>("idCiudad")
@@ -235,9 +190,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idFoto"));
 
-                    b.Property<int?>("CasaPendienteidCasa")
-                        .HasColumnType("integer");
-
                     b.Property<string>("direccionName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -250,8 +202,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("idFoto");
-
-                    b.HasIndex("CasaPendienteidCasa");
 
                     b.HasIndex("idCasa");
 
@@ -398,35 +348,8 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                     b.Navigation("usuario");
                 });
 
-            modelBuilder.Entity("SistemaAlquiler.Entidades.CasaPendiente", b =>
-                {
-                    b.HasOne("SistemaAlquiler.Entidades.Caracteristicas", "caracteristicas")
-                        .WithMany()
-                        .HasForeignKey("idCaracteristica")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SistemaAlquiler.Entidades.Ciudad", "ciudad")
-                        .WithMany()
-                        .HasForeignKey("idCiudad");
-
-                    b.HasOne("SistemaAlquiler.Entidades.Usuario", "usuario")
-                        .WithMany()
-                        .HasForeignKey("idUsuario");
-
-                    b.Navigation("caracteristicas");
-
-                    b.Navigation("ciudad");
-
-                    b.Navigation("usuario");
-                });
-
             modelBuilder.Entity("SistemaAlquiler.Entidades.Foto", b =>
                 {
-                    b.HasOne("SistemaAlquiler.Entidades.CasaPendiente", null)
-                        .WithMany("fotos")
-                        .HasForeignKey("CasaPendienteidCasa");
-
                     b.HasOne("SistemaAlquiler.Entidades.Casa", "casa")
                         .WithMany("fotos")
                         .HasForeignKey("idCasa")
@@ -486,11 +409,6 @@ namespace SistemaAlquiler.AccesoDatos.Migrations
                 });
 
             modelBuilder.Entity("SistemaAlquiler.Entidades.Casa", b =>
-                {
-                    b.Navigation("fotos");
-                });
-
-            modelBuilder.Entity("SistemaAlquiler.Entidades.CasaPendiente", b =>
                 {
                     b.Navigation("fotos");
                 });

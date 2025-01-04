@@ -34,8 +34,10 @@ public class Casa
     public string descripcion {  get; set; }
     public string nombre { get; set; }
     public string direccion { get; set; }
+    public string estado { get; set; }
 
-    public Casa(double precioNoche, double precioMes, double areaTotal, string descripcion, string nombre,string direccion)
+    public Casa() { }
+    public Casa(double precioNoche, double precioMes, double areaTotal, string descripcion, string nombre,string direccion, string estado)
     {
         this.precioNoche = precioNoche;
         this.precioMes = precioMes;
@@ -43,18 +45,6 @@ public class Casa
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.direccion = direccion;
-    }
-
-    public Casa(CasaPendiente casaPendiente)
-    {
-        idCaracteristica=casaPendiente.idCaracteristica;
-        idUsuario = casaPendiente.idUsuario;
-        idCiudad = casaPendiente.idCiudad;
-        precioNoche = casaPendiente.precioNoche;
-        precioMes = casaPendiente.precioMes;
-        areaTotal = casaPendiente.areaTotal;
-        descripcion = casaPendiente.descripcion;
-        nombre = casaPendiente.nombre;
-        direccion = casaPendiente.direccion;
+        this.estado = estado;
     }
 }

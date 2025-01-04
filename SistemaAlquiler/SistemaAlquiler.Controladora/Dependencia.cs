@@ -36,10 +36,10 @@ public static class Dependencia
         servicios.AddScoped<ICiudadServicio, CiudadServicio>();
         servicios.AddScoped<IReservacionServicio, ReservacionServicio>();
         servicios.AddScoped<ILoginServicio, LoginServicio>();
-        servicios.AddScoped<ICasaPendienteServicio,CasaPendienteServicio>();
         servicios.AddScoped<IGestorServicio, GestorServicio > ();
         servicios.AddScoped<IValoracionServicio, ValoracionServicio>();
         servicios.AddScoped<IValidadorServicio, ValidadorServicio>();
+        servicios.AddScoped<IFotoServicio, FotoServicio>();
         servicios.AddSingleton<CreadorToken>();
         
         
