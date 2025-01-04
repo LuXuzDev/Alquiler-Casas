@@ -4,3 +4,5 @@
 
 /.vs/
 /SistemaAlquiler/.vs
+bin/
+obj/
