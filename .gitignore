@@ -4,5 +4,7 @@
 
 /.vs/
 /SistemaAlquiler/.vs
-bin/
-obj/
+/SistemaAlquiler/SistemaAlquiler.API/bin/
+/SistemaAlquiler/SistemaAlquiler.API/obj/
+/SistemaAlquiler/SistemaAlquiler.AccesoDatos/bin/
+/SistemaAlquiler/SistemaAlquiler.AccesoDatos/obj/
