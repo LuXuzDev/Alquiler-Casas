@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using SistemaAlquiler.AccesoDatos.Interfaces;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.DTOs;
@@ -34,17 +33,16 @@ public class FotoServicio:IFotoServicio
         return fotos.Select(f => f.direccionURL).ToList(); // Devuelve las URLs de las fotos
     }
 
-
-
     public async Task<Foto> eliminarFoto(int idFoto)
     {
-        var foto = await repositorio.obtener(u=> u.idFoto==idFoto); 
+        var foto = await repositorio.obtener(u=> u.idFoto==idFoto); // Método que obtiene la foto por Id
         if (foto == null)
-            throw new TaskCanceledException("La foto no existe");
-
+        {
+            return null; // O lanza una excepción si no se encuentra
+        }
         Foto temp = foto.FirstOrDefault();
         // Elimina la foto del sistema de archivos
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fotos", temp.direccionName);
+        var filePath = Path.Combine(_rutaBase, Path.GetFileName(temp.direccionName));
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
@@ -55,26 +53,25 @@ public class FotoServicio:IFotoServicio
         return temp; // Devuelve la foto eliminada
     }
 
-
     public async Task<List<Foto>> eliminarFotos(int idCasa)
     {
-        var fotos = await repositorio.obtener(u => u.idCasa == idCasa);
-        List<Foto> temp =fotos.ToList();
-
-        if (temp.Count == 0)
-            throw new TaskCanceledException("La casa no tiene fotos");
-
-        // Elimina las fotos del sistema de archivos
-        foreach (Foto f in temp)
+        var foto = await repositorio.obtener(u => u.idCasa == idCasa); // Método que obtiene la foto por Id
+        if (foto.ToList().Count==0)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fotos", f.direccionName);
-            if (File.Exists(filePath))
+            return null; // O lanza una excepción si no se encuentra
+        }
+        List<Foto> temp = foto.ToList();
+        // Elimina la foto del sistema de archivos
+        foreach(Foto f in temp)
+        {
+            if (File.Exists(f.direccionURL))
             {
-                File.Delete(filePath);
+                File.Delete(f.direccionURL);
             }
             await repositorio.eliminar(f);
         }
-        return temp;
+        
+        return temp; // Devuelve la foto eliminada
     }
 
 
