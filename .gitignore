@@ -3,3 +3,13 @@
 ################################################################################
 
 /.vs/
+/SistemaAlquiler/.vs
+/SistemaAlquiler/SistemaAlquiler.API/bin/
+/SistemaAlquiler/SistemaAlquiler.API/obj/
+/SistemaAlquiler/SistemaAlquiler.AccesoDatos/bin/
+/SistemaAlquiler/SistemaAlquiler.AccesoDatos/obj/
+/SistemaAlquiler/SistemaAlquiler.Entidades/obj
+/SistemaAlquiler/SistemaAlquiler.Entidades/obj
+/SistemaAlquiler/SistemaAlquiler.Entidades/obj
+/SistemaAlquiler/SistemaAlquiler.LogicaNegocio/obj
+/SistemaAlquiler/SistemaAlquiler.LogicaNegocio/obj/Debug

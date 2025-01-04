@@ -17,8 +17,8 @@ public class CasaDTO
     public double areaTotal { get; set; }
     public string nombre { get; set; }
     public string direccion { get; set; }
-
     public Caracteristicas caracteristicas { get; set; }
+    public List<string> fotosURL { get; set; }
 
     //Usuario
     public int idUsuario { get; set; }

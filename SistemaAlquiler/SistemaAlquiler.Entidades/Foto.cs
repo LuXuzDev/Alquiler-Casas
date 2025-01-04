@@ -14,5 +14,10 @@ public class Foto
     public virtual Casa casa { get; set; }
     public string direccionURL { get; set; }
     public string direccionName { get; set; }
-
+    public Foto(int idCasa,string direccionURL, string direccionName)
+    {
+        this.idCasa = idCasa;
+        this.direccionURL = direccionURL;
+        this.direccionName = direccionName;
+    }
 }

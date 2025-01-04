@@ -12,7 +12,6 @@ public interface IValidadorServicio
 {
     Task<Usuario> existeUsuario(int idUsuario,string mensaje);
     Task<Casa> existeCasa(int idCasa, string mensaje);
-    Task<CasaPendiente> existeCasaPendiente(int idCasaPendiente, string mensaje);
     Task<Usuario> existeGestor(int idGestor, string mensaje);
     Task<Reservacion> existeReservacion(int idReservacion, string mensaje);
     Task<Ciudad> existeCuidad(int idCiudad, string mensaje);

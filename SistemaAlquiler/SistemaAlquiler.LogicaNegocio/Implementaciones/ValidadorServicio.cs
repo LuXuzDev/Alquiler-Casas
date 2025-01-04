@@ -14,7 +14,6 @@ namespace SistemaAlquiler.LogicaNegocio.Implementaciones;
 public class ValidadorServicio : IValidadorServicio
 {
     private readonly IRepositorioGenerico<Casa> casas;
-    private readonly IRepositorioGenerico<CasaPendiente> casasPendientes;
     private readonly IRepositorioGenerico<Usuario> usuarios;
     private readonly IRepositorioGenerico<Rol> roles;
     private readonly IRepositorioGenerico<Ciudad> ciudades;
@@ -22,13 +21,12 @@ public class ValidadorServicio : IValidadorServicio
     private readonly IRepositorioGenerico<Valoracion> valoraciones;
     private readonly IRepositorioGenerico<Caracteristicas> caracteristicas;
 
-    public ValidadorServicio(IRepositorioGenerico<Casa> casas, IRepositorioGenerico<CasaPendiente> casasPendientes,
-        IRepositorioGenerico<Usuario> usuarios, IRepositorioGenerico<Rol> roles,
-        IRepositorioGenerico<Ciudad> ciudades, IRepositorioGenerico<Reservacion> reservaciones,
-        IRepositorioGenerico<Valoracion> valoraciones, IRepositorioGenerico<Caracteristicas> caracteristicas)
+    public ValidadorServicio(IRepositorioGenerico<Casa> casas,IRepositorioGenerico<Usuario> usuarios,
+        IRepositorioGenerico<Rol> roles,IRepositorioGenerico<Ciudad> ciudades,
+        IRepositorioGenerico<Reservacion> reservaciones,IRepositorioGenerico<Valoracion> valoraciones,
+        IRepositorioGenerico<Caracteristicas> caracteristicas)
     {
         this.casas = casas;
-        this.casasPendientes = casasPendientes;
         this.usuarios = usuarios;
         this.roles = roles;
         this.ciudades = ciudades;
@@ -42,15 +40,6 @@ public class ValidadorServicio : IValidadorServicio
         var consulta = await casas.obtener(u => u.idCasa == idCasa, [u => u.caracteristicas, u => u.ciudad, u=>u.usuario]);
         Casa casa = consulta.FirstOrDefault();
         if(casa == null)
-            throw new TaskCanceledException(mensaje);
-        return casa;
-    }
-
-    public async Task<CasaPendiente> existeCasaPendiente(int idCasaPendiente, string mensaje)
-    {
-        var consulta = await casasPendientes.obtener(u => u.idCasa == idCasaPendiente, [u => u.caracteristicas, u => u.ciudad, u => u.usuario]);
-        CasaPendiente casa = consulta.FirstOrDefault();
-        if (casa == null)
             throw new TaskCanceledException(mensaje);
         return casa;
     }
@@ -179,7 +168,7 @@ public class ValidadorServicio : IValidadorServicio
 
     public async Task<string> validarClave(string clave, string mensaje)
     {
-        validarTextoVacio(clave, mensaje);
+        await validarTextoVacio(clave, mensaje);
         if(clave.Length<8)
             throw new TaskCanceledException(mensaje);
         return clave;
