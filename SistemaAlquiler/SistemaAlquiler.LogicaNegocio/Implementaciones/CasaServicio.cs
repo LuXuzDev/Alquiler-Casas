@@ -15,18 +15,15 @@ namespace SistemaAlquiler.LogicaNegocio.Implementaciones;
 public class CasaServicio : ICasaServicio
 {
     private readonly IRepositorioGenerico<Casa> repositorio;
-    private readonly IRepositorioGenerico<CasaPendiente> pendientes;
     private readonly IRepositorioGenerico<Reservacion> reservacion;
     private readonly ICaracteristicaServicio caracteristicaServicio;
     private readonly IValidadorServicio validadorServicio;
 
     public CasaServicio(IRepositorioGenerico<Casa> repositorio, ICaracteristicaServicio caracteristicaServicio,
-        IRepositorioGenerico<CasaPendiente> pendientes,IValidadorServicio validadorServicio,
-        IRepositorioGenerico<Reservacion> reservacion)
+        IValidadorServicio validadorServicio,IRepositorioGenerico<Reservacion> reservacion)
     {
         this.repositorio = repositorio;
         this.caracteristicaServicio = caracteristicaServicio;
-        this.pendientes = pendientes;
         this.validadorServicio= validadorServicio;
         this.reservacion = reservacion;
     }

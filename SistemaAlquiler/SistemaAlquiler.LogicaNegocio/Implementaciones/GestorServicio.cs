@@ -13,28 +13,26 @@ public class GestorServicio : IGestorServicio
 {
     private readonly IRepositorioGenerico<Casa> repositorioCasa;
     private readonly IRepositorioGenerico<Usuario> repositorioUsuarios;
-    private readonly IRepositorioGenerico<CasaPendiente> repositorioPendientes;
     private readonly IRepositorioGenerico<Reservacion> repositorioReservaciones;
     private readonly IValoracionServicio valoracionServicio;
     private readonly IValidadorServicio validadorServicio;
 
-    public GestorServicio(IRepositorioGenerico<Casa> repositorioCasa, IRepositorioGenerico<CasaPendiente> repositorioPendientes,
-        IRepositorioGenerico<Reservacion> repositorioReservaciones, IRepositorioGenerico<Usuario> repositorioUsuarios,
-        IValoracionServicio valoracionServicio, IValidadorServicio validadorServicio)
+    public GestorServicio(IRepositorioGenerico<Casa> repositorioCasa,IRepositorioGenerico<Reservacion> repositorioReservaciones,
+        IRepositorioGenerico<Usuario> repositorioUsuarios,IValoracionServicio valoracionServicio,
+        IValidadorServicio validadorServicio)
     {
         this.repositorioCasa = repositorioCasa;
-        this.repositorioPendientes = repositorioPendientes;
         this.repositorioReservaciones = repositorioReservaciones;
         this.repositorioUsuarios = repositorioUsuarios;
         this.valoracionServicio = valoracionServicio;
         this.validadorServicio = validadorServicio;
     }
 
-    public async Task<List<CasaPendiente>> casasPendientes(int idGestor)
+    public async Task<List<Casa>> casasPendientes(int idGestor)
     {
         await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
-        var consulta = await repositorioPendientes.obtener(u=> u.idUsuario==idGestor);
-        List<CasaPendiente> casas = consulta.ToList();
+        var consulta = await repositorioCasa.obtener(u=> u.idUsuario==idGestor && u.estado.Equals("Pendiente"));
+        List<Casa> casas = consulta.ToList();
         return casas;
     }
 

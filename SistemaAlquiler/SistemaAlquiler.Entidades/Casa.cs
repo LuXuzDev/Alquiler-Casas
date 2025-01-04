@@ -46,17 +46,4 @@ public class Casa
         this.direccion = direccion;
         this.estado = estado;
     }
-
-    public Casa(CasaPendiente casaPendiente)
-    {
-        idCaracteristica=casaPendiente.idCaracteristica;
-        idUsuario = casaPendiente.idUsuario;
-        idCiudad = casaPendiente.idCiudad;
-        precioNoche = casaPendiente.precioNoche;
-        precioMes = casaPendiente.precioMes;
-        areaTotal = casaPendiente.areaTotal;
-        descripcion = casaPendiente.descripcion;
-        nombre = casaPendiente.nombre;
-        direccion = casaPendiente.direccion;
-    }
 }
