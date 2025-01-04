@@ -61,5 +61,9 @@ public class AutoMapperProfile : Profile
             .ReverseMap();
 
         #endregion
+
+        #region Foto
+        CreateMap<Foto, FotoDTO>().ReverseMap();
+        #endregion
     }
 }

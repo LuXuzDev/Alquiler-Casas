@@ -36,6 +36,7 @@ public class Casa
     public string direccion { get; set; }
     public string estado { get; set; }
 
+    public Casa() { }
     public Casa(double precioNoche, double precioMes, double areaTotal, string descripcion, string nombre,string direccion, string estado)
     {
         this.precioNoche = precioNoche;

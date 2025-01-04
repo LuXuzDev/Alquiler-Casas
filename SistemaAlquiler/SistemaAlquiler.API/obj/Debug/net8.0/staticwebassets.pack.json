@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\04d2992b-8eb7-4978-b5ad-3bfc62a2d145.png",
+      "PackagePath": "staticwebassets\\fotos\\04d2992b-8eb7-4978-b5ad-3bfc62a2d145.png"
+    },
+    {
+      "Id": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\5bf0d8eb-77ab-4b55-91d4-91f92cb84359.png",
+      "PackagePath": "staticwebassets\\fotos\\5bf0d8eb-77ab-4b55-91d4-91f92cb84359.png"
+    },
+    {
+      "Id": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\926f93dc-cc70-4619-a493-0509bb93fb14.png",
+      "PackagePath": "staticwebassets\\fotos\\926f93dc-cc70-4619-a493-0509bb93fb14.png"
+    },
+    {
+      "Id": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.API\\wwwroot\\fotos\\98b98e77-1c6a-4d2a-8de8-fdb77c28157d.png",
+      "PackagePath": "staticwebassets\\fotos\\98b98e77-1c6a-4d2a-8de8-fdb77c28157d.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SistemaAlquiler.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SistemaAlquiler.API.props",
+      "PackagePath": "build\\SistemaAlquiler.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SistemaAlquiler.API.props",
+      "PackagePath": "buildMultiTargeting\\SistemaAlquiler.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SistemaAlquiler.API.props",
+      "PackagePath": "buildTransitive\\SistemaAlquiler.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

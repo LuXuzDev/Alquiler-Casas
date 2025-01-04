@@ -25,4 +25,8 @@
 	  <ProjectReference Include="..\SistemaAlquiler.LogicaNegocio\SistemaAlquiler.LogicaNegocio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fotos\" />
+  </ItemGroup>
+
 </Project>

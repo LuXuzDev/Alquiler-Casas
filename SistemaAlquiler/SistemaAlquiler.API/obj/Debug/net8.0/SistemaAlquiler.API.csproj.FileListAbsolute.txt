@@ -267,3 +267,4 @@ C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\S
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.API\bin\Debug\net8.0\SistemaAlquiler.API.staticwebassets.runtime.json

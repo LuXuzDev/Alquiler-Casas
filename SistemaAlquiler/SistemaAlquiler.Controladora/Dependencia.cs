@@ -39,6 +39,7 @@ public static class Dependencia
         servicios.AddScoped<IGestorServicio, GestorServicio > ();
         servicios.AddScoped<IValoracionServicio, ValoracionServicio>();
         servicios.AddScoped<IValidadorServicio, ValidadorServicio>();
+        servicios.AddScoped<IFotoServicio, FotoServicio>();
         servicios.AddSingleton<CreadorToken>();
         
         

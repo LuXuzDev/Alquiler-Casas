@@ -1,79 +1,5 @@
 [
   {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
-    "Method": "cancelar",
-    "RelativePath": "api/CasaPendiente/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
-    "Method": "crear",
-    "RelativePath": "api/CasaPendiente/crear",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "casaDTO",
-        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearCasaDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
-    "Method": "editar",
-    "RelativePath": "api/CasaPendiente/editar",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "casaDTO",
-        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.EditarCasaDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
-    "Method": "listaCasas",
-    "RelativePath": "api/CasaPendiente/listaCasas",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SistemaAlquiler.API.Controllers.CasaPendienteController",
-    "Method": "publicar",
-    "RelativePath": "api/CasaPendiente/publicar{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
     "Method": "casaPorId",
     "RelativePath": "api/Casas/{id}",
@@ -130,9 +56,139 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "casaDTO",
-        "Type": "SistemaAlquiler.LogicaNegocio.DTOs.CrearCasaDTO",
-        "IsRequired": true
+        "Name": "idCiudad",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "descripcion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioNoche",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "precioMes",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "areaTotal",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "direccion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.cantMaxPersonas",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.cantHabitaciones",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.cantBanos",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.cantCuartos",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.cocina",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.terraza_balcon",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.barbacoa",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.garaje",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.piscina",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.gimnasio",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.lavadora_secadora",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.tv",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.permiteMenores",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.permiteFumar",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.permiteMascotas",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.wifi",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.aguaCaliente",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "caracteristicasDTO.climatizada",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "fotos",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -193,6 +249,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "listaCasasPendientes",
+    "RelativePath": "api/Casas/listaCasasPendientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaAlquiler.API.Controllers.CasasController",
+    "Method": "publicar",
+    "RelativePath": "api/Casas/publicar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idCasa",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

@@ -16,17 +16,15 @@ public class CasasController:ControllerBase
 {
 
     private readonly ICasaServicio casaServicio;
-
+    private readonly IFotoServicio fotoServicio;
     private readonly IMapper autoMapper;
     
 
-    public CasasController(ICasaServicio casaServicio, IMapper autoMapper)
+    public CasasController(ICasaServicio casaServicio, IMapper autoMapper,IFotoServicio fotoServicio)
     {
         this.casaServicio = casaServicio;
-
+        this.fotoServicio = fotoServicio;
         this.autoMapper = autoMapper;
-
-
     }
 
     [HttpGet("listaCasas")]
@@ -35,6 +33,17 @@ public class CasasController:ControllerBase
         var casas = await casaServicio.lista();
         
         List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
+        return StatusCode(StatusCodes.Status200OK, vmLista);
+    }
+
+    [HttpGet("listaCasasPendientes")]
+    public async Task<IActionResult> listaCasasPendientes()
+    {
+        var casas = await casaServicio.listaPendientes();
+
+        List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
@@ -43,6 +52,7 @@ public class CasasController:ControllerBase
     {
         var casa = await casaServicio.obtenerPorId(id);
         CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        await fotoServicio.llenarDTO(vmCasa);
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
@@ -52,6 +62,7 @@ public class CasasController:ControllerBase
     {
         var casas =await casaServicio.obtenerCasaPorCiudad(idCiudad);
         List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
@@ -59,26 +70,29 @@ public class CasasController:ControllerBase
     public async Task<IActionResult> listaCasasFiltradas([FromBody] BusquedaCasaDTO busquedaCasaDTO)
     {
         var casas = await casaServicio.obtenerCasasFiltradas(busquedaCasaDTO);
-        List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
-        return StatusCode(StatusCodes.Status200OK, vmCasas);
+        List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
+        return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
     [HttpPost("filtrarInicial")]
     public async Task<IActionResult> listaCasasFiltradasInicial([FromBody] FiltradoInicialDTO filtrado)
     {
         var casas = await casaServicio.filtradoInicial(filtrado);
-        List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
-        return StatusCode(StatusCodes.Status200OK, vmCasas);
+        List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
+        return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
 
     [HttpPost("crear")]
-    public async Task<IActionResult> crear([FromBody]CrearCasaDTO casaDTO)
+    public async Task<IActionResult> crear([FromForm]CrearCasaDTO casaDTO,List<IFormFile> fotos )
     {
         Casa c = autoMapper.Map<Casa>(casaDTO);
-        Casa casa = await casaServicio.crear(c, casaDTO.caracteristicasDTO);
+        Casa casa = await casaServicio.crear(casaDTO,fotos);
 
         CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        await fotoServicio.llenarDTO(vmCasa);
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
@@ -89,6 +103,18 @@ public class CasasController:ControllerBase
         Casa casa = await casaServicio.editar(casaDTO, caracteristica);
 
         CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        await fotoServicio.llenarDTO(vmCasa);
+        return StatusCode(StatusCodes.Status200OK, vmCasa);
+    }
+
+    [HttpPatch("publicar")]
+    public async Task<IActionResult> publicar(int idCasa)
+    {
+        
+        Casa casa = await casaServicio.publicarCasa(idCasa);
+
+        CasaDTO vmCasa = autoMapper.Map<CasaDTO>(casa);
+        await fotoServicio.llenarDTO(vmCasa);
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
