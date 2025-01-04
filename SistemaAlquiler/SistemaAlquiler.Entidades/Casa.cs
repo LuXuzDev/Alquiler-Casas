@@ -34,8 +34,9 @@ public class Casa
     public string descripcion {  get; set; }
     public string nombre { get; set; }
     public string direccion { get; set; }
+    public string estado { get; set; }
 
-    public Casa(double precioNoche, double precioMes, double areaTotal, string descripcion, string nombre,string direccion)
+    public Casa(double precioNoche, double precioMes, double areaTotal, string descripcion, string nombre,string direccion, string estado)
     {
         this.precioNoche = precioNoche;
         this.precioMes = precioMes;
@@ -43,6 +44,7 @@ public class Casa
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.direccion = direccion;
+        this.estado = estado;
     }
 
     public Casa(CasaPendiente casaPendiente)

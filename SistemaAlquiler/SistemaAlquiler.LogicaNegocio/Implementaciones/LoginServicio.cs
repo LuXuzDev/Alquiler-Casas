@@ -30,10 +30,17 @@ public class LoginServicio : ILoginServicio
             if (usuario == null)
                 throw new TaskCanceledException("Usuario incorrecto");
             
+<<<<<<< HEAD
             LoginRetornoDTO retornoDTO = new LoginRetornoDTO();
             retornoDTO.token = creadorToken.crearToken(usuario);
             retornoDTO.idUsuario=usuario.idUsuario;
             return retornoDTO;
+=======
+            LoginRetornoDTO ret = new LoginRetornoDTO();
+            ret.token= creadorToken.crearToken(usuario);
+            ret.idUsuario = usuario.idUsuario;
+            return ret;
+>>>>>>> feace3b7b76e39484f78849713366e2432ea631b
         }
         catch (Exception)
         {
