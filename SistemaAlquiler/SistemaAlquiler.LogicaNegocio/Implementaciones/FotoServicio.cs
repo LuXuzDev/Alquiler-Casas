@@ -20,7 +20,7 @@ public class FotoServicio:IFotoServicio
     public FotoServicio(IRepositorioGenerico<Foto> repositorio)
     {
         this.repositorio = repositorio;
-        _rutaBase = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fotos"); // Ruta local
+        _rutaBase = Path.Combine("wwwroot", "fotos"); // Ruta local
         if (!Directory.Exists(_rutaBase))
         {
             Directory.CreateDirectory(_rutaBase); // Crea el directorio si no existe
