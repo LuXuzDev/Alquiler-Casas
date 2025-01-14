@@ -13,6 +13,7 @@ public interface ICasaServicio
 {
     Task<List<Casa>> lista();
     Task<List<Casa>> listaPendientes();
+    Task<List<Casa>> listaPendientesUsuario(int idUsuario);
     Task<Casa> crear(CrearCasaDTO casa,List<IFormFile> fotos );
     Task<Casa> editar(EditarCasaDTO casa,CaracteristicaDTO caracteristicas);
     Task<Casa> eliminar(int idCasa);

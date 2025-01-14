@@ -47,6 +47,16 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
+    [HttpGet("listaCasasPendientesUsuario")]
+    public async Task<IActionResult> listaCasasPendientesUsuario(int idUsuario)
+    {
+        var casas = await casaServicio.listaPendientesUsuario(idUsuario);
+
+        List<CasaDTO> vmLista = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmLista);
+        return StatusCode(StatusCodes.Status200OK, vmLista);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> casaPorId(int id)
     {

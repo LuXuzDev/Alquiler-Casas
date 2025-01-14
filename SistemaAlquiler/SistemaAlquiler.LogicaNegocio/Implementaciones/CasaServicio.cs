@@ -269,6 +269,12 @@ public class CasaServicio : ICasaServicio
         IQueryable<Casa> consulta = await repositorio.obtener(u => u.idUsuario != null && u.idCiudad != null && u.estado.Equals("Pendiente"), [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
         List<Casa> casas = consulta.ToList();
         return casas;
+    }
 
+    public async Task<List<Casa>> listaPendientesUsuario(int idUsuario)
+    {
+        IQueryable<Casa> consulta = await repositorio.obtener(u => u.idUsuario != null && u.idCiudad != null && u.estado.Equals("Pendiente") && u.idUsuario==idUsuario, [u => u.usuario, u => u.caracteristicas, u => u.ciudad]);
+        List<Casa> casas = consulta.ToList();
+        return casas;
     }
 }
