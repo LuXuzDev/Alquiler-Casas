@@ -24,7 +24,6 @@ public static class Dependencia
         servicios.AddDbContext<DB_Context>(opciones =>
         {
             opciones.UseNpgsql(configuracion.GetConnectionString("PostgreSQLConnection"));
-            
         });
 
 
@@ -40,6 +39,7 @@ public static class Dependencia
         servicios.AddScoped<IValoracionServicio, ValoracionServicio>();
         servicios.AddScoped<IValidadorServicio, ValidadorServicio>();
         servicios.AddScoped<IFotoServicio, FotoServicio>();
+        servicios.AddScoped<ICalendarioServicio, CalendarioServicio>();
         servicios.AddSingleton<CreadorToken>();
         
         
