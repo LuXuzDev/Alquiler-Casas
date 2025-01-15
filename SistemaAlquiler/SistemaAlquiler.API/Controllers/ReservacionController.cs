@@ -43,6 +43,16 @@ public class ReservacionController : ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmReservacion);
     }
 
+    [HttpGet("listaId")]
+    public async Task<IActionResult> listaReservacionesIdCasa(int idCasa)
+    {
+        var reservacion = await reservacionServicio.listaIdCasa(idCasa);
+
+        List<ReservacionDTO> vmReservacion = autoMapper.Map<List<ReservacionDTO>>(reservacion);
+
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
     [HttpDelete("{id}")]
 
     public async Task<IActionResult> eliminar(int id)
