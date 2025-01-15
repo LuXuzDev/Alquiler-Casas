@@ -41,7 +41,5 @@ public static class Dependencia
         servicios.AddScoped<IFotoServicio, FotoServicio>();
         servicios.AddScoped<ICalendarioServicio, CalendarioServicio>();
         servicios.AddSingleton<CreadorToken>();
-        
-        
     }
 }

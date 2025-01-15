@@ -10,6 +10,7 @@ namespace SistemaAlquiler.LogicaNegocio.Interfaces;
 public interface IReservacionServicio
 {
     Task<List<Reservacion>> lista();
+    Task<List<Reservacion>> listaIdCasa(int idCasa);
     Task<Reservacion> crear(int idUsuario, int idCasa, int cantPersonas,
         DateOnly fechaEntrada, DateOnly fechaSalida);
     Task<Reservacion> eliminar(int idReservacion);
