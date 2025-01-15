@@ -50,7 +50,12 @@ public class ReservacionServicio : IReservacionServicio
         return (List<Reservacion>)consulta.ToList();
     }
 
-    
+    public async Task<List<Reservacion>> listaIdCasa(int idCasa)
+    {
+        IQueryable<Reservacion> consulta = await repositorio.obtener(u=> u.idCasa==idCasa);
+        return (List<Reservacion>)consulta.ToList();
+    }
+
 
     public async Task<Reservacion> obtenerPorId(int idReservacion)
     {
