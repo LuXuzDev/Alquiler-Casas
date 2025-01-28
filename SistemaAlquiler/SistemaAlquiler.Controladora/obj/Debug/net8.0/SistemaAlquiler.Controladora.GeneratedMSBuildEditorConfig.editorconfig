@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SistemaAlquiler.Controladora
-build_property.ProjectDir = C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\
+build_property.ProjectDir = C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

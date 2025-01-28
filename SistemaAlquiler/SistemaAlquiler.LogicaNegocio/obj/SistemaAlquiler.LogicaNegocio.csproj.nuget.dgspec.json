@@ -1,36 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj": {}
+    "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj": {
+    "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj",
         "projectName": "SistemaAlquiler.AccesoDatos",
-        "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj",
-        "packagesPath": "C:\\Users\\Angel Hernandez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Angel Hernandez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
-                "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj"
+              "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj"
               }
             }
           }
@@ -83,29 +80,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
+    "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj",
         "projectName": "SistemaAlquiler.Entidades",
-        "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj",
-        "packagesPath": "C:\\Users\\Angel Hernandez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Angel Hernandez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -166,40 +160,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj": {
+    "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj",
         "projectName": "SistemaAlquiler.LogicaNegocio",
-        "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj",
-        "packagesPath": "C:\\Users\\Angel Hernandez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\SistemaAlquiler.LogicaNegocio.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.LogicaNegocio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Angel Hernandez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj": {
-                "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj"
+              "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.AccesoDatos\\SistemaAlquiler.AccesoDatos.csproj"
               },
-              "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
-                "projectPath": "C:\\Users\\Angel Hernandez\\Documents\\WorkSpace\\C#\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj"
+              "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\Proyectos\\Medialityc\\Alquiler-Casas\\Alquiler-Casas\\SistemaAlquiler\\SistemaAlquiler.Entidades\\SistemaAlquiler.Entidades.csproj"
               }
             }
           }
@@ -244,7 +235,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
