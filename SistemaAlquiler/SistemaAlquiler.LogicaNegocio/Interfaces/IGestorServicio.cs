@@ -14,6 +14,6 @@ public interface IGestorServicio
     Task<double> ganaciasMensuales(int idGestor);
     Task<double> gananciasTotales(int idGestor);
     Task<List<Valoracion>> valoracionesCasa(int idCasa);
-
+    Task<List<Reservacion>> listaReservacion(int idGestor);
 
 }

@@ -5,6 +5,7 @@ using SistemaAlquiler.LogicaNegocio.DTOs;
 using SistemaAlquiler.Entidades;
 using SistemaAlquiler.LogicaNegocio.Interfaces;
 using System.Web.Http.Results;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -37,7 +38,9 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
+
     [HttpGet("listaCasasPendientes")]
+    [Authorize(Policy = "RequireAdmin_Gestor")]
     public async Task<IActionResult> listaCasasPendientes()
     {
         var casas = await casaServicio.listaPendientes();
@@ -47,7 +50,9 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
 
+
     [HttpGet("listaCasasPendientesUsuario")]
+    [Authorize(Policy = "RequireAdmin_Gestor")]
     public async Task<IActionResult> listaCasasPendientesUsuario(int idUsuario)
     {
         var casas = await casaServicio.listaPendientesUsuario(idUsuario);
@@ -56,6 +61,7 @@ public class CasasController:ControllerBase
         await fotoServicio.llenarDTOs(vmLista);
         return StatusCode(StatusCodes.Status200OK, vmLista);
     }
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> casaPorId(int id)
@@ -95,7 +101,9 @@ public class CasasController:ControllerBase
     }
 
 
+
     [HttpPost("crear")]
+    [Authorize(Policy = "RequireAdmin_Gestor")]
     public async Task<IActionResult> crear([FromForm]CrearCasaDTO casaDTO,List<IFormFile> fotos )
     {
         Casa c = autoMapper.Map<Casa>(casaDTO);
@@ -106,7 +114,9 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
+
     [HttpPatch("editar")]
+    [Authorize(Policy = "RequireAdmin_Gestor")]
     public async Task<IActionResult> editar([FromBody]EditarCasaDTO casaDTO)
     {
         CaracteristicaDTO caracteristica = autoMapper.Map<CaracteristicaDTO>(casaDTO.caracteristicas);
@@ -117,7 +127,9 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
+
     [HttpPatch("publicar")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> publicar(int idCasa)
     {
         
@@ -128,7 +140,9 @@ public class CasasController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCasa);
     }
 
+
     [HttpDelete("{id}")]
+    [Authorize(Policy = "RequireAdmin_Gestor")]
     public async Task<IActionResult> borrar(int id)
     {
         Casa casa = await casaServicio.eliminar(id);

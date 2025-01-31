@@ -33,6 +33,16 @@ public class GestorController:ControllerBase
         return StatusCode(StatusCodes.Status200OK, vmCasas);
     }
 
+
+    [HttpGet("{id}/reservaciones")]
+    public async Task<IActionResult> listaReservaciones(int id)
+    {
+        var reservaciones = await gestorServicio.listaReservacion(id);
+        List<ReservacionDTO> vmReservacion = autoMapper.Map<List<ReservacionDTO>>(reservaciones);
+        return StatusCode(StatusCodes.Status200OK, vmReservacion);
+    }
+
+
     [HttpGet("{id}/pendientes")]
     public async Task<IActionResult> listaCasasPendientes(int id)
     {
