@@ -31,7 +31,7 @@ public class GestorServicio : IGestorServicio
     public async Task<List<Casa>> casasPendientes(int idGestor)
     {
         await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
-        var consulta = await repositorioCasa.obtener(u=> u.idUsuario==idGestor && u.estado.Equals("Pendiente"), [u => u.caracteristicas, u => u.ciudad]);
+        var consulta = await repositorioCasa.obtener(u=> u.idUsuario==idGestor && u.estado.Equals("Pendiente"), [u => u.caracteristicas, u => u.ciudad, u => u.fotos]);
         List<Casa> casas = consulta.ToList();
         return casas;
     }
@@ -39,9 +39,14 @@ public class GestorServicio : IGestorServicio
     public async Task<List<Casa>> listaCasas(int idGestor)
     {
         await validadorServicio.existeGestor(idGestor, "No existe ese gestor");
-        var consulta = await repositorioCasa.obtener(u => u.idUsuario == idGestor && u.estado.Equals("Publicada"), [u => u.caracteristicas, u => u.ciudad]);
+        var consulta = await repositorioCasa.obtener(u => u.idUsuario == idGestor && u.estado.Equals("Publicada"), [u => u.caracteristicas, u => u.ciudad, u => u.fotos]);
         List<Casa> casas = consulta.ToList();
         return casas;
+    }
+
+    public async Task<List<Reservacion>> listaReservacion(int idGestor)
+    {
+        return await obtenerPorGestor(idGestor);
     }
 
     private async Task<List<Reservacion>> obtenerPorGestor(int idGestor)

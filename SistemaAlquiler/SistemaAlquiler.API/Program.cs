@@ -6,25 +6,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using SistemaAlquiler.API.Utilidades.JWT;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SistemaAlquiler.Entidades;
-
-
-
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Agregar controladores y servicios
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-
-
-//JWT 
-
-builder.Services.AddSwaggerGen(options => {
+// Configuración de Swagger para JWT
+builder.Services.AddSwaggerGen(options =>
+{
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -32,7 +28,7 @@ builder.Services.AddSwaggerGen(options => {
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Past token here:"
+        Description = "Paste your token here:"
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -48,9 +44,10 @@ builder.Services.AddSwaggerGen(options => {
             },
             Array.Empty<string>()
         }
-    }); 
+    });
 });
 
+// Configuración de Identity y JWT
 builder.Services.AddIdentity<UserModel, IdentityRole>()
     .AddEntityFrameworkStores<DB_Context>()
     .AddDefaultTokenProviders();
@@ -67,57 +64,47 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"], 
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8.GetBytes("TuClaveSecretaMuySeguraTanSeguraQueNoHayPeligroDeUnAtaqueInformatico"))
     };
 });
 
+// Configuración de roles y políticas
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequireAdmin", policy => policy.RequireRole("1"));
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("RequireAdmin_Gestor", policy => policy.RequireRole("1","2"));
-   
-});
-
-builder.Services.AddAuthorization(options =>
-{
+    options.AddPolicy("RequireAdmin_Gestor", policy => policy.RequireRole("1", "2"));
     options.AddPolicy("RequireGestor", policy => policy.RequireRole("2"));
 });
 
-
 builder.Services.AddAuthorization();
+
+// Inyección de dependencias y mapeos
 builder.Services.inyectarDependencia(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-
-
-//Cors
-builder.Services.AddCors(opciones =>
+// Configuración de CORS
+builder.Services.AddCors(options =>
 {
-    opciones.AddDefaultPolicy(
-        builder =>
-        {
-            builder.AllowAnyOrigin()
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader();
-        });
+    });
 });
 
-
+// Método para inicializar roles
 async Task roles(IServiceProvider serviceProvider)
 {
     using var scope = serviceProvider.CreateScope();
     var rolControlador = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
     var roles = new[] { "1", "2", "3" };
-    
-    foreach(var rol in roles)
+
+    foreach (var rol in roles)
     {
         if (!await rolControlador.RoleExistsAsync(rol))
             await rolControlador.CreateAsync(new IdentityRole(rol));
@@ -125,22 +112,34 @@ async Task roles(IServiceProvider serviceProvider)
 }
 
 var app = builder.Build();
+
+// Habilitar archivos estáticos desde wwwroot
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+    RequestPath = "" // Archivos accesibles directamente desde la raíz
+});
+
+// Habilitar CORS
 app.UseCors();
 
-
+// Configuración de Swagger en modo desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Configuración de middleware
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Crear roles iniciales
 await roles(app.Services);
 
+// Mapear controladores
 app.MapControllers();
 
 app.Run();

@@ -37,3 +37,23 @@ C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\S
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\refint\SistemaAlquiler.Controladora.dll
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.pdb
 C:\Users\Angel Hernandez\Documents\WorkSpace\C#\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\ref\SistemaAlquiler.Controladora.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.Controladora.deps.json
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.Controladora.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.Controladora.pdb
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.AccesoDatos.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.Entidades.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.LogicaNegocio.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.AccesoDatos.pdb
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.LogicaNegocio.pdb
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\bin\Debug\net8.0\SistemaAlquiler.Entidades.pdb
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.AssemblyInfo.cs
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.sourcelink.json
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaA.01E4C7B7.Up2Date
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\refint\SistemaAlquiler.Controladora.dll
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\SistemaAlquiler.Controladora.pdb
+C:\Users\admin\Desktop\Proyectos\Medialityc\Alquiler-Casas\Alquiler-Casas\SistemaAlquiler\SistemaAlquiler.Controladora\obj\Debug\net8.0\ref\SistemaAlquiler.Controladora.dll
