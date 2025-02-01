@@ -40,7 +40,7 @@ public class CasasController:ControllerBase
 
 
     [HttpGet("listaCasasPendientes")]
-    [Authorize(Policy = "RequireAdmin_Gestor")]
+    [Authorize(Policy = "RequireAdmin")]
     public async Task<IActionResult> listaCasasPendientes()
     {
         var casas = await casaServicio.listaPendientes();
