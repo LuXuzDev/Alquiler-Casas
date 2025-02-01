@@ -52,7 +52,15 @@ public class ReservacionServicio : IReservacionServicio
 
     public async Task<List<Reservacion>> listaIdCasa(int idCasa)
     {
+        await validadorServicio.existeCasa(idCasa,"La casa no existe");
         IQueryable<Reservacion> consulta = await repositorio.obtener(u=> u.idCasa==idCasa);
+        return (List<Reservacion>)consulta.ToList();
+    }
+
+    public async Task<List<Reservacion>> listaIdUsuario(int idUsuario)
+    {
+        await validadorServicio.existeUsuario(idUsuario,"El usuario no existe");
+        IQueryable<Reservacion> consulta = await repositorio.obtener(u => u.idUsuario == idUsuario);
         return (List<Reservacion>)consulta.ToList();
     }
 

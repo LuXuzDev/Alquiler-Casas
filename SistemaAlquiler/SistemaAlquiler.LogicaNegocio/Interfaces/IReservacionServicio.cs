@@ -11,6 +11,7 @@ public interface IReservacionServicio
 {
     Task<List<Reservacion>> lista();
     Task<List<Reservacion>> listaIdCasa(int idCasa);
+    Task<List<Reservacion>> listaIdUsuario(int idUsuario);
     Task<Reservacion> crear(int idUsuario, int idCasa, int cantPersonas,
         DateOnly fechaEntrada, DateOnly fechaSalida);
     Task<Reservacion> eliminar(int idReservacion);
