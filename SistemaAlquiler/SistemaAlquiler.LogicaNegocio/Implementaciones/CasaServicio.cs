@@ -40,6 +40,10 @@ public class CasaServicio : ICasaServicio
         await validadorServicio.validarNumerosDouble(0, 1000000, casa.precioMes, "El precio del mes no es correcto");
         await validadorServicio.validarNumerosDouble(0, 10000, casa.areaTotal, "El área total no es correcta");
 
+        if(fotos.Count() == 0)
+            throw new TaskCanceledException("La casa debe tener fotos");
+
+
         var caracteristica = await caracteristicaServicio.crear(casa.caracteristicasDTO);
         
         Casa casaCreada = new Casa(casa.precioNoche,casa.precioMes,casa.areaTotal,casa.descripcion,casa.nombre,casa.direccion,"Pendiente");
