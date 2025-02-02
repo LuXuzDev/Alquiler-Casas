@@ -16,7 +16,7 @@ public class GestorController:ControllerBase
 {
     private readonly IGestorServicio gestorServicio;
     private readonly IMapper autoMapper;
-
+    private readonly IFotoServicio fotoServicio;
 
     public GestorController(IGestorServicio gestorServicio, IMapper autoMapper)
     {
@@ -29,6 +29,7 @@ public class GestorController:ControllerBase
     public async Task<IActionResult> listaCasasPublicadas(int id)
     {
         var casas = await gestorServicio.listaCasas(id);
+        await fotoServicio.llenarDTOs(vmLista);
         List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
         return StatusCode(StatusCodes.Status200OK, vmCasas);
     }
