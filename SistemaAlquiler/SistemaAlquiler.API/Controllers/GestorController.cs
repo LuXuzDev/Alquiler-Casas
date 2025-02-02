@@ -16,12 +16,13 @@ public class GestorController:ControllerBase
 {
     private readonly IGestorServicio gestorServicio;
     private readonly IMapper autoMapper;
+    private readonly IFotoServicio fotoServicio;
 
-
-    public GestorController(IGestorServicio gestorServicio, IMapper autoMapper)
+    public GestorController(IGestorServicio gestorServicio, IMapper autoMapper, IFotoServicio fotoServicio)
     {
         this.gestorServicio = gestorServicio;
         this.autoMapper = autoMapper;
+        this.fotoServicio = fotoServicio;
     }
 
     [HttpGet("{id}/listaCasas")]
@@ -30,6 +31,7 @@ public class GestorController:ControllerBase
     {
         var casas = await gestorServicio.listaCasas(id);
         List<CasaDTO> vmCasas = autoMapper.Map<List<CasaDTO>>(casas);
+        await fotoServicio.llenarDTOs(vmCasas);
         return StatusCode(StatusCodes.Status200OK, vmCasas);
     }
 
